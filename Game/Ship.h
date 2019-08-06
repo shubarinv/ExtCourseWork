@@ -14,7 +14,7 @@
 
 using namespace std;
 
-[[deprecated]]class Ship : public GameObject {
+class [[deprecated]] Ship : public GameObject {
 protected:
     int health{0}, movementDirection{0}, movementSpeed{0};
 

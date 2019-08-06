@@ -26,6 +26,7 @@ public:
             throw runtime_error("ScreenManager: Failed to init SDL\n" + (string) SDL_GetError());
         }
         SDL_WM_SetCaption("Курсовая rev 2.0 ", nullptr);
+	    screenUnit = max_y / 10;
     }
 
     void changeResolution(int width, int height) {
@@ -35,6 +36,7 @@ public:
         }
     }
 
+	int screenUnit{0};
     void updateScreen() {
         SDL_UpdateRect(mainSurface, 0, 0, max_x, max_y);
     }
