@@ -6,12 +6,11 @@
 #define COURSEWORK_GAMEMANAGER_H
 
 
-#include "Enemy.h"
 
 class GameManager {
 private:
     void resetEnemies() {
-        enemies->clear();
+	    /*   enemies->clear();*/
     }
 
     void spawnEnemies(int wv) {/*
@@ -27,7 +26,6 @@ private:
 
     int wave{0};
     ScreenManager *screenManager;
-    list<Enemy> *enemies= nullptr;
     int elapsed = 0, current = 0, timeSinceSecond = 0, frames = 0, next{}, avgFPS = 100; //avgFPS - Avg fps per seconds
     int framerate = 59;
 public:
@@ -49,10 +47,10 @@ public:
     }
 
     void checkForNewWave() {
-        if (enemies->empty()) {
-            setWave(++wave);
-            cout << "==================" << endl << "NEW Wave, now " << wave << endl << "==================" << endl;
-        }
+	    /*if (enemies->empty()) {
+			setWave(++wave);
+			cout << "==================" << endl << "NEW Wave, now " << wave << endl << "==================" << endl;
+		}*/
     }
 
     bool swtch = true;

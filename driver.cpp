@@ -7,14 +7,18 @@
 #include "Game/EventManager.h"
 #include "Game/Player.h"
 #include "Game/GameManager.h"
+#include "Game/asteroid.h"
 
 
 /**
  * @brief Draws background(sky, water)
  **/
 void drawBg(ScreenManager *screenMgr) {
-	screenMgr->draw_Rect(0, 0, screenMgr->getScreenWidth(), 100, 0x87CEEB);
-	screenMgr->draw_Rect(0, 100, screenMgr->getScreenWidth(), screenMgr->getScreenHeight(), 0x006994);
+	/*
+	screenMgr->draw_Rect(0, 0, screenMgr->getScreenWidth(), screenMgr->getScreenHeight(), 0x0);
+	for (int i = 0; i <50 ; ++i) {
+		Draw_Pixel(screenMgr->getMainSurface(),GameObject::randIntInRange(1,screenMgr->getScreenWidth()-1),GameObject::randIntInRange(1,screenMgr->getScreenHeight()-1),GameObject::randIntInRange(1,0xffffff));
+	}*/
 }
 
 int showMainMenu(EventManager *eventMgr, ScreenManager *screenMgr, UI_Manager *UI_Mgr) {
@@ -31,6 +35,17 @@ int showMainMenu(EventManager *eventMgr, ScreenManager *screenMgr, UI_Manager *U
 
 
 	screenMgr->updateScreen();
+
+	Asteroid asteroid1(screenMgr);
+	Asteroid asteroid2(screenMgr);
+	Asteroid asteroid3(screenMgr);
+	Asteroid asteroid4(screenMgr);
+	Asteroid asteroid5(screenMgr);
+	Asteroid asteroid6(screenMgr);
+	Asteroid asteroid7(screenMgr);
+	Asteroid asteroid8(screenMgr);
+	Asteroid asteroid9(screenMgr);
+	Asteroid asteroid10(screenMgr);
 
 	/* Polling events */
 	while (true) {
@@ -51,7 +66,18 @@ int showMainMenu(EventManager *eventMgr, ScreenManager *screenMgr, UI_Manager *U
 			else
 				selectedOption--;
 		}
+		SDL_Delay(10);
 		screenMgr->draw_Rect(0, 0, screenMgr->getScreenWidth(), screenMgr->getScreenHeight(), 0x0);
+		asteroid1.reDraw();
+		asteroid2.reDraw();
+		asteroid3.reDraw();
+		asteroid4.reDraw();
+		asteroid5.reDraw();
+		asteroid6.reDraw();
+		asteroid7.reDraw();
+		asteroid8.reDraw();
+		asteroid9.reDraw();
+		asteroid10.reDraw();
 		switch (selectedOption) {
 			case 1:
 				UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  start", 0xffffff);
@@ -79,6 +105,7 @@ int showMainMenu(EventManager *eventMgr, ScreenManager *screenMgr, UI_Manager *U
 				break;
 		}
 		screenMgr->updateScreen();
+
 	}
 	return 0;
 }
@@ -108,7 +135,7 @@ int main() {
 
 	// ===== Setting GMmanager initial values
 	gmManager.setWave(1);
-	gmManager.setFramerate(300);
+	gmManager.setFramerate(60);
 
 	// ===== Game itself ====== //
 	while (true) {

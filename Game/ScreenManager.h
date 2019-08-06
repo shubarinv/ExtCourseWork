@@ -10,6 +10,9 @@
 #include <stdexcept>
 #include <iostream>
 #include <SDL/SDL_draw.h>
+#include <SDL/SDL_gfxPrimitives.h>
+#include <SDL/SDL_gfxBlitFunc.h>
+
 
 using namespace std;
 

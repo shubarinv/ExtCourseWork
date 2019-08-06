@@ -8,7 +8,6 @@
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
-#include <SDL/SDL_draw.h>
 
 class UI_Manager {
 private:
