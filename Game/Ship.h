@@ -14,7 +14,7 @@
 
 using namespace std;
 
-class Ship : public GameObject {
+[[deprecated]]class Ship : public GameObject {
 protected:
     int health{0}, movementDirection{0}, movementSpeed{0};
 
@@ -22,7 +22,7 @@ protected:
     int bodyColor = 0x727272;
 	int *hitLoc;
 
-    void updateLocation() {
+    void updateLocation() {/*
         location.x1 += movementDirection * movementSpeed;
 
         // ==== Location checks (so that player won't go off screen) ==== //
@@ -30,7 +30,7 @@ protected:
             location.x1 -= screenManager->getScreenWidth() - 120;
 
         if ((location.x1 < 0) && movementDirection == -1)
-            location.x1 += screenManager->getScreenWidth() - 90;
+            location.x1 += screenManager->getScreenWidth() - 90;*/
     }
 
 public:
@@ -59,7 +59,6 @@ public:
 		hitLoc[i]=loc-location.x1;
 	}
 
-    Weapon weapon;
     coords location;
     SDL_Rect body;
 };

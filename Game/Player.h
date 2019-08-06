@@ -27,10 +27,10 @@ public:
         location.x2 = body.x + body.w;
         location.y1 = body.y;
         location.y2 = location.y1 + body.h;
-
+/*
         weapon.init(screenManager, false);
-        weapon.location = this->location;
-        hitLoc = new int[health / 20]{-1};
+        weapon.location = this->location;*/
+
         money = 0;
     }
 
@@ -38,9 +38,10 @@ public:
         if (health > 0) {
             updateLocation();
             body.x = location.x1;
-            location.x2=location.x1+body.w;
+            location.x2 = location.x1 + body.w;
             SDL_FillRect(screenManager->getMainSurface(), &body, bodyColor);
-            weapon.update(location);
+            /*
+            weapon.update(location);*/
         }
     }
 
@@ -56,7 +57,8 @@ public:
     }
 
     void shoot() {
-        weapon.shoot();
+        /*
+        weapon.shoot();*/
     }
 
     SDL_Rect body{};

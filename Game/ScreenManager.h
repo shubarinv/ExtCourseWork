@@ -27,12 +27,14 @@ public:
         }
         SDL_WM_SetCaption("Курсовая rev 2.0 ", nullptr);
     }
-    void changeResolution(int width,int height){
-	    mainSurface = SDL_SetVideoMode(width, height, 16, SDL_ANYFORMAT | SDL_DOUBLEBUF);
-	    if (!mainSurface) {
-		    throw runtime_error("ScreenManager: Failed to init SDL\n" + (string) SDL_GetError());
-	    }
+
+    void changeResolution(int width, int height) {
+        mainSurface = SDL_SetVideoMode(width, height, 16, SDL_ANYFORMAT | SDL_DOUBLEBUF);
+        if (!mainSurface) {
+            throw runtime_error("ScreenManager: Failed to init SDL\n" + (string) SDL_GetError());
+        }
     }
+
     void updateScreen() {
         SDL_UpdateRect(mainSurface, 0, 0, max_x, max_y);
     }
