@@ -8,7 +8,7 @@
 
 #include <list>
 #include "GameObject.h"
-#include "Ship.h"
+#include "ScreenManager.h"
 
 class Particle : public GameObject {
 private:
@@ -19,7 +19,7 @@ private:
 public:
     Particle() {
         bIsOnScreen = true;
-        initialsed = false;
+	    initialised = false;
     }
 
     void init(ScreenManager *screenMgr, coords loc, bool isEnemy) {
@@ -32,7 +32,7 @@ public:
         screenManager = screenMgr;
         location.x1 = particle.x;
         location.x2 = particle.x + particle.w;
-        initialsed = true;
+	    initialised = true;
     }
 
     [[nodiscard]] bool isOnScreen() const {
@@ -44,8 +44,8 @@ public:
     }
 
     void reDraw() {
-        if (!initialsed) cout << "WARNING: Particle is UNINITIALISED, but got reDraw command" << endl;
-        if (initialsed && bIsOnScreen) {
+	    if (!initialised) cout << "WARNING: Particle is UNINITIALISED, but got reDraw command" << endl;
+	    if (initialised && bIsOnScreen) {
             updateLocation();
             SDL_FillRect(screenManager->getMainSurface(), &particle, 0xff0000);
         } else {
@@ -55,8 +55,6 @@ public:
 
 private:
     void updateLocation() {
-        canBeRemoved = false;
-        if (!shouldBeRemoved) {
             if (bIsOnScreen) {
                 if (particle.y >= screenManager->getScreenHeight() || particle.y <= 0)
                     bIsOnScreen = false;
@@ -66,14 +64,10 @@ private:
                 location.y2 = particle.y + particle.h;
             }
         }
-        canBeRemoved = true;
-    }
 
 public:
     static bool removalCheck(Particle prtcl) {
-        if (!prtcl.isOnScreen())
-            prtcl.shouldBeRemoved = true;
-        return prtcl.canBeRemoved && prtcl.shouldBeRemoved;
+	    return !prtcl.isOnScreen();
     }
 };
 
@@ -88,11 +82,11 @@ public:
         cout << "Weapon was spawned: " << this << endl;
         screenManager = screenMgr;
         bIsEnemy = isEnemy;
-        initialsed = true;
+	    initialised = true;
     }
 
     Weapon() {
-        initialsed = false;
+	    initialised = false;
     }
 
     [[maybe_unused]] int getPower() const {
@@ -104,7 +98,7 @@ public:
     }
 
     void shoot() {
-        if (!initialsed) throw runtime_error("ERROR: attempt to call shoot on uninitialised Weapon instance\n");
+	    if (!initialised) throw runtime_error("ERROR: attempt to call shoot on uninitialised Weapon instance\n");
         particles.push_back(*new Particle());
         particles.back().init(screenManager, location, bIsEnemy);
     }
@@ -121,9 +115,7 @@ public:
         location = newloc;
         if (!particles.empty()) {
             for (auto &particle : particles) {
-                particle.canBeRemoved=false;
                 particle.reDraw();
-                particle.canBeRemoved=true;
             }
 
         }

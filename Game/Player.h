@@ -5,63 +5,113 @@
 #ifndef COURSEWORK_PLAYER_H
 #define COURSEWORK_PLAYER_H
 
-#include "Ship.h"
+#include "GameObject.h"
 
-class Player : public Ship {
+class Player : GameObject {
 private:
-    int money{0};
-    int bodyColor = 0x727272;
+	int health{0}, movementDirection{0}, movementSpeed{0};
+	ScreenManager *screenManager = nullptr;
+	int money{0};
+	int bodyColor = 0x727272;
+	SDL_Rect LweaponBody{};
+	SDL_Rect RweaponBody{};
 
 public:
-    explicit Player(ScreenManager *screenMgr) {
-        screenManager = screenMgr;
-        health = 100;
-        movementDirection = 1;
-        movementSpeed = 1;
-        body.w = 90;
-        body.h = 35;
-        body.x = 100;
-        body.y = screenMgr->getScreenHeight() - 50;
-        SDL_FillRect(screenMgr->getMainSurface(), &body, bodyColor);
-        location.x1 = body.x;
-        location.x2 = body.x + body.w;
-        location.y1 = body.y;
-        location.y2 = location.y1 + body.h;
+	explicit Player(ScreenManager *screenMgr) {
+		screenManager = screenMgr;
+		health = 100;
+		movementDirection = 1;
+		movementSpeed = 1;
+		LweaponBody.w = 12;
+		LweaponBody.h = 40;
+		LweaponBody.x = screenMgr->getScreenWidth() / 2 - LweaponBody.w;
+		LweaponBody.y = screenMgr->getScreenHeight() - 70;
+
+		RweaponBody.w = LweaponBody.w;
+		RweaponBody.h = LweaponBody.h;
+		RweaponBody.x = LweaponBody.x + RweaponBody.w + 15;
+		RweaponBody.y = LweaponBody.y;
+
+
+		SDL_FillRect(screenMgr->getMainSurface(), &LweaponBody, bodyColor);
+		SDL_FillRect(screenMgr->getMainSurface(), &RweaponBody, bodyColor);
+
+		location.x1 = LweaponBody.x;
+		location.x2 = RweaponBody.x + RweaponBody.w;
+		location.y1 = LweaponBody.y;
+		location.y2 = location.y1 + RweaponBody.h;
 /*
         weapon.init(screenManager, false);
         weapon.location = this->location;*/
 
-        money = 0;
-    }
+		money = 0;
+	}
 
-    void reDraw() {
-        if (health > 0) {
-            updateLocation();
-            body.x = location.x1;
-            location.x2 = location.x1 + body.w;
-            SDL_FillRect(screenManager->getMainSurface(), &body, bodyColor);
-            /*
-            weapon.update(location);*/
-        }
-    }
+	void updateLocation() {/*
+		location.x1 += movementDirection * movementSpeed;
+location.x2 = location.x1 + body.w;
+		// ==== Location checks (so that player won't go off screen) ==== //
+		if ((location.x1 >= screenManager->getScreenWidth() - 90) && movementDirection == 1)
+			location.x1 -= screenManager->getScreenWidth() - 120;
 
-    /**
-     * @param direction -1=left ; 1=right
-     **/
-    void setMovementDirection(int direction) {
-        movementDirection = direction;
-    }
+		if ((location.x1 < 0) && movementDirection == -1)
+			location.x1 += screenManager->getScreenWidth() - 90;
+		*/
+	}
 
-    int getMoney() {
-        return money;
-    }
+	void reDraw() {
+		if (health > 0) {
+			updateLocation();
+			LweaponBody.x = location.x1;
 
-    void shoot() {
-        /*
-        weapon.shoot();*/
-    }
+			RweaponBody.x = location.x2 - RweaponBody.w;
+			SDL_FillRect(screenManager->getMainSurface(), &LweaponBody, bodyColor);
+			SDL_FillRect(screenManager->getMainSurface(), &RweaponBody, bodyColor);
+			Draw_FillEllipse(screenManager->getMainSurface(), LweaponBody.x + LweaponBody.w + 7,
+			                 (location.y1 + location.y2) / 2, 7, 20, 0x00ff00);
+			/*
+			weapon.update(location);*/
+		}
+	}
 
-    SDL_Rect body{};
+	/**
+	 * @param direction -1=left ; 1=right
+	 **/
+	void setMovementDirection(int direction) {
+		movementDirection = direction;
+	}
+
+	int getMoney() {
+		return money;
+	}
+
+	void shoot() {
+		/*
+		weapon.shoot();*/
+	}
+
+	coords getCoords() {
+		return location;
+	}
+
+	void setHealth(int deltaHealth) {
+		health += deltaHealth;
+	}
+
+	int getHealth() {
+		return health;
+	}
+
+	int getMovementSpeed() const {
+		return movementSpeed;
+	}
+
+	void setMovementSpeed(int mvSpeed) {
+		movementSpeed = mvSpeed;
+	}
+
+	coords location{};
+
 };
 
 

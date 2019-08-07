@@ -13,15 +13,16 @@
 /**
  * @brief Draws background(sky, water)
  **/
+int bgX[50];
+int bgY[50];
+
 void drawBg(ScreenManager *screenMgr) {
-	/*
-	screenMgr->draw_Rect(0, 0, screenMgr->getScreenWidth(), screenMgr->getScreenHeight(), 0x0);
-	for (int i = 0; i <50 ; ++i) {
-		Draw_Pixel(screenMgr->getMainSurface(),GameObject::randIntInRange(1,screenMgr->getScreenWidth()-1),GameObject::randIntInRange(1,screenMgr->getScreenHeight()-1),GameObject::randIntInRange(1,0xffffff));
-	}*/
+	for (int i = 0; i < 50; ++i) {
+		Draw_Pixel(screenMgr->getMainSurface(), bgX[i], bgY[i], 0xF5F5DC);
+	}
 }
 
-int showMainMenu(EventManager *eventMgr, ScreenManager *screenMgr, UI_Manager *UI_Mgr) {
+[[deprecated]]int showMainMenu(EventManager *eventMgr, ScreenManager *screenMgr, UI_Manager *UI_Mgr) {
 	SDL_Event event;
 	screenMgr->draw_Rect(0, 0, screenMgr->getScreenWidth(), screenMgr->getScreenHeight(),
 	                     0x0); ///< Filling screen with solid color
@@ -68,6 +69,7 @@ int showMainMenu(EventManager *eventMgr, ScreenManager *screenMgr, UI_Manager *U
 		}
 		SDL_Delay(10);
 		screenMgr->draw_Rect(0, 0, screenMgr->getScreenWidth(), screenMgr->getScreenHeight(), 0x0);
+		drawBg(screenMgr);
 		asteroid1.reDraw();
 		asteroid2.reDraw();
 		asteroid3.reDraw();
@@ -119,6 +121,12 @@ int main() {
 	Player player(&screenManager); ///< Player obj
 	GameManager gmManager(&screenManager); ///< Implements gamelogic
 
+	// ===== Generating background ==== //
+	for (int i = 0; i < 50; i++) {
+		bgX[i] = GameObject::randIntInRange(1, screenManager.getScreenWidth() - 1);
+		bgY[i] = GameObject::randIntInRange(1, screenManager.getScreenHeight() - 1);
+	}
+
 	// ===== Show mainMenu ===== //
 	int tmp = showMainMenu(&eventManager, &screenManager, &uiManager);
 	switch (tmp) {
@@ -135,7 +143,7 @@ int main() {
 
 	// ===== Setting GMmanager initial values
 	gmManager.setWave(1);
-	gmManager.setFramerate(60);
+	gmManager.setFramerate(300);
 
 	// ===== Game itself ====== //
 	while (true) {
@@ -150,25 +158,21 @@ int main() {
 				break;
 			}
 			if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_LEFT)
-				//   player.setMovementDirection(-1);
-				true;
+				player.setMovementDirection(-1);
 
 			if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_RIGHT)
-				//    player.setMovementDirection(1);
-				true;
+				player.setMovementDirection(1);
 
 			if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_DOWN)
-				//     player.setMovementSpeed(0);
-				true;
+				player.setMovementSpeed(0);
 
 			if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_UP)
-				//     player.setMovementSpeed(1);
-				true;
+				player.setMovementSpeed(1);
 			if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_SPACE)
 				//     player.shoot();
 				true;
 		}
-		//   player.reDraw();
+		player.reDraw();
 
 		screenManager.updateScreen();
 		gmManager.checkForNewWave();

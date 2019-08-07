@@ -10,14 +10,12 @@
 
 class GameObject {
 public:
-    bool initialsed{false};
+	bool initialised{false};
     struct coords {
         int x1, x2;
         int y1, y2;
     };
     coords location{};
-    bool canBeRemoved=true;
-    bool shouldBeRemoved=false;
 
     static int randIntInRange(int min, int max) {
         std::random_device rd;     // only used once to initialise (seed) engine

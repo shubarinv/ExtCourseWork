@@ -14,6 +14,7 @@ private:
 	ScreenManager *screenManager;
 	int movementByX{0}, movementByY{0}, size{0};
 	Sint16 x{30}, y{60};
+	bool isOnScreen{true};
 
 	void updateLocation() {
 		x += movementByX;
@@ -29,15 +30,18 @@ public:
 		//y = randIntInRange(size*10+20, screenManager->getScreenHeight()-size*15-1);
 		size = randIntInRange(1, 6);
 		Draw_Circle(screenMgr->getMainSurface(), x, y, 10 * size, 0xF4F1C9);
+		initialised = true;
 	}
 
 	void reDraw() {
-		updateLocation();
-		if (y >= screenManager->getScreenHeight() - size * 10) {
-			size = randIntInRange(1, 6);
-			y = size * 10;
+		if (initialised && isOnScreen) {
+			updateLocation();
+			if (y >= screenManager->getScreenHeight() - size * 10) {
+				size = randIntInRange(1, 6);
+				y = size * 10;
+			}
+			Draw_FillCircle(screenManager->getMainSurface(), x, y, 10 * size, 0xF4F1C9);
 		}
-		Draw_FillCircle(screenManager->getMainSurface(), x, y, 10 * size, 0xF4F1C9);
 	}
 
 
