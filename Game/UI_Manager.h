@@ -70,8 +70,8 @@ public:
      * @brief Draws HUD(text like player money, level, etc)
     **/
     void drawHUD(int health, int money) {
-        drawText(10, 10, "Health:" + to_string(health), 0x0);
-        drawText(screenManager->getScreenWidth() - 100, 10, "Money:" + to_string(money), 0x0);
+	    drawText(10, 10, "Health:" + to_string(health), 0xFFFFFF);
+	    drawText(screenManager->getScreenWidth() - 100, 10, "Money:" + to_string(money), 0xFFFFFF);
     }
 
 };

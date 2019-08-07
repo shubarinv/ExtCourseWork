@@ -22,7 +22,7 @@ public:
 	Weapon weapon;
 	explicit Player(ScreenManager *screenMgr) {
 		screenManager = screenMgr;
-		health = 100;
+		health = 1000;
 		movementDirection = 0;
 		movementSpeed = 1;
 		LweaponBody.w = 12;

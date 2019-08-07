@@ -32,24 +32,31 @@ public:
 		return (!asteroid.isOnScreen);
 	}
 
-	Asteroid(ScreenManager *screenMgr) {
+	explicit Asteroid(ScreenManager *screenMgr) {
+		cout << "Spawned new asteroid(" << this << ")" << endl;
 		screenManager = screenMgr;
 		movementByX = randIntInRange(-1, 1);
-		movementByY = randIntInRange(1, 3);
+		movementByY = randIntInRange(1, 2);
 		x = randIntInRange(0, screenManager->getScreenWidth());
 		//y = randIntInRange(size*10+30, 400);
-		size = randIntInRange(1, 6);
+		size = randIntInRange(2, 5);
+		hp = size * 20;
 		Draw_Circle(screenMgr->getMainSurface(), x, y, 10 * size, 0xF4F1C9);
 		initialised = true;
 	}
 
 	Asteroid(ScreenManager *screenMgr, int CoordX, int CoordY, int mvByX, int mvByY, int astSize) {
+		cout << "Spawned new asteroid(with params)(" << this << ")" << endl;
 		screenManager = screenMgr;
 		x = CoordX;
 		y = CoordY;
 		movementByX = mvByX;
 		movementByY = mvByY;
+		if (movementByY == 0) {
+			movementByY = 1;
+		}
 		size = astSize / 2;
+		hp = size * 20;
 		initialised = true;
 	}
 
@@ -58,7 +65,7 @@ public:
 	}
 
 
-	void reDraw() {
+	int reDraw() {
 		swtch = !swtch;
 		if (hp <= 0) {
 			if (size > 1) {
@@ -68,9 +75,14 @@ public:
 		if (initialised && isOnScreen) {
 			if (swtch) {
 				updateLocation();
-				if (y >= screenManager->getScreenHeight() - size * 10) {
+				if (y >= screenManager->getScreenHeight() - size * 15) {
 					y = size * 10;
-					x = randIntInRange(1, screenManager->getScreenWidth() - size * 10);
+					x = screenManager->getScreenWidth() + 100;
+					isOnScreen = false;
+					if (size == 1) {
+						return 0;
+					}
+					return size * 20;
 				}
 			}
 			Draw_FillCircle(screenManager->getMainSurface(), x, y, 10 * size, 0xF4F1C9);
@@ -88,6 +100,19 @@ public:
 			particle->setIsOnScreem(false);
 			hp -= 30;
 			cout << "Asteroid(" << this << "): got hit HP(" << hp << ")" << endl;
+		}
+	}
+
+	void checkForOverlap(Asteroid asteroid) {
+		c2Circle c1;
+		c1.r = 10 * size;
+		c1.p = c2V(x, y);
+		c2Circle c2;
+		c2.r = 10 * asteroid.getSize();
+		c2.p = c2V(asteroid.getX(), asteroid.getY());
+		if (c2CircletoCircle(c1, c2) != 0) {
+			shouldUnite = true;
+			cout << "Asteroid(" << this << "): got hit and will be united" << endl;
 		}
 	}
 
@@ -112,6 +137,7 @@ public:
 	}
 
 	bool shouldBreak{false};
+	bool shouldUnite{false};
 };
 
 

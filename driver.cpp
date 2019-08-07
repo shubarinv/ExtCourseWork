@@ -44,6 +44,10 @@ int showMainMenu(EventManager *eventMgr, ScreenManager *screenMgr, UI_Manager *U
 
 	/* Polling events */
 	while (true) {
+		astroids.remove_if(Asteroid::removalCheck);
+		if (astroids.size() < 10) {
+			astroids.emplace_back(screenMgr);
+		}
 		event = eventMgr->getEvent();
 		if (event.type == SDL_QUIT) {
 			cout << "EventManager: got ESC button press. Quiting..." << endl;
@@ -98,6 +102,12 @@ int showMainMenu(EventManager *eventMgr, ScreenManager *screenMgr, UI_Manager *U
 	}
 }
 
+void showGameOver(ScreenManager *screenMgr, UI_Manager *UI_Mgr) {
+	screenMgr->clearScreen();
+	UI_Mgr->drawText(screenMgr->getScreenWidth() / 2 - 50, screenMgr->getScreenHeight() / 2, "GAME OVER!", 0xff0000);
+	screenMgr->updateScreen();
+}
+
 int main() {
 	// ===== GameManagers initialisation ==== //
 	ScreenManager screenManager; ///< This thing is required to draw on screen
@@ -130,10 +140,14 @@ int main() {
 	// ===== Setting GMmanager initial values
 	gmManager.setWave(1);
 	gmManager.setFramerate(300);
-	list<Asteroid> astroids;
-	astroids.emplace_back(&screenManager);
+	list<Asteroid> asteroids;
+	asteroids.emplace_back(&screenManager);
+
 	// ===== Game itself ====== //
 	while (true) {
+		if (asteroids.empty()) {
+			asteroids.emplace_back(&screenManager);
+		}
 		gmManager.capFPS();
 
 		event = eventManager.getEvent();
@@ -162,28 +176,41 @@ int main() {
 		drawBg(&screenManager);
 		uiManager.drawHUD(player.getHealth(), player.getMoney());
 		player.reDraw();
-		astroids.remove_if(Asteroid::removalCheck);
+		asteroids.remove_if(Asteroid::removalCheck);
 		/* ==== Check for collisions ====*/
-		for (auto &asteroid : astroids) {
-			asteroid.reDraw();
+		for (auto &asteroid : asteroids) {
+			player.setHealth(-asteroid.reDraw());
 			player.weapon.particles.remove_if(Particle::removalCheck);
 			for (auto &particle : player.weapon.particles) {
 				asteroid.checkForOverlap(&particle);
 			}
 			if (asteroid.shouldBreak) {
 				cout << "Asteroid Breaking" << endl;
-				astroids.emplace_back(&screenManager, asteroid.getX() + 15, asteroid.getY(), asteroid.getMovementByX(),
-				                      asteroid.getMovementByY() - 1, asteroid.getSize());
-				astroids.emplace_back(&screenManager, asteroid.getX() - 15, asteroid.getY(), asteroid.getMovementByX(),
-				                      asteroid.getMovementByY() - 1, asteroid.getSize());
+				asteroids.emplace_back(&screenManager, asteroid.getX() + asteroid.getSize() * 10, asteroid.getY(),
+				                       asteroid.getMovementByX(),
+				                       asteroid.getMovementByY() / 2, asteroid.getSize());
+				asteroids.emplace_back(&screenManager, asteroid.getX() - asteroid.getSize() * 10, asteroid.getY(),
+				                       asteroid.getMovementByX(),
+				                       asteroid.getMovementByY() / 2, asteroid.getSize());
 				asteroid.setIsOnScreen(false);
 			}
 		}
-
 		screenManager.updateScreen();
 
 		gmManager.checkForNewWave();
 		gmManager.capFPS();
+
+		if (player.getHealth() <= 0) {
+			showGameOver(&screenManager, &uiManager);
+			break;
+		}
+	}
+	while (true) {
+		if (event.type == SDL_QUIT) {
+			cout << "EventManager: got ESC button press. Quiting..." << endl;
+			break;
+		}
+		event = eventManager.getEvent();
 	}
 	return 0;
 }
