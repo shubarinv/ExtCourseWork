@@ -24,8 +24,7 @@ void drawBg(ScreenManager *screenMgr) {
 
 [[deprecated]]int showMainMenu(EventManager *eventMgr, ScreenManager *screenMgr, UI_Manager *UI_Mgr) {
 	SDL_Event event;
-	screenMgr->draw_Rect(0, 0, screenMgr->getScreenWidth(), screenMgr->getScreenHeight(),
-	                     0x0); ///< Filling screen with solid color
+	screenMgr->clearScreen();
 
 	int selectedOption{1};
 	UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  start", 0xffffff);
@@ -67,8 +66,8 @@ void drawBg(ScreenManager *screenMgr) {
 			else
 				selectedOption--;
 		}
-		SDL_Delay(10);
-		screenMgr->draw_Rect(0, 0, screenMgr->getScreenWidth(), screenMgr->getScreenHeight(), 0x0);
+		SDL_Delay(5);
+		screenMgr->clearScreen();
 		drawBg(screenMgr);
 		asteroid1.reDraw();
 		asteroid2.reDraw();
@@ -148,8 +147,6 @@ int main() {
 	// ===== Game itself ====== //
 	while (true) {
 		gmManager.capFPS();
-		drawBg(&screenManager);
-		uiManager.drawHUD(player.getHealth(), player.getMoney());
 
 		event = eventManager.getEvent();
 		{
@@ -172,9 +169,15 @@ int main() {
 				//     player.shoot();
 				true;
 		}
+		screenManager.clearScreen();
+
+		/* ==== Redrawing game objects ====*/
+		drawBg(&screenManager);
+		uiManager.drawHUD(player.getHealth(), player.getMoney());
 		player.reDraw();
 
 		screenManager.updateScreen();
+
 		gmManager.checkForNewWave();
 		gmManager.capFPS();
 	}

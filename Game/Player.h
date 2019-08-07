@@ -47,16 +47,16 @@ public:
 		money = 0;
 	}
 
-	void updateLocation() {/*
+	void updateLocation() {
 		location.x1 += movementDirection * movementSpeed;
-location.x2 = location.x1 + body.w;
+		location.x2 += movementDirection * movementSpeed;
 		// ==== Location checks (so that player won't go off screen) ==== //
 		if ((location.x1 >= screenManager->getScreenWidth() - 90) && movementDirection == 1)
 			location.x1 -= screenManager->getScreenWidth() - 120;
 
 		if ((location.x1 < 0) && movementDirection == -1)
 			location.x1 += screenManager->getScreenWidth() - 90;
-		*/
+
 	}
 
 	void reDraw() {

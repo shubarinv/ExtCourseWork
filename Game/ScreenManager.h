@@ -49,6 +49,10 @@ public:
         SDL_Quit();
     }
 
+	void clearScreen() { ///<@brief Fills screen with black color
+		draw_Rect(0, 0, getScreenWidth(), getScreenHeight(), 0x0);
+	}
+
     // === GETTERS AND SETTERS ====
 
     SDL_Surface *
