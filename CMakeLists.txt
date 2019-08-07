@@ -17,4 +17,4 @@ link_libraries(
 )
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(NewCourseWork driver.cpp Game/ScreenManager.h Game/UI_Manager.h Game/Player.h Game/GameObject.h Game/GameManager.h Game/Weapon.h Game/asteroid.h Game/Lib/Lib.cpp)
+add_executable(NewCourseWork driver.cpp Game/ScreenManager.h Game/UI_Manager.h Game/Player.h Game/GameObject.h Game/GameManager.h Game/Weapon.h Game/asteroid.h Game/EventManager.h Game/Lib/cute_c2.h)

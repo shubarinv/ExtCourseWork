@@ -2,8 +2,13 @@
 // Created by vhundef on 25.06.19.
 //
 
-#include "Game/Lib/Lib.cpp"
 #include <list>
+#include "Game/ScreenManager.h"
+#include "Game/EventManager.h"
+#include "Game/asteroid.h"
+#include "Game/UI_Manager.h"
+#include "Game/Player.h"
+#include "Game/GameManager.h"
 
 
 /**
@@ -125,7 +130,8 @@ int main() {
 	// ===== Setting GMmanager initial values
 	gmManager.setWave(1);
 	gmManager.setFramerate(300);
-
+	list<Asteroid> astroids;
+	astroids.emplace_back(&screenManager);
 	// ===== Game itself ====== //
 	while (true) {
 		gmManager.capFPS();
@@ -156,6 +162,23 @@ int main() {
 		drawBg(&screenManager);
 		uiManager.drawHUD(player.getHealth(), player.getMoney());
 		player.reDraw();
+		astroids.remove_if(Asteroid::removalCheck);
+		/* ==== Check for collisions ====*/
+		for (auto &asteroid : astroids) {
+			asteroid.reDraw();
+			player.weapon.particles.remove_if(Particle::removalCheck);
+			for (auto &particle : player.weapon.particles) {
+				asteroid.checkForOverlap(&particle);
+			}
+			if (asteroid.shouldBreak) {
+				cout << "Asteroid Breaking" << endl;
+				astroids.emplace_back(&screenManager, asteroid.getX(), asteroid.getY(), asteroid.getMovementByX(),
+				                      asteroid.getMovementByY() - 1, asteroid.getSize());
+				astroids.emplace_back(&screenManager, asteroid.getX(), asteroid.getY(), asteroid.getMovementByX(),
+				                      asteroid.getMovementByY() - 1, asteroid.getSize());
+				asteroid.setIsOnScreen(false);
+			}
+		}
 
 		screenManager.updateScreen();
 

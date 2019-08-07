@@ -7,7 +7,6 @@
 
 
 #include <list>
-#include "Lib/Lib.cpp"
 
 class Particle : public GameObject {
 private:
@@ -20,7 +19,6 @@ public:
         bIsOnScreen = true;
 	    initialised = false;
     }
-
     void init(ScreenManager *screenMgr, coords loc, bool isEnemy) {
         cout << "Particle was spawned: " << this << endl;
         particle.h = 10;

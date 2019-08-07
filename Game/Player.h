@@ -5,7 +5,10 @@
 #ifndef COURSEWORK_PLAYER_H
 #define COURSEWORK_PLAYER_H
 
-#include "Lib/Lib.cpp"
+
+#include "GameObject.h"
+#include "ScreenManager.h"
+#include "Weapon.h"
 
 class Player : GameObject {
 private:
@@ -15,9 +18,8 @@ private:
 	int bodyColor = 0x727272;
 	SDL_Rect LweaponBody{};
 	SDL_Rect RweaponBody{};
-	Weapon weapon;
-
 public:
+	Weapon weapon;
 	explicit Player(ScreenManager *screenMgr) {
 		screenManager = screenMgr;
 		health = 100;

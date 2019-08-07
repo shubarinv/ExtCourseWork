@@ -5,7 +5,6 @@
 #ifndef COURSEWORK_EVENTMANAGER_H
 #define COURSEWORK_EVENTMANAGER_H
 
-#include "Lib/Lib.cpp"
 class EventManager {
 
 
