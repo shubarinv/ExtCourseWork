@@ -172,9 +172,9 @@ int main() {
 			}
 			if (asteroid.shouldBreak) {
 				cout << "Asteroid Breaking" << endl;
-				astroids.emplace_back(&screenManager, asteroid.getX(), asteroid.getY(), asteroid.getMovementByX(),
+				astroids.emplace_back(&screenManager, asteroid.getX() + 15, asteroid.getY(), asteroid.getMovementByX(),
 				                      asteroid.getMovementByY() - 1, asteroid.getSize());
-				astroids.emplace_back(&screenManager, asteroid.getX(), asteroid.getY(), asteroid.getMovementByX(),
+				astroids.emplace_back(&screenManager, asteroid.getX() - 15, asteroid.getY(), asteroid.getMovementByX(),
 				                      asteroid.getMovementByY() - 1, asteroid.getSize());
 				asteroid.setIsOnScreen(false);
 			}
