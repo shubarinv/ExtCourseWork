@@ -5,6 +5,7 @@
 #ifndef COURSEWORK_GAMEOBJECT_H
 #define COURSEWORK_GAMEOBJECT_H
 
+#include "Lib/Lib.cpp"
 
 #include <random>
 

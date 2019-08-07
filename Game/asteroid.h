@@ -6,8 +6,7 @@
 #define NEWCOURSEWORK_ASTEROID_H
 
 
-#include "GameObject.h"
-#include "ScreenManager.h"
+#include "Lib/Lib.cpp"
 
 class Asteroid : GameObject {
 private:
@@ -46,6 +45,8 @@ public:
 			Draw_FillCircle(screenManager->getMainSurface(), x, y, 10 * size, 0xF4F1C9);
 		}
 	}
+
+	void checkForOverlap();
 
 
 };

@@ -5,7 +5,7 @@
 #ifndef COURSEWORK_GAMEMANAGER_H
 #define COURSEWORK_GAMEMANAGER_H
 
-
+#include "Lib/Lib.cpp"
 
 class GameManager {
 private:

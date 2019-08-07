@@ -5,8 +5,7 @@
 #ifndef COURSEWORK_PLAYER_H
 #define COURSEWORK_PLAYER_H
 
-#include "GameObject.h"
-#include "Weapon.h"
+#include "Lib/Lib.cpp"
 
 class Player : GameObject {
 private:

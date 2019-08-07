@@ -2,12 +2,7 @@
 // Created by vhundef on 25.06.19.
 //
 
-#include "Game/ScreenManager.h"
-#include "Game/UI_Manager.h"
-#include "Game/EventManager.h"
-#include "Game/Player.h"
-#include "Game/GameManager.h"
-#include "Game/asteroid.h"
+#include "Game/Lib/Lib.cpp"
 #include <list>
 
 

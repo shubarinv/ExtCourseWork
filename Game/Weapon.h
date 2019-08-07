@@ -7,8 +7,7 @@
 
 
 #include <list>
-#include "GameObject.h"
-#include "ScreenManager.h"
+#include "Lib/Lib.cpp"
 
 class Particle : public GameObject {
 private:
