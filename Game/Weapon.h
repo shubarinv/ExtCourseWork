@@ -113,6 +113,7 @@ public:
 
     void update(coords newloc) {
         location = newloc;
+	    particles.remove_if(Particle::removalCheck);
         if (!particles.empty()) {
             for (auto &particle : particles) {
                 particle.reDraw();

@@ -8,6 +8,7 @@
 #include "Game/Player.h"
 #include "Game/GameManager.h"
 #include "Game/asteroid.h"
+#include <list>
 
 
 /**
@@ -22,7 +23,7 @@ void drawBg(ScreenManager *screenMgr) {
 	}
 }
 
-[[deprecated]]int showMainMenu(EventManager *eventMgr, ScreenManager *screenMgr, UI_Manager *UI_Mgr) {
+int showMainMenu(EventManager *eventMgr, ScreenManager *screenMgr, UI_Manager *UI_Mgr) {
 	SDL_Event event;
 	screenMgr->clearScreen();
 
@@ -36,16 +37,10 @@ void drawBg(ScreenManager *screenMgr) {
 
 	screenMgr->updateScreen();
 
-	Asteroid asteroid1(screenMgr);
-	Asteroid asteroid2(screenMgr);
-	Asteroid asteroid3(screenMgr);
-	Asteroid asteroid4(screenMgr);
-	Asteroid asteroid5(screenMgr);
-	Asteroid asteroid6(screenMgr);
-	Asteroid asteroid7(screenMgr);
-	Asteroid asteroid8(screenMgr);
-	Asteroid asteroid9(screenMgr);
-	Asteroid asteroid10(screenMgr);
+	list<Asteroid> astroids;
+	for (int i = 0; i < 10; ++i) {
+		astroids.emplace_back(screenMgr);
+	}
 
 	/* Polling events */
 	while (true) {
@@ -69,16 +64,9 @@ void drawBg(ScreenManager *screenMgr) {
 		SDL_Delay(5);
 		screenMgr->clearScreen();
 		drawBg(screenMgr);
-		asteroid1.reDraw();
-		asteroid2.reDraw();
-		asteroid3.reDraw();
-		asteroid4.reDraw();
-		asteroid5.reDraw();
-		asteroid6.reDraw();
-		asteroid7.reDraw();
-		asteroid8.reDraw();
-		asteroid9.reDraw();
-		asteroid10.reDraw();
+		for (auto &asteroid : astroids) {
+			asteroid.reDraw();
+		}
 		switch (selectedOption) {
 			case 1:
 				UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  start", 0xffffff);
@@ -108,7 +96,6 @@ void drawBg(ScreenManager *screenMgr) {
 		screenMgr->updateScreen();
 
 	}
-	return 0;
 }
 
 int main() {
@@ -166,8 +153,7 @@ int main() {
 			if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_UP)
 				player.setMovementSpeed(1);
 			if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_SPACE)
-				//     player.shoot();
-				true;
+				player.shoot();
 		}
 		screenManager.clearScreen();
 

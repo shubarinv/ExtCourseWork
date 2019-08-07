@@ -6,6 +6,7 @@
 #define COURSEWORK_PLAYER_H
 
 #include "GameObject.h"
+#include "Weapon.h"
 
 class Player : GameObject {
 private:
@@ -15,12 +16,13 @@ private:
 	int bodyColor = 0x727272;
 	SDL_Rect LweaponBody{};
 	SDL_Rect RweaponBody{};
+	Weapon weapon;
 
 public:
 	explicit Player(ScreenManager *screenMgr) {
 		screenManager = screenMgr;
 		health = 100;
-		movementDirection = 1;
+		movementDirection = 0;
 		movementSpeed = 1;
 		LweaponBody.w = 12;
 		LweaponBody.h = 40;
@@ -40,9 +42,9 @@ public:
 		location.x2 = RweaponBody.x + RweaponBody.w;
 		location.y1 = LweaponBody.y;
 		location.y2 = location.y1 + RweaponBody.h;
-/*
-        weapon.init(screenManager, false);
-        weapon.location = this->location;*/
+
+		weapon.init(screenManager, false);
+		weapon.location = this->location;
 
 		money = 0;
 	}
@@ -69,8 +71,8 @@ public:
 			SDL_FillRect(screenManager->getMainSurface(), &RweaponBody, bodyColor);
 			Draw_FillEllipse(screenManager->getMainSurface(), LweaponBody.x + LweaponBody.w + 7,
 			                 (location.y1 + location.y2) / 2, 7, 20, 0x00ff00);
-			/*
-			weapon.update(location);*/
+
+			weapon.update(location);
 		}
 	}
 
@@ -86,8 +88,7 @@ public:
 	}
 
 	void shoot() {
-		/*
-		weapon.shoot();*/
+		weapon.shoot();
 	}
 
 	coords getCoords() {

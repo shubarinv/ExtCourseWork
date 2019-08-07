@@ -27,7 +27,7 @@ public:
 		movementByX = randIntInRange(-1, 1);
 		movementByY = randIntInRange(1, 4);
 		x = randIntInRange(0, screenManager->getScreenWidth());
-		//y = randIntInRange(size*10+20, screenManager->getScreenHeight()-size*15-1);
+		//y = randIntInRange(size*10+30, 400);
 		size = randIntInRange(1, 6);
 		Draw_Circle(screenMgr->getMainSurface(), x, y, 10 * size, 0xF4F1C9);
 		initialised = true;
@@ -38,7 +38,10 @@ public:
 			updateLocation();
 			if (y >= screenManager->getScreenHeight() - size * 10) {
 				size = randIntInRange(1, 6);
+				movementByX = randIntInRange(-1, 1);
+				movementByY = randIntInRange(1, 4);
 				y = size * 10;
+				x = randIntInRange(1, screenManager->getScreenWidth() - size * 10);
 			}
 			Draw_FillCircle(screenManager->getMainSurface(), x, y, 10 * size, 0xF4F1C9);
 		}
