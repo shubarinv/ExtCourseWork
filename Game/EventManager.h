@@ -5,6 +5,8 @@
 #ifndef COURSEWORK_EVENTMANAGER_H
 #define COURSEWORK_EVENTMANAGER_H
 
+#include <SDL/SDL_events.h>
+
 class EventManager {
 
 

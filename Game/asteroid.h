@@ -11,6 +11,7 @@
 #define CUTE_C2_IMPLEMENTATION
 
 #include "Lib/cute_c2.h"
+#include "ScreenManager.h"
 
 class Asteroid : GameObject {
 private:
@@ -37,7 +38,12 @@ public:
 		screenManager = screenMgr;
 		movementByX = randIntInRange(-1, 1);
 		movementByY = randIntInRange(1, 2);
-		x = randIntInRange(0, screenManager->getScreenWidth());
+		if (movementByX == -1)
+			x = randIntInRange(screenManager->getScreenWidth() / 2, screenManager->getScreenWidth());
+		else if (movementByX == 1)
+			x = randIntInRange(0, screenManager->getScreenWidth() / 2);
+		else
+			x = randIntInRange(0, screenManager->getScreenWidth());
 		//y = randIntInRange(size*10+30, 400);
 		size = randIntInRange(2, 5);
 		hp = size * 20;

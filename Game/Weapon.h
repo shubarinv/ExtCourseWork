@@ -7,6 +7,7 @@
 
 
 #include <list>
+#include "ScreenManager.h"
 
 class Particle : public GameObject {
 private:

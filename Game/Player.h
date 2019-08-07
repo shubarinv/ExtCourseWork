@@ -14,7 +14,7 @@ class Player : GameObject {
 private:
 	int health{0}, movementDirection{0}, movementSpeed{0};
 	ScreenManager *screenManager = nullptr;
-	int money{0};
+	int score{0};
 	int bodyColor = 0x727272;
 	SDL_Rect LweaponBody{};
 	SDL_Rect RweaponBody{};
@@ -47,7 +47,7 @@ public:
 		weapon.init(screenManager, false);
 		weapon.location = this->location;
 
-		money = 0;
+		score = 0;
 	}
 
 	void updateLocation() {
@@ -84,8 +84,12 @@ public:
 		movementDirection = direction;
 	}
 
-	int getMoney() {
-		return money;
+	int getScore() {
+		return score;
+	}
+
+	void setScore(int Deltascore) {
+		score += Deltascore;
 	}
 
 	void shoot() {
