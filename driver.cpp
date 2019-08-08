@@ -30,8 +30,18 @@ int main() {
 		case 1:
 			break;
 		case 2:
-			cout << "Not Yet Inplemented" << endl;
-			return -1;
+			uiManager.showLeaderBoard();
+			while (true) {
+				event = eventManager.getEvent();
+				if (event.type == SDL_QUIT) {
+					cout << "EventManager: got ESC button press. Quiting..." << endl;
+					return -1;
+				}
+				if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_RETURN) {
+					break;
+				}
+			}
+			break;
 		case 3:
 			return 0;
 		default:
@@ -45,8 +55,18 @@ int main() {
 			case 1:
 				break;
 			case 2:
-				cout << "Not Yet Inplemented" << endl;
-				return -1;
+				uiManager.showLeaderBoard();
+				while (true) {
+					event = eventManager.getEvent();
+					if (event.type == SDL_QUIT) {
+						cout << "EventManager: got ESC button press. Quiting..." << endl;
+						return -1;
+					}
+					if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_RETURN) {
+						break;
+					}
+				}
+				break;
 			case 3:
 				return 0;
 			default:

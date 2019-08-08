@@ -6,7 +6,9 @@
 #define COURSEWORK_GAMEMANAGER_H
 
 
+#include <fstream>
 #include "asteroid.h"
+#include "SDL/SDL.h"
 
 class GameManager {
 private:
@@ -24,6 +26,14 @@ private:
 		setFramerate(300);
 		asteroids.emplace_back(screenManager);
 	}
+
+	void writeScoreToFile(string playerName, int Score) {
+		std::ofstream outfile;
+
+		outfile.open("leaderBoard", std::ios_base::app);
+		outfile << playerName << " " << Score << "\n";
+	}
+
 
 public:
 
@@ -64,6 +74,7 @@ public:
 
 	int startGame(EventManager eventManager, UI_Manager uiManager, Player player) {
 		prestartInit();
+		player.setHealth(-1000);
 		while (true) {
 			if (asteroids.empty()) {
 				asteroids.emplace_back(screenManager);
@@ -119,12 +130,14 @@ public:
 			screenManager->updateScreen();
 			capFPS();
 
+
 			if (player.getHealth() <= 0) {
+				writeScoreToFile("", player.getScore());
 				return uiManager.showGameOver(&eventManager, screenManager, &uiManager);
-				break;
 			}
 		}
 	}
+
 };
 
 

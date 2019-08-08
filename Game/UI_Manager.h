@@ -8,6 +8,7 @@
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
+#include <fstream>
 #include "GameObject.h"
 #include "asteroid.h"
 
@@ -71,7 +72,7 @@ public:
 	 **/
 	void createButton(int x, int y, int width, int height, const string &text, int btnColor, int textColor) {
 		screenManager->draw_Rect(x, y, width, height, btnColor);
-		drawText((x + width / 2) - 10 * (text.length() / 2.0), y + height / 2 - 10, text, textColor);
+		drawText((x + width / 2) - 10 * (text.length() / 2.0), (y + height / 2) - 12, text, textColor);
 	}
 
 
@@ -239,6 +240,34 @@ public:
 			screenMgr->updateScreen();
 
 		}
+	}
+
+	void showLeaderBoard() {
+		std::ifstream infile("leaderBoard");
+		string name;
+		int score;
+		int i = 1;
+		screenManager->clearScreen();
+		createButton(0, 0, screenManager->getScreenWidth() / 2, screenManager->getScreenHeight() / 20 + 20,
+		             "Player Name", 0x4d4d4d, 0xFFFFff);
+		createButton(screenManager->getScreenWidth() / 2, 0, screenManager->getScreenWidth() / 2,
+		             screenManager->getScreenHeight() / 20 + 20, "Score", 0x4d4d4d, 0xFFFFff);
+		while (infile >> name >> score) {
+			createButton(0, screenManager->getScreenHeight() / 20 + 20 * i, screenManager->getScreenWidth() / 2, 20,
+			             name, 0x4d4d4d, 0xFFFF00);
+			createButton(screenManager->getScreenWidth() / 2, screenManager->getScreenHeight() / 20 + 20 * i,
+			             screenManager->getScreenWidth() / 2, 20, to_string(score), 0x4d4d4d, 0xFFFF00);
+			Draw_HLine(screenManager->getMainSurface(), 0, screenManager->getScreenHeight() / 20 + 20 * i + 19,
+			           screenManager->getScreenWidth(), 0x0);
+			Draw_VLine(screenManager->getMainSurface(), screenManager->getScreenWidth() / 2,
+			           screenManager->getScreenHeight() / 20 + 20 * i,
+			           screenManager->getScreenHeight() / 20 + 20 * i + 18, 0xffffff);
+			i++;
+		}
+		drawText(screenManager->getScreenWidth() / 2 - screenManager->getScreenWidth() / 12,
+		         screenManager->getScreenHeight() - 50, "Press Enter to continue", 0xffadad);
+		screenManager->updateScreen();
+
 	}
 };
 
