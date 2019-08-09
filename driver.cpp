@@ -23,51 +23,20 @@ int main() {
 	GameManager gmManager(&screenManager); ///< Implements gamelogic
 
 
-
+	int tmp;
 	// ===== Show mainMenu ===== //
-	int tmp = uiManager.showMainMenu(&eventManager, &screenManager, &uiManager);
-	switch (tmp) {
-		case 1:
-			break;
-		case 2:
-			uiManager.showLeaderBoard();
-			while (true) {
-				event = eventManager.getEvent();
-				if (event.type == SDL_QUIT) {
-					cout << "EventManager: got ESC button press. Quiting..." << endl;
-					return -1;
-				}
-				if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_RETURN) {
-					break;
-				}
-			}
-			break;
-		case 3:
-			return 0;
-		default:
-			return -2;
+	tmp = uiManager.showMainMenu(&eventManager, &screenManager, &uiManager);
+	if (tmp == 2||tmp==-1) { // player pressed show leaderboard
+		return 0;
 	}
 
-	// ==== Game start/Restart Loop ==== //
+// ==== Game start/Restart Loop ==== //
 	while (true) {
 		tmp = gmManager.startGame(eventManager, uiManager, player);
-		switch (tmp) {
-			case 1:
+		switch (tmp) { // prefoming actions depending on what player pressed after gameover screeen
+			case 1: // player pressed restart
 				break;
-			case 2:
-				uiManager.showLeaderBoard();
-				while (true) {
-					event = eventManager.getEvent();
-					if (event.type == SDL_QUIT) {
-						cout << "EventManager: got ESC button press. Quiting..." << endl;
-						return -1;
-					}
-					if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_RETURN) {
-						break;
-					}
-				}
-				break;
-			case 3:
+			case 2: // player pressed quit
 				return 0;
 			default:
 				return -2;

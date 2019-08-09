@@ -98,8 +98,6 @@ public:
 		int selectedOption{1};
 		UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  start  <", 0xffffff);
 		UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
-		                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.4), "leaderBoard", 0xffffff);
-		UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
 		                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
 
 
@@ -125,7 +123,7 @@ public:
 				return selectedOption;
 			}
 			if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_DOWN) {
-				if (selectedOption == 3)selectedOption = 1;
+				if (selectedOption == 2)selectedOption = 1;
 				else
 					selectedOption++;
 			} else if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_UP) {
@@ -136,6 +134,7 @@ public:
 			SDL_Delay(5);
 			screenMgr->clearScreen();
 			drawBg();
+			UI_Mgr->showLeaderBoard();
 			for (auto &asteroid : astroids) {
 				asteroid.reDraw();
 			}
@@ -144,27 +143,12 @@ public:
 					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  start  <",
 					                 0xffffff);
 					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
-					                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.4), "leaderBoard",
-					                 0xffffff);
-					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
-					                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
+					                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.5), "quit", 0xffffff);
 					break;
 				case 2:
 					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, "start", 0xffffff);
 					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
-					                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.4),
-					                 ">  leaderBoard  <",
-					                 0xffffff);
-					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
-					                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
-					break;
-				case 3:
-					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, "start", 0xffffff);
-					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
-					                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.4), "leaderBoard",
-					                 0xffffff);
-					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
-					                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), ">  quit  <",
+					                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.5), ">  quit  <",
 					                 0xffffff);
 					break;
 			}
@@ -173,14 +157,10 @@ public:
 		}
 	}
 
-	int showGameOver(EventManager *eventMgr, ScreenManager *screenMgr, UI_Manager *UI_Mgr) {
+	int showGameOver(EventManager *eventMgr, ScreenManager *screenMgr, UI_Manager *UI_Mgr, int score) {
 		SDL_Event event;
 		screenMgr->clearScreen();
-		UI_Mgr->drawText(screenMgr->getScreenWidth() / 2 - 50, screenMgr->getScreenHeight() / 2, "GAME OVER!",
-		                 0xff0000);
 		UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  Restart  <", 0xffffff);
-		UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
-		                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.4), "leaderBoard", 0xffffff);
 		UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
 		                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
 		screenMgr->updateScreen();
@@ -206,31 +186,19 @@ public:
 			SDL_Delay(5);
 			screenMgr->clearScreen();
 			drawBg();
+			UI_Mgr->showLeaderBoard();
+			UI_Mgr->drawText(screenMgr->getScreenWidth() / 2 - 50, screenMgr->getScreenHeight() - 50,
+			                 "GAME OVER!\nScore:" + to_string(score),
+			                 0xff0000);
 			switch (selectedOption) {
 				case 1:
 					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  restart  <",
-					                 0xffffff);
-					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
-					                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.4), "leaderBoard",
 					                 0xffffff);
 					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
 					                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
 					break;
 				case 2:
 					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, "restart",
-					                 0xffffff);
-					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
-					                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.4),
-					                 ">  leaderBoard  <",
-					                 0xffffff);
-					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
-					                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
-					break;
-				case 3:
-					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, "restart",
-					                 0xffffff);
-					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
-					                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.4), "leaderBoard",
 					                 0xffffff);
 					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
 					                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), ">  quit  <",
@@ -246,28 +214,32 @@ public:
 		std::ifstream infile("leaderBoard");
 		string name;
 		int score;
-		int i = 1;
-		screenManager->clearScreen();
-		createButton(0, 0, screenManager->getScreenWidth() / 2, screenManager->getScreenHeight() / 20 + 20,
+		int i = 4;
+		//screenManager->clearScreen();
+		createButton(screenManager->getScreenWidth() / 2, screenManager->getScreenHeight() / 12,
+		             screenManager->getScreenWidth() / 4, screenManager->getScreenHeight() / 20 + 20,
 		             "Player Name", 0x4d4d4d, 0xFFFFff);
-		createButton(screenManager->getScreenWidth() / 2, 0, screenManager->getScreenWidth() / 2,
+		createButton(screenManager->getScreenWidth() / 2 + screenManager->getScreenWidth() / 4,
+		             screenManager->getScreenHeight() / 12, screenManager->getScreenWidth() / 4,
 		             screenManager->getScreenHeight() / 20 + 20, "Score", 0x4d4d4d, 0xFFFFff);
 		while (infile >> name >> score) {
-			createButton(0, screenManager->getScreenHeight() / 20 + 20 * i, screenManager->getScreenWidth() / 2, 20,
-			             name, 0x4d4d4d, 0xFFFF00);
 			createButton(screenManager->getScreenWidth() / 2, screenManager->getScreenHeight() / 20 + 20 * i,
-			             screenManager->getScreenWidth() / 2, 20, to_string(score), 0x4d4d4d, 0xFFFF00);
-			Draw_HLine(screenManager->getMainSurface(), 0, screenManager->getScreenHeight() / 20 + 20 * i + 19,
+			             screenManager->getScreenWidth() / 4, 20,
+			             name, 0x4d4d4d, 0xFFFF00);
+			createButton(screenManager->getScreenWidth() / 2 + screenManager->getScreenWidth() / 4,
+			             screenManager->getScreenHeight() / 20 + 20 * i,
+			             screenManager->getScreenWidth() / 4, 20, to_string(score), 0x4d4d4d, 0xFFFF00);
+			Draw_HLine(screenManager->getMainSurface(), screenManager->getScreenWidth() / 2,
+			           screenManager->getScreenHeight() / 20 + 20 * i + 19,
 			           screenManager->getScreenWidth(), 0x0);
-			Draw_VLine(screenManager->getMainSurface(), screenManager->getScreenWidth() / 2,
+			Draw_VLine(screenManager->getMainSurface(),
+			           screenManager->getScreenWidth() / 2 + screenManager->getScreenWidth() / 4,
 			           screenManager->getScreenHeight() / 20 + 20 * i,
 			           screenManager->getScreenHeight() / 20 + 20 * i + 18, 0xffffff);
 			i++;
 		}
-		drawText(screenManager->getScreenWidth() / 2 - screenManager->getScreenWidth() / 12,
-		         screenManager->getScreenHeight() - 50, "Press Enter to continue", 0xffadad);
+		infile.close();
 		screenManager->updateScreen();
-
 	}
 };
 

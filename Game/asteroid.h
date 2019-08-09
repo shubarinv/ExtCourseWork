@@ -93,6 +93,7 @@ public:
 			}
 			Draw_FillCircle(screenManager->getMainSurface(), x, y, 10 * size, 0xF4F1C9);
 		}
+		return 0;
 	}
 
 	void checkForOverlap(Particle *particle) {

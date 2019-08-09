@@ -15,9 +15,9 @@ private:
 
 	int wave{0};
 	ScreenManager *screenManager;
-	int elapsed = 0, current = 0, timeSinceSecond = 0, frames = 0, next{}, avgFPS = 100; //avgFPS - Avg fps per seconds
+	int elapsed = 0, current = 0, timeSinceSecond = 0, frames = 0, next{}; //avgFPS - Avg fps per seconds
 	int framerate = 59;
-	SDL_Event event; ///< Holds last event
+	SDL_Event event{}; ///< Holds last event
 	list<Asteroid> asteroids;
 
 	void prestartInit() {
@@ -27,11 +27,12 @@ private:
 		asteroids.emplace_back(screenManager);
 	}
 
-	void writeScoreToFile(string playerName, int Score) {
+	static void writeScoreToFile(const string& playerName, int Score) {
 		std::ofstream outfile;
 
 		outfile.open("leaderBoard", std::ios_base::app);
 		outfile << playerName << " " << Score << "\n";
+		outfile.close();
 	}
 
 
@@ -60,13 +61,12 @@ public:
 			frames++;
 			if (timeSinceSecond >= 1000) {
 				timeSinceSecond = 0;
-				avgFPS = frames;
 				frames = 0;
 			}
 		} else {
 			next = SDL_GetTicks();
 			if (next - current < 1000.0 / framerate) {
-				SDL_Delay(1000.f / framerate - (next - current));
+				SDL_Delay(1000.f / (float)framerate - (float)(next - current));
 			}
 		}
 		swtch = !swtch;
@@ -74,7 +74,7 @@ public:
 
 	int startGame(EventManager eventManager, UI_Manager uiManager, Player player) {
 		prestartInit();
-		player.setHealth(-1000);
+		player.setHealth(-999);
 		while (true) {
 			if (asteroids.empty()) {
 				asteroids.emplace_back(screenManager);
@@ -107,24 +107,24 @@ public:
 			uiManager.drawBg();
 			uiManager.drawHUD(player.getHealth(), player.getScore());
 			player.reDraw();
-			asteroids.remove_if(Asteroid::removalCheck);
+			asteroids.remove_if(Asteroid::removalCheck); // removes asterod from list if asteroid is offscreen
 			/* ==== Check for collisions ====*/
 			for (auto &asteroid : asteroids) {
-				player.setHealth(-asteroid.reDraw());
-				player.weapon.particles.remove_if(Particle::removalCheck);
+				player.setHealth(-asteroid.reDraw()); // asteroid returns some value if it hits base(lower part of screen)
+				player.weapon.particles.remove_if(Particle::removalCheck); // removes particle from list if it is offcreenj
 				for (auto &particle : player.weapon.particles) {
-					asteroid.checkForOverlap(&particle);
+					asteroid.checkForOverlap(&particle); // checks if any particle overlaps particle(aka particle hit asteroid)
 				}
-				if (asteroid.shouldBreak) {
+				if (asteroid.shouldBreak) { // returns true if asteroid was hit enough times to break
 					cout << "Asteroid Breaking" << endl;
 					player.setScore(asteroid.getSize() * 7);
 					asteroids.emplace_back(screenManager, asteroid.getX() + asteroid.getSize() * 10, asteroid.getY(),
 					                       asteroid.getMovementByX(),
-					                       asteroid.getMovementByY() / 2, asteroid.getSize());
+					                       asteroid.getMovementByY() / 2, asteroid.getSize()); // creates asteroid in place of the one that should break
 					asteroids.emplace_back(screenManager, asteroid.getX() - asteroid.getSize() * 10, asteroid.getY(),
 					                       asteroid.getMovementByX(),
-					                       asteroid.getMovementByY() / 2, asteroid.getSize());
-					asteroid.setIsOnScreen(false);
+					                       asteroid.getMovementByY() / 2, asteroid.getSize()); // creates asteroid in place of the one that should break
+					asteroid.setIsOnScreen(false); // removes from screen asteroid that should break
 				}
 			}
 			screenManager->updateScreen();
@@ -132,12 +132,13 @@ public:
 
 
 			if (player.getHealth() <= 0) {
-				writeScoreToFile("", player.getScore());
-				return uiManager.showGameOver(&eventManager, screenManager, &uiManager);
+				writeScoreToFile("NOT SET", player.getScore());
+				SDL_Delay(10);
+				return uiManager.showGameOver(&eventManager, screenManager, &uiManager,player.getScore());
 			}
 		}
+		return -0xf;
 	}
-
 };
 
 
