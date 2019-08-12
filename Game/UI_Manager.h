@@ -21,6 +21,20 @@ private:
 	int bgX[100];
 	int bgY[100];
 
+
+	struct LdbrdRecord {
+		string name;
+		int score;
+
+		LdbrdRecord(string name_, int score_) {
+			name = name_;
+			score = score_;
+		}
+	};
+
+	list <LdbrdRecord> leaderBoardParsed;
+
+
 public:
 	UI_Manager(ScreenManager *screenMgr) {
 		screenManager = screenMgr;
@@ -107,7 +121,7 @@ public:
 		for (int i = 0; i < 10; ++i) {
 			astroids.emplace_back(screenMgr);
 		}
-
+		parseLeaderboard();
 		/* Polling events */
 		while (true) {
 			astroids.remove_if(Asteroid::removalCheck);
@@ -157,12 +171,27 @@ public:
 		}
 	}
 
-	int showGameOver(EventManager *eventMgr, ScreenManager *screenMgr, UI_Manager *UI_Mgr, int score) {
+	void parseLeaderboard() {
+		leaderBoardParsed.clear();
+		std::ifstream infile("leaderBoard");
+		string name;
+		int score;
+		while (infile >> name >> score) {
+			leaderBoardParsed.emplace_back(name, score);
+		}
+		infile.close();
+		if (leaderBoardParsed.empty()) {
+			cout << "WARNING: LeaderBoard Empty either file is empty or error occured" << endl;
+		}
+	}
+
+	int showGameOver(EventManager *eventMgr, ScreenManager *screenMgr, int score) {
 		SDL_Event event;
 		screenMgr->clearScreen();
-		UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  Restart  <", 0xffffff);
-		UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
-		                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
+		drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  Restart  <", 0xffffff);
+		drawText((int) (0.5 * screenMgr->screenUnit),
+		         (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
+		parseLeaderboard();
 		screenMgr->updateScreen();
 		int selectedOption{1};
 		while (true) {
@@ -179,30 +208,30 @@ public:
 				else
 					selectedOption++;
 			} else if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_UP) {
-				if (selectedOption == 1)selectedOption = 3;
+				if (selectedOption == 1)selectedOption = 2;
 				else
 					selectedOption--;
 			}
 			SDL_Delay(5);
 			screenMgr->clearScreen();
 			drawBg();
-			UI_Mgr->showLeaderBoard();
-			UI_Mgr->drawText(screenMgr->getScreenWidth() / 2 - 50, screenMgr->getScreenHeight() - 50,
-			                 "GAME OVER!\nScore:" + to_string(score),
-			                 0xff0000);
+			showLeaderBoard();
+			drawText(screenMgr->getScreenWidth() / 2 - 50, screenMgr->getScreenHeight() - 50,
+			         "GAME OVER!\nScore:" + to_string(score),
+			         0xff0000);
 			switch (selectedOption) {
 				case 1:
-					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  restart  <",
-					                 0xffffff);
-					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
-					                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
+					drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  restart  <",
+					         0xffffff);
+					drawText((int) (0.5 * screenMgr->screenUnit),
+					         (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
 					break;
 				case 2:
-					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, "restart",
-					                 0xffffff);
-					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
-					                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), ">  quit  <",
-					                 0xffffff);
+					drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, "restart",
+					         0xffffff);
+					drawText((int) (0.5 * screenMgr->screenUnit),
+					         (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), ">  quit  <",
+					         0xffffff);
 					break;
 			}
 			screenMgr->updateScreen();
@@ -211,24 +240,20 @@ public:
 	}
 
 	void showLeaderBoard() {
-		std::ifstream infile("leaderBoard");
-		string name;
-		int score;
 		int i = 4;
-		//screenManager->clearScreen();
 		createButton(screenManager->getScreenWidth() / 2, screenManager->getScreenHeight() / 12,
 		             screenManager->getScreenWidth() / 4, screenManager->getScreenHeight() / 20 + 20,
 		             "Player Name", 0x4d4d4d, 0xFFFFff);
 		createButton(screenManager->getScreenWidth() / 2 + screenManager->getScreenWidth() / 4,
 		             screenManager->getScreenHeight() / 12, screenManager->getScreenWidth() / 4,
 		             screenManager->getScreenHeight() / 20 + 20, "Score", 0x4d4d4d, 0xFFFFff);
-		while (infile >> name >> score) {
+		for (auto &record : leaderBoardParsed) {
 			createButton(screenManager->getScreenWidth() / 2, screenManager->getScreenHeight() / 20 + 20 * i,
 			             screenManager->getScreenWidth() / 4, 20,
-			             name, 0x4d4d4d, 0xFFFF00);
+			             record.name, 0x4d4d4d, 0xFFFF00);
 			createButton(screenManager->getScreenWidth() / 2 + screenManager->getScreenWidth() / 4,
 			             screenManager->getScreenHeight() / 20 + 20 * i,
-			             screenManager->getScreenWidth() / 4, 20, to_string(score), 0x4d4d4d, 0xFFFF00);
+			             screenManager->getScreenWidth() / 4, 20, to_string(record.score), 0x4d4d4d, 0xFFFF00);
 			Draw_HLine(screenManager->getMainSurface(), screenManager->getScreenWidth() / 2,
 			           screenManager->getScreenHeight() / 20 + 20 * i + 19,
 			           screenManager->getScreenWidth(), 0x0);
@@ -238,9 +263,35 @@ public:
 			           screenManager->getScreenHeight() / 20 + 20 * i + 18, 0xffffff);
 			i++;
 		}
-		infile.close();
-		screenManager->updateScreen();
 	}
+
+	static string parseEvent(SDLKey param) {
+		if (param == SDLK_a) {
+			return "a";
+		}
+	}
+
+	static string input() {
+		SDL_Event event;
+		string str;
+		string tmp;
+		while (SDL_WaitEvent(&event)) {
+			if (event.type == SDL_QUIT) {
+				break;
+			} else if (event.key.keysym.sym == SDLK_BACKSPACE) {
+				str = str.substr(0, str.size() - 1);
+				continue;
+			} else if (event.key.keysym.sym == SDLK_RETURN) {
+				return str;
+			} else if (event.type == SDL_KEYDOWN) {
+				str.append(parseEvent(event.key.keysym.sym));
+			}
+
+		}
+		return str;
+	}
+
+
 };
 
 

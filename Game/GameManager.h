@@ -132,9 +132,8 @@ public:
 
 
 			if (player.getHealth() <= 0) {
-				writeScoreToFile("NOT SET", player.getScore());
-				SDL_Delay(10);
-				return uiManager.showGameOver(&eventManager, screenManager, &uiManager,player.getScore());
+				writeScoreToFile(UI_Manager::input(), player.getScore());
+				return uiManager.showGameOver(&eventManager, screenManager, player.getScore());
 			}
 		}
 		return -0xf;
