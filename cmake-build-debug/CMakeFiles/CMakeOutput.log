@@ -1,4 +1,4 @@
-The system is: Linux - 5.2.6-1-MANJARO - x86_64
+The system is: Linux - 4.19.62-1-MANJARO - x86_64
 Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
 Compiler: /usr/bin/cc 
 Build flags: 
@@ -10,7 +10,7 @@ The output was:
 
 Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
 
-The C compiler identification is GNU, found in "/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/3.14.5/CompilerIdC/a.out"
+The C compiler identification is GNU, found in "/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/3.14.5/CompilerIdC/a.out"
 
 Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
 Compiler: /usr/bin/c++ 
@@ -23,38 +23,38 @@ The output was:
 
 Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
 
-The CXX compiler identification is GNU, found in "/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/3.14.5/CompilerIdCXX/a.out"
+The CXX compiler identification is GNU, found in "/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/3.14.5/CompilerIdCXX/a.out"
 
 Determining if the C compiler works passed with the following output:
-Change Dir: /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp
+Change Dir: /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_a428b/fast 
-/usr/bin/make -f CMakeFiles/cmTC_a428b.dir/build.make CMakeFiles/cmTC_a428b.dir/build
-make[1]: вход в каталог «/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp»
-Building C object CMakeFiles/cmTC_a428b.dir/testCCompiler.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_a428b.dir/testCCompiler.c.o   -c /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp/testCCompiler.c
-Linking C executable cmTC_a428b
-/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a428b.dir/link.txt --verbose=1
-/usr/bin/cc      CMakeFiles/cmTC_a428b.dir/testCCompiler.c.o  -o cmTC_a428b 
-make[1]: выход из каталога «/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp»
+Run Build Command(s):/usr/bin/make cmTC_fc1bf/fast 
+/usr/bin/make -f CMakeFiles/cmTC_fc1bf.dir/build.make CMakeFiles/cmTC_fc1bf.dir/build
+make[1]: вход в каталог «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
+Building C object CMakeFiles/cmTC_fc1bf.dir/testCCompiler.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_fc1bf.dir/testCCompiler.c.o   -c /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_fc1bf
+/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fc1bf.dir/link.txt --verbose=1
+/usr/bin/cc      CMakeFiles/cmTC_fc1bf.dir/testCCompiler.c.o  -o cmTC_fc1bf 
+make[1]: выход из каталога «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
 
 
 Detecting C compiler ABI info compiled with the following output:
-Change Dir: /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp
+Change Dir: /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_b2d0d/fast 
-/usr/bin/make -f CMakeFiles/cmTC_b2d0d.dir/build.make CMakeFiles/cmTC_b2d0d.dir/build
-make[1]: Entering directory '/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_b2d0d.dir/CMakeCCompilerABI.c.o
-/usr/bin/cc   -v -o CMakeFiles/cmTC_b2d0d.dir/CMakeCCompilerABI.c.o   -c /home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/share/cmake-3.14/Modules/CMakeCCompilerABI.c
+Run Build Command(s):/usr/bin/make cmTC_762d1/fast 
+/usr/bin/make -f CMakeFiles/cmTC_762d1.dir/build.make CMakeFiles/cmTC_762d1.dir/build
+make[1]: Entering directory '/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_762d1.dir/CMakeCCompilerABI.c.o
+/usr/bin/cc   -v -o CMakeFiles/cmTC_762d1.dir/CMakeCCompilerABI.c.o   -c /home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/share/cmake-3.14/Modules/CMakeCCompilerABI.c
 Using built-in specs.
 COLLECT_GCC=/usr/bin/cc
 Target: x86_64-pc-linux-gnu
 Configured with: /build/gcc/src/gcc/configure --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://bugs.archlinux.org/ --enable-languages=c,c++,ada,fortran,go,lto,objc,obj-c++ --enable-shared --enable-threads=posix --with-system-zlib --with-isl --enable-__cxa_atexit --disable-libunwind-exceptions --enable-clocale=gnu --disable-libstdcxx-pch --disable-libssp --enable-gnu-unique-object --enable-linker-build-id --enable-lto --enable-plugin --enable-install-libiberty --with-linker-hash-style=gnu --enable-gnu-indirect-function --enable-multilib --disable-werror --enable-checking=release --enable-default-pie --enable-default-ssp --enable-cet=auto
 Thread model: posix
 gcc version 9.1.0 (GCC) 
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b2d0d.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/cc1 -quiet -v /home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/share/cmake-3.14/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_b2d0d.dir/CMakeCCompilerABI.c.o -version -o /tmp/cc3DamWo.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_762d1.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/cc1 -quiet -v /home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/share/cmake-3.14/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_762d1.dir/CMakeCCompilerABI.c.o -version -o /tmp/ccKfXVxV.s
 GNU C17 (GCC) version 9.1.0 (x86_64-pc-linux-gnu)
 	compiled by GNU C version 9.1.0, GMP version 6.1.2, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.21-GMP
 
@@ -72,15 +72,15 @@ GNU C17 (GCC) version 9.1.0 (x86_64-pc-linux-gnu)
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 Compiler executable checksum: 07f790f36f3287770d39e49f2618fa39
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b2d0d.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
- as -v --64 -o CMakeFiles/cmTC_b2d0d.dir/CMakeCCompilerABI.c.o /tmp/cc3DamWo.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_762d1.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
+ as -v --64 -o CMakeFiles/cmTC_762d1.dir/CMakeCCompilerABI.c.o /tmp/ccKfXVxV.s
 GNU assembler version 2.32 (x86_64-pc-linux-gnu) using BFD version (GNU Binutils) 2.32
 COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b2d0d.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
-Linking C executable cmTC_b2d0d
-/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b2d0d.dir/link.txt --verbose=1
-/usr/bin/cc     -v CMakeFiles/cmTC_b2d0d.dir/CMakeCCompilerABI.c.o  -o cmTC_b2d0d 
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_762d1.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
+Linking C executable cmTC_762d1
+/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_762d1.dir/link.txt --verbose=1
+/usr/bin/cc     -v CMakeFiles/cmTC_762d1.dir/CMakeCCompilerABI.c.o  -o cmTC_762d1 
 Using built-in specs.
 COLLECT_GCC=/usr/bin/cc
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/lto-wrapper
@@ -90,10 +90,10 @@ Thread model: posix
 gcc version 9.1.0 (GCC) 
 COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_b2d0d' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccEGc7bo.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_b2d0d /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0 -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../.. CMakeFiles/cmTC_b2d0d.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/crtn.o
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_b2d0d' '-mtune=generic' '-march=x86-64'
-make[1]: Leaving directory '/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp'
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_762d1' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccJCLsRZ.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_762d1 /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0 -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../.. CMakeFiles/cmTC_762d1.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_762d1' '-mtune=generic' '-march=x86-64'
+make[1]: Leaving directory '/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp'
 
 
 Parsed C implicit include dir info from above output: rv=done
@@ -113,21 +113,21 @@ Parsed C implicit include dir info from above output: rv=done
 
 Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp]
+  ignore line: [Change Dir: /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command(s):/usr/bin/make cmTC_b2d0d/fast ]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_b2d0d.dir/build.make CMakeFiles/cmTC_b2d0d.dir/build]
-  ignore line: [make[1]: Entering directory '/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp']
-  ignore line: [Building C object CMakeFiles/cmTC_b2d0d.dir/CMakeCCompilerABI.c.o]
-  ignore line: [/usr/bin/cc   -v -o CMakeFiles/cmTC_b2d0d.dir/CMakeCCompilerABI.c.o   -c /home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/share/cmake-3.14/Modules/CMakeCCompilerABI.c]
+  ignore line: [Run Build Command(s):/usr/bin/make cmTC_762d1/fast ]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_762d1.dir/build.make CMakeFiles/cmTC_762d1.dir/build]
+  ignore line: [make[1]: Entering directory '/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_762d1.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/cc   -v -o CMakeFiles/cmTC_762d1.dir/CMakeCCompilerABI.c.o   -c /home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/share/cmake-3.14/Modules/CMakeCCompilerABI.c]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/cc]
   ignore line: [Target: x86_64-pc-linux-gnu]
   ignore line: [Configured with: /build/gcc/src/gcc/configure --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://bugs.archlinux.org/ --enable-languages=c,c++,ada,fortran,go,lto,objc,obj-c++ --enable-shared --enable-threads=posix --with-system-zlib --with-isl --enable-__cxa_atexit --disable-libunwind-exceptions --enable-clocale=gnu --disable-libstdcxx-pch --disable-libssp --enable-gnu-unique-object --enable-linker-build-id --enable-lto --enable-plugin --enable-install-libiberty --with-linker-hash-style=gnu --enable-gnu-indirect-function --enable-multilib --disable-werror --enable-checking=release --enable-default-pie --enable-default-ssp --enable-cet=auto]
   ignore line: [Thread model: posix]
   ignore line: [gcc version 9.1.0 (GCC) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b2d0d.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
-  ignore line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/cc1 -quiet -v /home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/share/cmake-3.14/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_b2d0d.dir/CMakeCCompilerABI.c.o -version -o /tmp/cc3DamWo.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_762d1.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
+  ignore line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/cc1 -quiet -v /home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/share/cmake-3.14/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_762d1.dir/CMakeCCompilerABI.c.o -version -o /tmp/ccKfXVxV.s]
   ignore line: [GNU C17 (GCC) version 9.1.0 (x86_64-pc-linux-gnu)]
   ignore line: [	compiled by GNU C version 9.1.0, GMP version 6.1.2, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.21-GMP]
   ignore line: []
@@ -145,15 +145,15 @@ Parsed C implicit link information from above output:
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
   ignore line: [Compiler executable checksum: 07f790f36f3287770d39e49f2618fa39]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b2d0d.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
-  ignore line: [ as -v --64 -o CMakeFiles/cmTC_b2d0d.dir/CMakeCCompilerABI.c.o /tmp/cc3DamWo.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_762d1.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
+  ignore line: [ as -v --64 -o CMakeFiles/cmTC_762d1.dir/CMakeCCompilerABI.c.o /tmp/ccKfXVxV.s]
   ignore line: [GNU assembler version 2.32 (x86_64-pc-linux-gnu) using BFD version (GNU Binutils) 2.32]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b2d0d.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
-  ignore line: [Linking C executable cmTC_b2d0d]
-  ignore line: [/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b2d0d.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/cc     -v CMakeFiles/cmTC_b2d0d.dir/CMakeCCompilerABI.c.o  -o cmTC_b2d0d ]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_762d1.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
+  ignore line: [Linking C executable cmTC_762d1]
+  ignore line: [/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_762d1.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/cc     -v CMakeFiles/cmTC_762d1.dir/CMakeCCompilerABI.c.o  -o cmTC_762d1 ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/cc]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/lto-wrapper]
@@ -163,13 +163,13 @@ Parsed C implicit link information from above output:
   ignore line: [gcc version 9.1.0 (GCC) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_b2d0d' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccEGc7bo.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_b2d0d /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0 -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../.. CMakeFiles/cmTC_b2d0d.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_762d1' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccJCLsRZ.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_762d1 /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0 -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../.. CMakeFiles/cmTC_762d1.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/crtn.o]
     arg [/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/ccEGc7bo.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccJCLsRZ.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -184,7 +184,7 @@ Parsed C implicit link information from above output:
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-pie] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_b2d0d] ==> ignore
+    arg [cmTC_762d1] ==> ignore
     arg [/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/Scrt1.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/crti.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/crtbeginS.o] ==> ignore
@@ -193,7 +193,7 @@ Parsed C implicit link information from above output:
     arg [-L/lib/../lib] ==> dir [/lib/../lib]
     arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
     arg [-L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../..] ==> dir [/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../..]
-    arg [CMakeFiles/cmTC_b2d0d.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [CMakeFiles/cmTC_762d1.dir/CMakeCCompilerABI.c.o] ==> ignore
     arg [-lgcc] ==> lib [gcc]
     arg [--push-state] ==> ignore
     arg [--as-needed] ==> ignore
@@ -220,17 +220,17 @@ Parsed C implicit link information from above output:
 
 
 Detecting C [-std=c11] compiler features compiled with the following output:
-Change Dir: /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp
+Change Dir: /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_b2ef7/fast 
-/usr/bin/make -f CMakeFiles/cmTC_b2ef7.dir/build.make CMakeFiles/cmTC_b2ef7.dir/build
-make[1]: вход в каталог «/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp»
-Building C object CMakeFiles/cmTC_b2ef7.dir/feature_tests.c.o
-/usr/bin/cc   -std=c11 -o CMakeFiles/cmTC_b2ef7.dir/feature_tests.c.o   -c /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/feature_tests.c
-Linking C executable cmTC_b2ef7
-/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b2ef7.dir/link.txt --verbose=1
-/usr/bin/cc      CMakeFiles/cmTC_b2ef7.dir/feature_tests.c.o  -o cmTC_b2ef7 
-make[1]: выход из каталога «/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp»
+Run Build Command(s):/usr/bin/make cmTC_371e7/fast 
+/usr/bin/make -f CMakeFiles/cmTC_371e7.dir/build.make CMakeFiles/cmTC_371e7.dir/build
+make[1]: вход в каталог «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
+Building C object CMakeFiles/cmTC_371e7.dir/feature_tests.c.o
+/usr/bin/cc   -std=c11 -o CMakeFiles/cmTC_371e7.dir/feature_tests.c.o   -c /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/feature_tests.c
+Linking C executable cmTC_371e7
+/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_371e7.dir/link.txt --verbose=1
+/usr/bin/cc      CMakeFiles/cmTC_371e7.dir/feature_tests.c.o  -o cmTC_371e7 
+make[1]: выход из каталога «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -240,17 +240,17 @@ make[1]: выход из каталога «/home/vhundef/CLionProjects/NewCours
 
 
 Detecting C [-std=c99] compiler features compiled with the following output:
-Change Dir: /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp
+Change Dir: /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_3981b/fast 
-/usr/bin/make -f CMakeFiles/cmTC_3981b.dir/build.make CMakeFiles/cmTC_3981b.dir/build
-make[1]: вход в каталог «/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp»
-Building C object CMakeFiles/cmTC_3981b.dir/feature_tests.c.o
-/usr/bin/cc   -std=c99 -o CMakeFiles/cmTC_3981b.dir/feature_tests.c.o   -c /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/feature_tests.c
-Linking C executable cmTC_3981b
-/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3981b.dir/link.txt --verbose=1
-/usr/bin/cc      CMakeFiles/cmTC_3981b.dir/feature_tests.c.o  -o cmTC_3981b 
-make[1]: выход из каталога «/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp»
+Run Build Command(s):/usr/bin/make cmTC_fb635/fast 
+/usr/bin/make -f CMakeFiles/cmTC_fb635.dir/build.make CMakeFiles/cmTC_fb635.dir/build
+make[1]: вход в каталог «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
+Building C object CMakeFiles/cmTC_fb635.dir/feature_tests.c.o
+/usr/bin/cc   -std=c99 -o CMakeFiles/cmTC_fb635.dir/feature_tests.c.o   -c /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/feature_tests.c
+Linking C executable cmTC_fb635
+/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fb635.dir/link.txt --verbose=1
+/usr/bin/cc      CMakeFiles/cmTC_fb635.dir/feature_tests.c.o  -o cmTC_fb635 
+make[1]: выход из каталога «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -260,17 +260,17 @@ make[1]: выход из каталога «/home/vhundef/CLionProjects/NewCours
 
 
 Detecting C [-std=c90] compiler features compiled with the following output:
-Change Dir: /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp
+Change Dir: /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_cc06b/fast 
-/usr/bin/make -f CMakeFiles/cmTC_cc06b.dir/build.make CMakeFiles/cmTC_cc06b.dir/build
-make[1]: вход в каталог «/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp»
-Building C object CMakeFiles/cmTC_cc06b.dir/feature_tests.c.o
-/usr/bin/cc   -std=c90 -o CMakeFiles/cmTC_cc06b.dir/feature_tests.c.o   -c /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/feature_tests.c
-Linking C executable cmTC_cc06b
-/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cc06b.dir/link.txt --verbose=1
-/usr/bin/cc      CMakeFiles/cmTC_cc06b.dir/feature_tests.c.o  -o cmTC_cc06b 
-make[1]: выход из каталога «/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp»
+Run Build Command(s):/usr/bin/make cmTC_41335/fast 
+/usr/bin/make -f CMakeFiles/cmTC_41335.dir/build.make CMakeFiles/cmTC_41335.dir/build
+make[1]: вход в каталог «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
+Building C object CMakeFiles/cmTC_41335.dir/feature_tests.c.o
+/usr/bin/cc   -std=c90 -o CMakeFiles/cmTC_41335.dir/feature_tests.c.o   -c /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/feature_tests.c
+Linking C executable cmTC_41335
+/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_41335.dir/link.txt --verbose=1
+/usr/bin/cc      CMakeFiles/cmTC_41335.dir/feature_tests.c.o  -o cmTC_41335 
+make[1]: выход из каталога «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -278,35 +278,35 @@ make[1]: выход из каталога «/home/vhundef/CLionProjects/NewCours
     Feature record: C_FEATURE:0c_static_assert
     Feature record: C_FEATURE:0c_variadic_macros
 Determining if the CXX compiler works passed with the following output:
-Change Dir: /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp
+Change Dir: /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_db54e/fast 
-/usr/bin/make -f CMakeFiles/cmTC_db54e.dir/build.make CMakeFiles/cmTC_db54e.dir/build
-make[1]: вход в каталог «/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp»
-Building CXX object CMakeFiles/cmTC_db54e.dir/testCXXCompiler.cxx.o
-/usr/bin/c++     -o CMakeFiles/cmTC_db54e.dir/testCXXCompiler.cxx.o -c /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
-Linking CXX executable cmTC_db54e
-/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_db54e.dir/link.txt --verbose=1
-/usr/bin/c++       CMakeFiles/cmTC_db54e.dir/testCXXCompiler.cxx.o  -o cmTC_db54e 
-make[1]: выход из каталога «/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp»
+Run Build Command(s):/usr/bin/make cmTC_7a4a3/fast 
+/usr/bin/make -f CMakeFiles/cmTC_7a4a3.dir/build.make CMakeFiles/cmTC_7a4a3.dir/build
+make[1]: вход в каталог «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
+Building CXX object CMakeFiles/cmTC_7a4a3.dir/testCXXCompiler.cxx.o
+/usr/bin/c++     -o CMakeFiles/cmTC_7a4a3.dir/testCXXCompiler.cxx.o -c /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_7a4a3
+/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7a4a3.dir/link.txt --verbose=1
+/usr/bin/c++       CMakeFiles/cmTC_7a4a3.dir/testCXXCompiler.cxx.o  -o cmTC_7a4a3 
+make[1]: выход из каталога «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
 
 
 Detecting CXX compiler ABI info compiled with the following output:
-Change Dir: /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp
+Change Dir: /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_8cd9f/fast 
-/usr/bin/make -f CMakeFiles/cmTC_8cd9f.dir/build.make CMakeFiles/cmTC_8cd9f.dir/build
-make[1]: Entering directory '/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_8cd9f.dir/CMakeCXXCompilerABI.cpp.o
-/usr/bin/c++    -v -o CMakeFiles/cmTC_8cd9f.dir/CMakeCXXCompilerABI.cpp.o -c /home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/share/cmake-3.14/Modules/CMakeCXXCompilerABI.cpp
+Run Build Command(s):/usr/bin/make cmTC_12647/fast 
+/usr/bin/make -f CMakeFiles/cmTC_12647.dir/build.make CMakeFiles/cmTC_12647.dir/build
+make[1]: Entering directory '/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_12647.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/c++    -v -o CMakeFiles/cmTC_12647.dir/CMakeCXXCompilerABI.cpp.o -c /home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/share/cmake-3.14/Modules/CMakeCXXCompilerABI.cpp
 Using built-in specs.
 COLLECT_GCC=/usr/bin/c++
 Target: x86_64-pc-linux-gnu
 Configured with: /build/gcc/src/gcc/configure --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://bugs.archlinux.org/ --enable-languages=c,c++,ada,fortran,go,lto,objc,obj-c++ --enable-shared --enable-threads=posix --with-system-zlib --with-isl --enable-__cxa_atexit --disable-libunwind-exceptions --enable-clocale=gnu --disable-libstdcxx-pch --disable-libssp --enable-gnu-unique-object --enable-linker-build-id --enable-lto --enable-plugin --enable-install-libiberty --with-linker-hash-style=gnu --enable-gnu-indirect-function --enable-multilib --disable-werror --enable-checking=release --enable-default-pie --enable-default-ssp --enable-cet=auto
 Thread model: posix
 gcc version 9.1.0 (GCC) 
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8cd9f.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/cc1plus -quiet -v -D_GNU_SOURCE /home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/share/cmake-3.14/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_8cd9f.dir/CMakeCXXCompilerABI.cpp.o -version -o /tmp/cchRIyjR.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_12647.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/cc1plus -quiet -v -D_GNU_SOURCE /home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/share/cmake-3.14/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_12647.dir/CMakeCXXCompilerABI.cpp.o -version -o /tmp/ccvw6crr.s
 GNU C++14 (GCC) version 9.1.0 (x86_64-pc-linux-gnu)
 	compiled by GNU C version 9.1.0, GMP version 6.1.2, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.21-GMP
 
@@ -327,15 +327,15 @@ GNU C++14 (GCC) version 9.1.0 (x86_64-pc-linux-gnu)
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 Compiler executable checksum: 651b755a2ab2663904afb50163356b15
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8cd9f.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
- as -v --64 -o CMakeFiles/cmTC_8cd9f.dir/CMakeCXXCompilerABI.cpp.o /tmp/cchRIyjR.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_12647.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ as -v --64 -o CMakeFiles/cmTC_12647.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccvw6crr.s
 GNU assembler version 2.32 (x86_64-pc-linux-gnu) using BFD version (GNU Binutils) 2.32
 COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8cd9f.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
-Linking CXX executable cmTC_8cd9f
-/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8cd9f.dir/link.txt --verbose=1
-/usr/bin/c++      -v CMakeFiles/cmTC_8cd9f.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_8cd9f 
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_12647.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+Linking CXX executable cmTC_12647
+/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_12647.dir/link.txt --verbose=1
+/usr/bin/c++      -v CMakeFiles/cmTC_12647.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_12647 
 Using built-in specs.
 COLLECT_GCC=/usr/bin/c++
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/lto-wrapper
@@ -345,10 +345,10 @@ Thread model: posix
 gcc version 9.1.0 (GCC) 
 COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_8cd9f' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/lto-wrapper -plugin-opt=-fresolution=/tmp/cckmrk9W.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_8cd9f /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0 -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../.. CMakeFiles/cmTC_8cd9f.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/crtn.o
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_8cd9f' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
-make[1]: Leaving directory '/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp'
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_12647' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/lto-wrapper -plugin-opt=-fresolution=/tmp/cc8IdcOv.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_12647 /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0 -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../.. CMakeFiles/cmTC_12647.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_12647' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+make[1]: Leaving directory '/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp'
 
 
 Parsed CXX implicit include dir info from above output: rv=done
@@ -374,21 +374,21 @@ Parsed CXX implicit include dir info from above output: rv=done
 
 Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp]
+  ignore line: [Change Dir: /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command(s):/usr/bin/make cmTC_8cd9f/fast ]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_8cd9f.dir/build.make CMakeFiles/cmTC_8cd9f.dir/build]
-  ignore line: [make[1]: Entering directory '/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp']
-  ignore line: [Building CXX object CMakeFiles/cmTC_8cd9f.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [/usr/bin/c++    -v -o CMakeFiles/cmTC_8cd9f.dir/CMakeCXXCompilerABI.cpp.o -c /home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/share/cmake-3.14/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Run Build Command(s):/usr/bin/make cmTC_12647/fast ]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_12647.dir/build.make CMakeFiles/cmTC_12647.dir/build]
+  ignore line: [make[1]: Entering directory '/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp']
+  ignore line: [Building CXX object CMakeFiles/cmTC_12647.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/c++    -v -o CMakeFiles/cmTC_12647.dir/CMakeCXXCompilerABI.cpp.o -c /home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/share/cmake-3.14/Modules/CMakeCXXCompilerABI.cpp]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/c++]
   ignore line: [Target: x86_64-pc-linux-gnu]
   ignore line: [Configured with: /build/gcc/src/gcc/configure --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://bugs.archlinux.org/ --enable-languages=c,c++,ada,fortran,go,lto,objc,obj-c++ --enable-shared --enable-threads=posix --with-system-zlib --with-isl --enable-__cxa_atexit --disable-libunwind-exceptions --enable-clocale=gnu --disable-libstdcxx-pch --disable-libssp --enable-gnu-unique-object --enable-linker-build-id --enable-lto --enable-plugin --enable-install-libiberty --with-linker-hash-style=gnu --enable-gnu-indirect-function --enable-multilib --disable-werror --enable-checking=release --enable-default-pie --enable-default-ssp --enable-cet=auto]
   ignore line: [Thread model: posix]
   ignore line: [gcc version 9.1.0 (GCC) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8cd9f.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  ignore line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/cc1plus -quiet -v -D_GNU_SOURCE /home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/share/cmake-3.14/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_8cd9f.dir/CMakeCXXCompilerABI.cpp.o -version -o /tmp/cchRIyjR.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_12647.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/cc1plus -quiet -v -D_GNU_SOURCE /home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/share/cmake-3.14/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_12647.dir/CMakeCXXCompilerABI.cpp.o -version -o /tmp/ccvw6crr.s]
   ignore line: [GNU C++14 (GCC) version 9.1.0 (x86_64-pc-linux-gnu)]
   ignore line: [	compiled by GNU C version 9.1.0, GMP version 6.1.2, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.21-GMP]
   ignore line: []
@@ -409,15 +409,15 @@ Parsed CXX implicit link information from above output:
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
   ignore line: [Compiler executable checksum: 651b755a2ab2663904afb50163356b15]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8cd9f.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  ignore line: [ as -v --64 -o CMakeFiles/cmTC_8cd9f.dir/CMakeCXXCompilerABI.cpp.o /tmp/cchRIyjR.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_12647.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [ as -v --64 -o CMakeFiles/cmTC_12647.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccvw6crr.s]
   ignore line: [GNU assembler version 2.32 (x86_64-pc-linux-gnu) using BFD version (GNU Binutils) 2.32]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8cd9f.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  ignore line: [Linking CXX executable cmTC_8cd9f]
-  ignore line: [/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8cd9f.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/c++      -v CMakeFiles/cmTC_8cd9f.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_8cd9f ]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_12647.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [Linking CXX executable cmTC_12647]
+  ignore line: [/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_12647.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/c++      -v CMakeFiles/cmTC_12647.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_12647 ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/c++]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/lto-wrapper]
@@ -427,13 +427,13 @@ Parsed CXX implicit link information from above output:
   ignore line: [gcc version 9.1.0 (GCC) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_8cd9f' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/lto-wrapper -plugin-opt=-fresolution=/tmp/cckmrk9W.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_8cd9f /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0 -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../.. CMakeFiles/cmTC_8cd9f.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_12647' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/collect2 -plugin /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/lto-wrapper -plugin-opt=-fresolution=/tmp/cc8IdcOv.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_12647 /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/Scrt1.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/crti.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/crtbeginS.o -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0 -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../.. CMakeFiles/cmTC_12647.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/crtendS.o /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/crtn.o]
     arg [/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/cckmrk9W.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/cc8IdcOv.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -448,7 +448,7 @@ Parsed CXX implicit link information from above output:
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-pie] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_8cd9f] ==> ignore
+    arg [cmTC_12647] ==> ignore
     arg [/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/Scrt1.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/crti.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/crtbeginS.o] ==> ignore
@@ -457,7 +457,7 @@ Parsed CXX implicit link information from above output:
     arg [-L/lib/../lib] ==> dir [/lib/../lib]
     arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
     arg [-L/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../..] ==> dir [/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../..]
-    arg [CMakeFiles/cmTC_8cd9f.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [CMakeFiles/cmTC_12647.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -480,17 +480,17 @@ Parsed CXX implicit link information from above output:
 
 
 Detecting CXX [-std=c++2a] compiler features compiled with the following output:
-Change Dir: /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp
+Change Dir: /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_114e7/fast 
-/usr/bin/make -f CMakeFiles/cmTC_114e7.dir/build.make CMakeFiles/cmTC_114e7.dir/build
-make[1]: вход в каталог «/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp»
-Building CXX object CMakeFiles/cmTC_114e7.dir/feature_tests.cxx.o
-/usr/bin/c++    -std=c++2a -o CMakeFiles/cmTC_114e7.dir/feature_tests.cxx.o -c /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_114e7
-/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_114e7.dir/link.txt --verbose=1
-/usr/bin/c++       CMakeFiles/cmTC_114e7.dir/feature_tests.cxx.o  -o cmTC_114e7 
-make[1]: выход из каталога «/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp»
+Run Build Command(s):/usr/bin/make cmTC_bdf7d/fast 
+/usr/bin/make -f CMakeFiles/cmTC_bdf7d.dir/build.make CMakeFiles/cmTC_bdf7d.dir/build
+make[1]: вход в каталог «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
+Building CXX object CMakeFiles/cmTC_bdf7d.dir/feature_tests.cxx.o
+/usr/bin/c++    -std=c++2a -o CMakeFiles/cmTC_bdf7d.dir/feature_tests.cxx.o -c /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_bdf7d
+/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bdf7d.dir/link.txt --verbose=1
+/usr/bin/c++       CMakeFiles/cmTC_bdf7d.dir/feature_tests.cxx.o  -o cmTC_bdf7d 
+make[1]: выход из каталога «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
 
 
     Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
@@ -553,17 +553,17 @@ make[1]: выход из каталога «/home/vhundef/CLionProjects/NewCours
 
 
 Detecting CXX [-std=c++17] compiler features compiled with the following output:
-Change Dir: /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp
+Change Dir: /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_6c8ef/fast 
-/usr/bin/make -f CMakeFiles/cmTC_6c8ef.dir/build.make CMakeFiles/cmTC_6c8ef.dir/build
-make[1]: вход в каталог «/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp»
-Building CXX object CMakeFiles/cmTC_6c8ef.dir/feature_tests.cxx.o
-/usr/bin/c++    -std=c++17 -o CMakeFiles/cmTC_6c8ef.dir/feature_tests.cxx.o -c /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_6c8ef
-/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6c8ef.dir/link.txt --verbose=1
-/usr/bin/c++       CMakeFiles/cmTC_6c8ef.dir/feature_tests.cxx.o  -o cmTC_6c8ef 
-make[1]: выход из каталога «/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp»
+Run Build Command(s):/usr/bin/make cmTC_6e957/fast 
+/usr/bin/make -f CMakeFiles/cmTC_6e957.dir/build.make CMakeFiles/cmTC_6e957.dir/build
+make[1]: вход в каталог «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
+Building CXX object CMakeFiles/cmTC_6e957.dir/feature_tests.cxx.o
+/usr/bin/c++    -std=c++17 -o CMakeFiles/cmTC_6e957.dir/feature_tests.cxx.o -c /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_6e957
+/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6e957.dir/link.txt --verbose=1
+/usr/bin/c++       CMakeFiles/cmTC_6e957.dir/feature_tests.cxx.o  -o cmTC_6e957 
+make[1]: выход из каталога «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
 
 
     Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
@@ -626,17 +626,17 @@ make[1]: выход из каталога «/home/vhundef/CLionProjects/NewCours
 
 
 Detecting CXX [-std=c++14] compiler features compiled with the following output:
-Change Dir: /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp
+Change Dir: /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_c80ed/fast 
-/usr/bin/make -f CMakeFiles/cmTC_c80ed.dir/build.make CMakeFiles/cmTC_c80ed.dir/build
-make[1]: вход в каталог «/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp»
-Building CXX object CMakeFiles/cmTC_c80ed.dir/feature_tests.cxx.o
-/usr/bin/c++    -std=c++14 -o CMakeFiles/cmTC_c80ed.dir/feature_tests.cxx.o -c /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_c80ed
-/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c80ed.dir/link.txt --verbose=1
-/usr/bin/c++       CMakeFiles/cmTC_c80ed.dir/feature_tests.cxx.o  -o cmTC_c80ed 
-make[1]: выход из каталога «/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp»
+Run Build Command(s):/usr/bin/make cmTC_0104e/fast 
+/usr/bin/make -f CMakeFiles/cmTC_0104e.dir/build.make CMakeFiles/cmTC_0104e.dir/build
+make[1]: вход в каталог «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
+Building CXX object CMakeFiles/cmTC_0104e.dir/feature_tests.cxx.o
+/usr/bin/c++    -std=c++14 -o CMakeFiles/cmTC_0104e.dir/feature_tests.cxx.o -c /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_0104e
+/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0104e.dir/link.txt --verbose=1
+/usr/bin/c++       CMakeFiles/cmTC_0104e.dir/feature_tests.cxx.o  -o cmTC_0104e 
+make[1]: выход из каталога «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
 
 
     Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
@@ -699,17 +699,17 @@ make[1]: выход из каталога «/home/vhundef/CLionProjects/NewCours
 
 
 Detecting CXX [-std=c++11] compiler features compiled with the following output:
-Change Dir: /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp
+Change Dir: /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_4beb5/fast 
-/usr/bin/make -f CMakeFiles/cmTC_4beb5.dir/build.make CMakeFiles/cmTC_4beb5.dir/build
-make[1]: вход в каталог «/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp»
-Building CXX object CMakeFiles/cmTC_4beb5.dir/feature_tests.cxx.o
-/usr/bin/c++    -std=c++11 -o CMakeFiles/cmTC_4beb5.dir/feature_tests.cxx.o -c /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_4beb5
-/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4beb5.dir/link.txt --verbose=1
-/usr/bin/c++       CMakeFiles/cmTC_4beb5.dir/feature_tests.cxx.o  -o cmTC_4beb5 
-make[1]: выход из каталога «/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp»
+Run Build Command(s):/usr/bin/make cmTC_83ee5/fast 
+/usr/bin/make -f CMakeFiles/cmTC_83ee5.dir/build.make CMakeFiles/cmTC_83ee5.dir/build
+make[1]: вход в каталог «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
+Building CXX object CMakeFiles/cmTC_83ee5.dir/feature_tests.cxx.o
+/usr/bin/c++    -std=c++11 -o CMakeFiles/cmTC_83ee5.dir/feature_tests.cxx.o -c /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_83ee5
+/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_83ee5.dir/link.txt --verbose=1
+/usr/bin/c++       CMakeFiles/cmTC_83ee5.dir/feature_tests.cxx.o  -o cmTC_83ee5 
+make[1]: выход из каталога «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
 
 
     Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
@@ -772,17 +772,17 @@ make[1]: выход из каталога «/home/vhundef/CLionProjects/NewCours
 
 
 Detecting CXX [-std=c++98] compiler features compiled with the following output:
-Change Dir: /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp
+Change Dir: /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_67482/fast 
-/usr/bin/make -f CMakeFiles/cmTC_67482.dir/build.make CMakeFiles/cmTC_67482.dir/build
-make[1]: вход в каталог «/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp»
-Building CXX object CMakeFiles/cmTC_67482.dir/feature_tests.cxx.o
-/usr/bin/c++    -std=c++98 -o CMakeFiles/cmTC_67482.dir/feature_tests.cxx.o -c /home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_67482
-/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_67482.dir/link.txt --verbose=1
-/usr/bin/c++       CMakeFiles/cmTC_67482.dir/feature_tests.cxx.o  -o cmTC_67482 
-make[1]: выход из каталога «/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/CMakeTmp»
+Run Build Command(s):/usr/bin/make cmTC_77432/fast 
+/usr/bin/make -f CMakeFiles/cmTC_77432.dir/build.make CMakeFiles/cmTC_77432.dir/build
+make[1]: вход в каталог «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
+Building CXX object CMakeFiles/cmTC_77432.dir/feature_tests.cxx.o
+/usr/bin/c++    -std=c++98 -o CMakeFiles/cmTC_77432.dir/feature_tests.cxx.o -c /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_77432
+/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_77432.dir/link.txt --verbose=1
+/usr/bin/c++       CMakeFiles/cmTC_77432.dir/feature_tests.cxx.o  -o cmTC_77432 
+make[1]: выход из каталога «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
 
 
     Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
@@ -842,3 +842,31 @@ make[1]: выход из каталога «/home/vhundef/CLionProjects/NewCours
     Feature record: CXX_FEATURE:0cxx_variable_templates
     Feature record: CXX_FEATURE:0cxx_variadic_macros
     Feature record: CXX_FEATURE:0cxx_variadic_templates
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_b55aa/fast 
+/usr/bin/make -f CMakeFiles/cmTC_b55aa.dir/build.make CMakeFiles/cmTC_b55aa.dir/build
+make[1]: вход в каталог «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
+Building C object CMakeFiles/cmTC_b55aa.dir/CheckIncludeFile.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_b55aa.dir/CheckIncludeFile.c.o   -c /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_b55aa
+/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b55aa.dir/link.txt --verbose=1
+/usr/bin/cc      CMakeFiles/cmTC_b55aa.dir/CheckIncludeFile.c.o  -o cmTC_b55aa 
+make[1]: выход из каталога «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_47f3f/fast 
+/usr/bin/make -f CMakeFiles/cmTC_47f3f.dir/build.make CMakeFiles/cmTC_47f3f.dir/build
+make[1]: вход в каталог «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
+Building C object CMakeFiles/cmTC_47f3f.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_47f3f.dir/CheckFunctionExists.c.o   -c /home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/share/cmake-3.14/Modules/CheckFunctionExists.c
+Linking C executable cmTC_47f3f
+/home/vhundef/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/192.5728.100/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_47f3f.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_47f3f.dir/CheckFunctionExists.c.o  -o cmTC_47f3f -lpthread 
+make[1]: выход из каталога «/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/CMakeTmp»
+
+

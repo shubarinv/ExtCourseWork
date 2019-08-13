@@ -200,11 +200,11 @@ public:
 				cout << "EventManager: got ESC button press. Quiting..." << endl;
 				return -1;
 			}
-			if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_RETURN) {
+			if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_RETURN) {
 				return selectedOption;
 			}
 			if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_DOWN) {
-				if (selectedOption == 3)selectedOption = 1;
+				if (selectedOption == 2)selectedOption = 1;
 				else
 					selectedOption++;
 			} else if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_UP) {

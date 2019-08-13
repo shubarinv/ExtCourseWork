@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/NewCourseWork.dir/main.cpp.o"
+  "CMakeFiles/NewCourseWork.dir/driver.cpp.o"
   "NewCourseWork.pdb"
   "NewCourseWork"
 )

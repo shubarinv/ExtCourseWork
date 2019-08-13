@@ -1,1 +1,1 @@
-/usr/bin/c++  -g   CMakeFiles/NewCourseWork.dir/main.cpp.o  -o NewCourseWork 
+/usr/bin/c++  -g   CMakeFiles/NewCourseWork.dir/driver.cpp.o  -o NewCourseWork -Wl,-rpath,/usr/local/lib /usr/lib/libSDLmain.a /usr/lib/libSDL.so -lpthread /usr/local/lib/libSDL_draw.so /usr/lib/libSDL_ttf.so -lSDLmain 

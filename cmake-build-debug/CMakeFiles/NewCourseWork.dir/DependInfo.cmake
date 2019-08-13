@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/vhundef/CLionProjects/NewCourseWork/main.cpp" "/home/vhundef/CLionProjects/NewCourseWork/cmake-build-debug/CMakeFiles/NewCourseWork.dir/main.cpp.o"
+  "/home/vhundef/CLionProjects/course-work-spring-2019/driver.cpp" "/home/vhundef/CLionProjects/course-work-spring-2019/cmake-build-debug/CMakeFiles/NewCourseWork.dir/driver.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
