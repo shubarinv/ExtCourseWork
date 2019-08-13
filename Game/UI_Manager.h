@@ -43,7 +43,7 @@ public:
 		}
 		fnt = TTF_OpenFont("Roboto-Regular.ttf", 20);
 		if (!fnt) {
-			printf("TTF_OpenFont: %s\n", TTF_GetError());
+			printf("ERROR_TTF_OpenFont: %s\n", TTF_GetError());
 			// handle error
 		}
 		// ===== Generating background ==== //
@@ -265,28 +265,110 @@ public:
 		}
 	}
 
-	static string parseEvent(SDLKey param) {
-		if (param == SDLK_a) {
-			return "a";
+	static string parseEvent(char param) {
+		switch ((char) param) {
+			case 'q':
+				return "q";
+			case 'w':
+				return "w";
+
+			case 'e':
+				return "e";
+
+			case 'r':
+				return "r";
+
+			case 't':
+				return "t";
+
+			case 'y':
+				return "y";
+
+			case 'u':
+				return "u";
+
+			case 'i':
+				return "i";
+
+			case 'o':
+				return "o";
+
+			case 'p':
+				return "p";
+
+			case 'a':
+				return "a";
+
+			case 's':
+				return "s";
+
+			case 'd':
+				return "d";
+
+			case 'f':
+				return "f";
+
+			case 'g':
+				return "g";
+
+			case 'h':
+				return "h";
+
+			case 'j':
+				return "j";
+
+			case 'k':
+				return "k";
+
+			case 'l':
+				return "l";
+
+			case 'z':
+				return "z";
+
+			case 'x':
+				return "x";
+
+			case 'c':
+				return "c";
+
+			case 'v':
+				return "v";
+
+			case 'b':
+				return "b";
+
+			case 'n':
+				return "n";
+
+			case 'm':
+				return "m";
+			default:
+				return "_";
 		}
 	}
 
-	static string input() {
+	string input() {
 		SDL_Event event;
 		string str;
 		string tmp;
+		screenManager->clearScreen();
+		createButton(0,screenManager->getScreenHeight()/2,screenManager->getScreenWidth(),20,"Player Name: "+str,0xff00ff,0xffff00);
+		screenManager->updateScreen();
+
 		while (SDL_WaitEvent(&event)) {
 			if (event.type == SDL_QUIT) {
 				break;
-			} else if (event.key.keysym.sym == SDLK_BACKSPACE) {
-				str = str.substr(0, str.size() - 1);
-				continue;
+			} else if (event.key.keysym.sym == SDLK_BACKSPACE&& event.type == SDL_KEYDOWN) {
+				str = str.substr(0, str.size()-1);
 			} else if (event.key.keysym.sym == SDLK_RETURN) {
 				return str;
 			} else if (event.type == SDL_KEYDOWN) {
 				str.append(parseEvent(event.key.keysym.sym));
 			}
-
+			screenManager->clearScreen();
+			createButton(0,screenManager->getScreenHeight()/2,screenManager->getScreenWidth(),20,"Player Name: "+str,0xff00ff,0xffff00);
+			screenManager->updateScreen();
 		}
 		return str;
 	}

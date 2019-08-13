@@ -132,7 +132,7 @@ public:
 
 
 			if (player.getHealth() <= 0) {
-				writeScoreToFile(UI_Manager::input(), player.getScore());
+				writeScoreToFile(uiManager.input(), player.getScore());
 				return uiManager.showGameOver(&eventManager, screenManager, player.getScore());
 			}
 		}
