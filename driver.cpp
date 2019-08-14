@@ -7,12 +7,6 @@
 #include "Game/Player.h"
 #include "Game/GameManager.h"
 
-
-/**
- * @brief Draws background(sky, water)
- **/
-
-
 int main() {
 	// ===== GameManagers initialisation ==== //
 	ScreenManager screenManager; ///< This thing is required to draw on screen
