@@ -14,19 +14,17 @@ private:
     bool bIsOnScreen{true};
     ScreenManager *screenManager{};
     SDL_Rect particle{};
-   [[deprecated]] bool bIsEnemy{true};
 public:
     Particle() {
         bIsOnScreen = true;
 	    initialised = false;
     }
-    void init(ScreenManager *screenMgr, coords loc, bool isEnemy) {
+    void init(ScreenManager *screenMgr, coords loc) {
         cout << "Particle was spawned: " << this << endl;
         particle.h = 10;
         particle.w = 5;
         particle.x = (loc.x1 + loc.x2) / 2;
         particle.y = (loc.y1 + loc.y2) / 2;
-        bIsEnemy = isEnemy;
         screenManager = screenMgr;
         location.x1 = particle.x;
         location.x2 = particle.x + particle.w;
@@ -56,8 +54,7 @@ private:
             if (bIsOnScreen) {
                 if (particle.y >= screenManager->getScreenHeight() || particle.y <= 0)
                     bIsOnScreen = false;
-                if (bIsEnemy) particle.y++;
-                else particle.y--;
+                particle.y--;
                 location.y1 = particle.y;
                 location.y2 = particle.y + particle.h;
             }
@@ -72,14 +69,11 @@ public:
 
 class Weapon : public GameObject {
 private:
-   [[deprecated]] int ammo{40}, power{1};
     ScreenManager *screenManager{};
-    [[deprecated]] bool bIsEnemy{true};
 public:
     void init(ScreenManager *screenMgr, bool isEnemy) {
         cout << "Weapon was spawned: " << this << endl;
         screenManager = screenMgr;
-        bIsEnemy = isEnemy;
 	    initialised = true;
     }
 
@@ -87,32 +81,11 @@ public:
 	    initialised = false;
     }
 
-    // Should be removed
-    [[maybe_unused]] int getPower() const {
-        return power;
-    }
-
-    [[maybe_unused]] void setPower(int pwr) {
-        Weapon::power = pwr;
-    }
-    //
-
     void shoot() {
 	    if (!initialised) throw runtime_error("ERROR: attempt to call shoot on uninitialised Weapon instance\n");
         particles.push_back(*new Particle());
-        particles.back().init(screenManager, location, bIsEnemy);
+        particles.back().init(screenManager, location);
     }
-
-    // should remove
-    [[maybe_unused]] int getAmmo() const {
-        return ammo;
-    }
-
-    [[maybe_unused]] void setAmmo(int ammoAmount) {
-        Weapon::ammo = ammoAmount;
-    }
-    //
-
 
     void update(coords newloc) {
         location = newloc;
