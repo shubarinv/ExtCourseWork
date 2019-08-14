@@ -95,7 +95,9 @@ public:
 		}
 		return 0;
 	}
-
+/**
+ * @brief checks if particle shot by player overlaps asteroid, using cute_c2 lib
+ **/
 	void checkForOverlap(Particle *particle) {
 		c2Circle c1;
 		c1.r = 10 * size;
@@ -110,6 +112,10 @@ public:
 		}
 	}
 
+/**
+ * @brief checks if one asteroid overlaps this asteroid, using cute_c2 lib
+ * @deprecated This function was planed to be used to merge two asteroids into one, since this mecanic was not implemented this function is deprecated
+ **/
 	void checkForOverlap(Asteroid asteroid) {
 		c2Circle c1;
 		c1.r = 10 * size;

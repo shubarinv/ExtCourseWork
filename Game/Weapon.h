@@ -14,7 +14,7 @@ private:
     bool bIsOnScreen{true};
     ScreenManager *screenManager{};
     SDL_Rect particle{};
-    bool bIsEnemy{true};
+   [[deprecated]] bool bIsEnemy{true};
 public:
     Particle() {
         bIsOnScreen = true;
@@ -72,9 +72,9 @@ public:
 
 class Weapon : public GameObject {
 private:
-    int ammo{40}, power{1};
+   [[deprecated]] int ammo{40}, power{1};
     ScreenManager *screenManager{};
-    bool bIsEnemy{true};
+    [[deprecated]] bool bIsEnemy{true};
 public:
     void init(ScreenManager *screenMgr, bool isEnemy) {
         cout << "Weapon was spawned: " << this << endl;
@@ -87,6 +87,7 @@ public:
 	    initialised = false;
     }
 
+    // Should be removed
     [[maybe_unused]] int getPower() const {
         return power;
     }
@@ -94,6 +95,7 @@ public:
     [[maybe_unused]] void setPower(int pwr) {
         Weapon::power = pwr;
     }
+    //
 
     void shoot() {
 	    if (!initialised) throw runtime_error("ERROR: attempt to call shoot on uninitialised Weapon instance\n");
@@ -101,6 +103,7 @@ public:
         particles.back().init(screenManager, location, bIsEnemy);
     }
 
+    // should remove
     [[maybe_unused]] int getAmmo() const {
         return ammo;
     }
@@ -108,6 +111,8 @@ public:
     [[maybe_unused]] void setAmmo(int ammoAmount) {
         Weapon::ammo = ammoAmount;
     }
+    //
+
 
     void update(coords newloc) {
         location = newloc;

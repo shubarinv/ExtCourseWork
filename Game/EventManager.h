@@ -17,7 +17,7 @@ public:
     SDL_Event getEvent() {
         event.type = '\0';
         SDL_PollEvent(&event);
-        SDL_GetMouseState(&mousePosX, &mousePosY);
+       // SDL_GetMouseState(&mousePosX, &mousePosY);
 
         if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
             event.type = SDL_QUIT; // So that app will close on ESC btn press

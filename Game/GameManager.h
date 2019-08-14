@@ -15,7 +15,7 @@ private:
 
 	int wave{0};
 	ScreenManager *screenManager;
-	int elapsed = 0, current = 0, timeSinceSecond = 0, frames = 0, next{}; //avgFPS - Avg fps per seconds
+	int elapsed = 0, current = 0, timeSinceSecond = 0, frames = 0, next{}; //avgFPS - Avg fps per second
 	int framerate = 59;
 	SDL_Event event{}; ///< Holds last event
 	list<Asteroid> asteroids;
@@ -132,7 +132,7 @@ public:
 
 
 			if (player.getHealth() <= 0) {
-				writeScoreToFile(uiManager.input(), player.getScore());
+				writeScoreToFile(uiManager.input(), player.getScore()); ///< Asks user to input PlayerName than writes it and player score to the leaderBoard file
 				return uiManager.showGameOver(&eventManager, screenManager, player.getScore());
 			}
 		}

@@ -14,364 +14,394 @@
 
 class UI_Manager {
 private:
-	TTF_Font *fnt;
-	ScreenManager *screenManager = nullptr;
-	SDL_Color text_color;
-	SDL_Surface *text_surface = nullptr;
-	int bgX[100];
-	int bgY[100];
+    TTF_Font *fnt;
+    ScreenManager *screenManager = nullptr;
+    SDL_Color text_color;
+    SDL_Surface *text_surface = nullptr;
+    int bgX[100];
+    int bgY[100];
 
 
-	struct LdbrdRecord {
-		string name;
-		int score;
+    struct LdbrdRecord {
+        string name;
+        int score;
 
-		LdbrdRecord(string name_, int score_) {
-			name = name_;
-			score = score_;
-		}
-	};
+        LdbrdRecord(string name_, int score_) {
+            name = name_;
+            score = score_;
+        }
+    };
 
-	list <LdbrdRecord> leaderBoardParsed;
+    list <LdbrdRecord> leaderBoardParsed;
 
 
 public:
-	UI_Manager(ScreenManager *screenMgr) {
-		screenManager = screenMgr;
-		if (TTF_Init()) {
-			throw runtime_error("UI_Manager: Failed to init SDL_TTF ");
-		}
-		fnt = TTF_OpenFont("Roboto-Regular.ttf", 20);
-		if (!fnt) {
-			printf("ERROR_TTF_OpenFont: %s\n", TTF_GetError());
-			// handle error
-		}
-		// ===== Generating background ==== //
-		for (int i = 0; i < 100; i++) {
-			bgX[i] = GameObject::randIntInRange(1, screenManager->getScreenWidth() - 1);
-			bgY[i] = GameObject::randIntInRange(1, screenManager->getScreenHeight() - 1);
-		}
-	}
+    UI_Manager(ScreenManager *screenMgr) {
+        screenManager = screenMgr;
+        if (TTF_Init()) { // init of SDL_TFF lib
+            throw runtime_error("UI_Manager: Failed to init SDL_TTF ");
+        }
 
-	/**
-	 * @param x - Horizontal position of text (in pixels)
-	 * @param y - Vertical position of text (in pixels)
-	 * @param text - Text that you want to add to the screen
-	 **/
-	void drawText(int x, int y, const string &text, int textColor) {
-		text_color.r = (textColor & 0x00ff0000) / 0x10000;
-		text_color.g = (textColor & 0x0000ff00) / 0x100;
-		text_color.b = textColor & 0x000000ff;
-		// text_color.g=textColor%10-textColor%1000;
-		//text_color.b=textColor%1000;
-		text_surface = TTF_RenderUTF8_Solid(fnt, text.c_str(), text_color);
+        fnt = TTF_OpenFont("Roboto-Regular.ttf", 20); ///< setting font and font size
+        if (!fnt) {
+            printf("ERROR_TTF_OpenFont: %s\n", TTF_GetError());
+        }
 
-		SDL_Rect textBg;
-		textBg.x = x;
-		textBg.y = y;
+        // ===== Generating background ==== //
+        for (int i = 0; i < 100; i++) {
+            bgX[i] = GameObject::randIntInRange(1, screenManager->getScreenWidth() - 1);
+            bgY[i] = GameObject::randIntInRange(1, screenManager->getScreenHeight() - 1);
+        }
+    }
 
-		SDL_BlitSurface(text_surface, nullptr, screenManager->getMainSurface(), &textBg);
-		SDL_FreeSurface(text_surface);
-		text_surface = nullptr;
+    /**
+     * @param x - Horizontal position of text (in pixels)
+     * @param y - Vertical position of text (in pixels)
+     * @param text - Text that you want to add to the screen
+     **/
+    void drawText(int x, int y, const string &text, int textColor) {
+        text_color.r = (textColor & 0x00ff0000) / 0x10000;
+        text_color.g = (textColor & 0x0000ff00) / 0x100;
+        text_color.b = textColor & 0x000000ff;
+        // text_color.g=textColor%10-textColor%1000;
+        //text_color.b=textColor%1000;
+        text_surface = TTF_RenderUTF8_Solid(fnt, text.c_str(), text_color);
 
-	}
+        SDL_Rect textBg;
+        textBg.x = x;
+        textBg.y = y;
 
-	/**
-	 * @param x - Horizontal position of text (in pixels)
-	 * @param y - Vertical position of text (in pixels)
-	 * @param width - width of a button
-	 * @param height - height if a button
-	 * @param text - Text that you want to add to the screen
-	 * @param textColor - Color of the text that will be added to the button
-	 **/
-	void createButton(int x, int y, int width, int height, const string &text, int btnColor, int textColor) {
-		screenManager->draw_Rect(x, y, width, height, btnColor);
-		drawText((x + width / 2) - 10 * (text.length() / 2.0), (y + height / 2) - 12, text, textColor);
-	}
+        SDL_BlitSurface(text_surface, nullptr, screenManager->getMainSurface(), &textBg);
+        SDL_FreeSurface(text_surface);
+        text_surface = nullptr;
 
+    }
 
-	/**
-	 * @brief Draws HUD(text like player money, level, etc)
-	**/
-	void drawHUD(int health, int money) {
-		drawText(10, 10, "Health:" + to_string(health), 0xFFFFFF);
-		drawText(screenManager->getScreenWidth() - 100, 10, "Score:" + to_string(money), 0xFFFFFF);
-	}
+    /**
+     * @param x - Horizontal position of text (in pixels)
+     * @param y - Vertical position of text (in pixels)
+     * @param width - width of a button
+     * @param height - height if a button
+     * @param text - Text that you want to add to the screen
+     * @param textColor - Color of the text that will be added to the button
+     **/
+    void createButton(int x, int y, int width, int height, const string &text, int btnColor, int textColor) {
+        screenManager->draw_Rect(x, y, width, height, btnColor);
+        drawText((x + width / 2) - 10 * (text.length() / 2.0), (y + height / 2) - 12, text, textColor);
+    }
 
 
-	void drawBg() {
-		for (int i = 0; i < 100; ++i) {
-			Draw_Pixel(screenManager->getMainSurface(), bgX[i], bgY[i], 0xF5F5DC);
-		}
-	}
+    /**
+     * @brief Draws HUD(text like player money, level, etc)
+    **/
+    void drawHUD(int health, int money) {
+        drawText(10, 10, "Health:" + to_string(health), 0xFFFFFF);
+        drawText(screenManager->getScreenWidth() - 100, 10, "Score:" + to_string(money), 0xFFFFFF);
+    }
 
-	int showMainMenu(EventManager *eventMgr, ScreenManager *screenMgr, UI_Manager *UI_Mgr) {
-		SDL_Event event;
-		screenMgr->clearScreen();
+    /**
+     * @brief Draws Background (stars (white pixels) in background)
+    **/
+    void drawBg() {
+        for (int i = 0; i < 100; ++i) {
+            Draw_Pixel(screenManager->getMainSurface(), bgX[i], bgY[i], 0xF5F5DC);
+        }
+    }
 
-		int selectedOption{1};
-		UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  start  <", 0xffffff);
-		UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
-		                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
+    /**
+     * @brief Draws mainMenu
+     * @return (-1) if player pressed ESC, (1) if player pressed start, (2) if player pressed quit
+    **/
+    int showMainMenu(EventManager *eventMgr, ScreenManager *screenMgr, UI_Manager *UI_Mgr) {
+        SDL_Event event;
+        screenMgr->clearScreen();
+
+        int selectedOption{1};
+        UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  start  <", 0xffffff);
+        UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
+                         (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
 
 
-		screenMgr->updateScreen();
+        screenMgr->updateScreen();
 
-		list <Asteroid> astroids;
-		for (int i = 0; i < 10; ++i) {
-			astroids.emplace_back(screenMgr);
-		}
-		parseLeaderboard();
-		/* Polling events */
-		while (true) {
-			astroids.remove_if(Asteroid::removalCheck);
-			if (astroids.size() < 10) {
-				astroids.emplace_back(screenMgr);
-			}
-			event = eventMgr->getEvent();
-			if (event.type == SDL_QUIT) {
-				cout << "EventManager: got ESC button press. Quiting..." << endl;
-				return -1;
-			}
-			if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_RETURN) {
-				return selectedOption;
-			}
-			if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_DOWN) {
-				if (selectedOption == 2)selectedOption = 1;
-				else
-					selectedOption++;
-			} else if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_UP) {
-				if (selectedOption == 1)selectedOption = 3;
-				else
-					selectedOption--;
-			}
-			SDL_Delay(5);
-			screenMgr->clearScreen();
-			drawBg();
-			UI_Mgr->showLeaderBoard();
-			for (auto &asteroid : astroids) {
-				asteroid.reDraw();
-			}
-			switch (selectedOption) {
-				case 1:
-					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  start  <",
-					                 0xffffff);
-					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
-					                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.5), "quit", 0xffffff);
-					break;
-				case 2:
-					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, "start", 0xffffff);
-					UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
-					                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.5), ">  quit  <",
-					                 0xffffff);
-					break;
-			}
-			screenMgr->updateScreen();
+        list <Asteroid> astroids;
+        for (int i = 0; i < 10; ++i) {
+            astroids.emplace_back(screenMgr);
+        }
+        parseLeaderboard();
 
-		}
-	}
+        /* Polling events */
+        while (true) {
+            /* Asteroid spawn/deletion related code */
+            astroids.remove_if(Asteroid::removalCheck);
+            if (astroids.size() < 10) {
+                astroids.emplace_back(screenMgr);
+            }
 
-	void parseLeaderboard() {
-		leaderBoardParsed.clear();
-		std::ifstream infile("leaderBoard");
-		string name;
-		int score;
-		while (infile >> name >> score) {
-			leaderBoardParsed.emplace_back(name, score);
-		}
-		infile.close();
-		if (leaderBoardParsed.empty()) {
-			cout << "WARNING: LeaderBoard Empty either file is empty or error occured" << endl;
-		}
-	}
+            /* Handling input */
+            event = eventMgr->getEvent();
+            if (event.type == SDL_QUIT) {
+                cout << "EventManager: got ESC button press. Quiting..." << endl;
+                return -1;
+            }
+            if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_RETURN) {
+                return selectedOption;
+            }
+            if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_DOWN) {
+                if (selectedOption == 2)selectedOption = 1;
+                else
+                    selectedOption++;
+            } else if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_UP) {
+                if (selectedOption == 1)selectedOption = 3;
+                else
+                    selectedOption--;
+            }
+            /* Redrawing menu/leaderboard/asteroids */
+            SDL_Delay(5);
+            screenMgr->clearScreen();
+            drawBg();
+            UI_Mgr->showLeaderBoard();
+            for (auto &asteroid : astroids) {
+                asteroid.reDraw();
+            }
+            switch (selectedOption) {
+                case 1:
+                    UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  start  <",
+                                     0xffffff);
+                    UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
+                                     (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.5), "quit", 0xffffff);
+                    break;
+                case 2:
+                    UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, "start", 0xffffff);
+                    UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
+                                     (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.5), ">  quit  <",
+                                     0xffffff);
+                    break;
+            }
+            screenMgr->updateScreen();
 
-	int showGameOver(EventManager *eventMgr, ScreenManager *screenMgr, int score) {
-		SDL_Event event;
-		screenMgr->clearScreen();
-		drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  Restart  <", 0xffffff);
-		drawText((int) (0.5 * screenMgr->screenUnit),
-		         (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
-		parseLeaderboard();
-		screenMgr->updateScreen();
-		int selectedOption{1};
-		while (true) {
-			event = eventMgr->getEvent();
-			if (event.type == SDL_QUIT) {
-				cout << "EventManager: got ESC button press. Quiting..." << endl;
-				return -1;
-			}
-			if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_RETURN) {
-				return selectedOption;
-			}
-			if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_DOWN) {
-				if (selectedOption == 2)selectedOption = 1;
-				else
-					selectedOption++;
-			} else if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_UP) {
-				if (selectedOption == 1)selectedOption = 2;
-				else
-					selectedOption--;
-			}
-			SDL_Delay(5);
-			screenMgr->clearScreen();
-			drawBg();
-			showLeaderBoard();
-			drawText(screenMgr->getScreenWidth() / 2 - 50, screenMgr->getScreenHeight() - 50,
-			         "GAME OVER!\nScore:" + to_string(score),
-			         0xff0000);
-			switch (selectedOption) {
-				case 1:
-					drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  restart  <",
-					         0xffffff);
-					drawText((int) (0.5 * screenMgr->screenUnit),
-					         (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
-					break;
-				case 2:
-					drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, "restart",
-					         0xffffff);
-					drawText((int) (0.5 * screenMgr->screenUnit),
-					         (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), ">  quit  <",
-					         0xffffff);
-					break;
-			}
-			screenMgr->updateScreen();
+        }
+    }
 
-		}
-	}
+/**
+ * @brief reads file that's called leaderBoard, then adds data from this file to the list
+ **/
+void parseLeaderboard() {
+    leaderBoardParsed.clear();
+    std::ifstream infile("leaderBoard");
+    string name;
+    int score;
+    while (infile >> name >> score) {
+        leaderBoardParsed.emplace_back(name, score);
+    }
+    infile.close();
+    if (leaderBoardParsed.empty()) {
+        cout << "WARNING: LeaderBoard Empty either file is empty or error occured" << endl;
+    }
+}
 
-	void showLeaderBoard() {
-		int i = 4;
-		createButton(screenManager->getScreenWidth() / 2, screenManager->getScreenHeight() / 12,
-		             screenManager->getScreenWidth() / 4, screenManager->getScreenHeight() / 20 + 20,
-		             "Player Name", 0x4d4d4d, 0xFFFFff);
-		createButton(screenManager->getScreenWidth() / 2 + screenManager->getScreenWidth() / 4,
-		             screenManager->getScreenHeight() / 12, screenManager->getScreenWidth() / 4,
-		             screenManager->getScreenHeight() / 20 + 20, "Score", 0x4d4d4d, 0xFFFFff);
-		for (auto &record : leaderBoardParsed) {
-			createButton(screenManager->getScreenWidth() / 2, screenManager->getScreenHeight() / 20 + 20 * i,
-			             screenManager->getScreenWidth() / 4, 20,
-			             record.name, 0x4d4d4d, 0xFFFF00);
-			createButton(screenManager->getScreenWidth() / 2 + screenManager->getScreenWidth() / 4,
-			             screenManager->getScreenHeight() / 20 + 20 * i,
-			             screenManager->getScreenWidth() / 4, 20, to_string(record.score), 0x4d4d4d, 0xFFFF00);
-			Draw_HLine(screenManager->getMainSurface(), screenManager->getScreenWidth() / 2,
-			           screenManager->getScreenHeight() / 20 + 20 * i + 19,
-			           screenManager->getScreenWidth(), 0x0);
-			Draw_VLine(screenManager->getMainSurface(),
-			           screenManager->getScreenWidth() / 2 + screenManager->getScreenWidth() / 4,
-			           screenManager->getScreenHeight() / 20 + 20 * i,
-			           screenManager->getScreenHeight() / 20 + 20 * i + 18, 0xffffff);
-			i++;
-		}
-	}
+/**
+ * @brief shows gameOver and leaderboard screen
+ **/
+int showGameOver(EventManager *eventMgr, ScreenManager *screenMgr, int score) {
+    SDL_Event event;
+    screenMgr->clearScreen();
+    drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  Restart  <", 0xffffff);
+    drawText((int) (0.5 * screenMgr->screenUnit),
+             (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
+    parseLeaderboard();
+    screenMgr->updateScreen();
+    int selectedOption{1};
+    while (true) {
+        /* Input handling */
+        event = eventMgr->getEvent();
+        if (event.type == SDL_QUIT) {
+            cout << "EventManager: got ESC button press. Quiting..." << endl;
+            return -1;
+        }
+        if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_RETURN) {
+            return selectedOption;
+        }
+        if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_DOWN) {
+            if (selectedOption == 2)selectedOption = 1;
+            else
+                selectedOption++;
+        } else if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_UP) {
+            if (selectedOption == 1)selectedOption = 2;
+            else
+                selectedOption--;
+        }
+        /* UI redraw */
+        SDL_Delay(5);
+        screenMgr->clearScreen();
+        drawBg();
+        showLeaderBoard();
+        drawText(screenMgr->getScreenWidth() / 2 - 50, screenMgr->getScreenHeight() - 50,
+                 "GAME OVER!\nScore:" + to_string(score),
+                 0xff0000);
+        switch (selectedOption) {
+            case 1:
+                drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  restart  <",
+                         0xffffff);
+                drawText((int) (0.5 * screenMgr->screenUnit),
+                         (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
+                break;
+            case 2:
+                drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, "restart",
+                         0xffffff);
+                drawText((int) (0.5 * screenMgr->screenUnit),
+                         (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), ">  quit  <",
+                         0xffffff);
+                break;
+        }
+        screenMgr->updateScreen();
 
-	static string parseEvent(char param) {
-		switch ((char) param) {
-			case 'q':
-				return "q";
-			case 'w':
-				return "w";
+    }
+}
+/**
+ * @brief shows leaderBoard
+ **/
+void showLeaderBoard() {
+    int i = 4;
+    createButton(screenManager->getScreenWidth() / 2, screenManager->getScreenHeight() / 12,
+                 screenManager->getScreenWidth() / 4, screenManager->getScreenHeight() / 20 + 20,
+                 "Player Name", 0x4d4d4d, 0xFFFFff);
+    createButton(screenManager->getScreenWidth() / 2 + screenManager->getScreenWidth() / 4,
+                 screenManager->getScreenHeight() / 12, screenManager->getScreenWidth() / 4,
+                 screenManager->getScreenHeight() / 20 + 20, "Score", 0x4d4d4d, 0xFFFFff);
+    for (auto &record : leaderBoardParsed) {
+        createButton(screenManager->getScreenWidth() / 2, screenManager->getScreenHeight() / 20 + 20 * i,
+                     screenManager->getScreenWidth() / 4, 20,
+                     record.name, 0x4d4d4d, 0xFFFF00);
+        createButton(screenManager->getScreenWidth() / 2 + screenManager->getScreenWidth() / 4,
+                     screenManager->getScreenHeight() / 20 + 20 * i,
+                     screenManager->getScreenWidth() / 4, 20, to_string(record.score), 0x4d4d4d, 0xFFFF00);
+        Draw_HLine(screenManager->getMainSurface(), screenManager->getScreenWidth() / 2,
+                   screenManager->getScreenHeight() / 20 + 20 * i + 19,
+                   screenManager->getScreenWidth(), 0x0);
+        Draw_VLine(screenManager->getMainSurface(),
+                   screenManager->getScreenWidth() / 2 + screenManager->getScreenWidth() / 4,
+                   screenManager->getScreenHeight() / 20 + 20 * i,
+                   screenManager->getScreenHeight() / 20 + 20 * i + 18, 0xffffff);
+        i++;
+    }
+}
 
-			case 'e':
-				return "e";
+/**
+ * @brief turns SDL_Event to String
+ **/
+static string parseEvent(char param) {
+    switch ((char) param) {
+        case 'q':
+            return "q";
+        case 'w':
+            return "w";
 
-			case 'r':
-				return "r";
+        case 'e':
+            return "e";
 
-			case 't':
-				return "t";
+        case 'r':
+            return "r";
 
-			case 'y':
-				return "y";
+        case 't':
+            return "t";
 
-			case 'u':
-				return "u";
+        case 'y':
+            return "y";
 
-			case 'i':
-				return "i";
+        case 'u':
+            return "u";
 
-			case 'o':
-				return "o";
+        case 'i':
+            return "i";
 
-			case 'p':
-				return "p";
+        case 'o':
+            return "o";
 
-			case 'a':
-				return "a";
+        case 'p':
+            return "p";
 
-			case 's':
-				return "s";
+        case 'a':
+            return "a";
 
-			case 'd':
-				return "d";
+        case 's':
+            return "s";
 
-			case 'f':
-				return "f";
+        case 'd':
+            return "d";
 
-			case 'g':
-				return "g";
+        case 'f':
+            return "f";
 
-			case 'h':
-				return "h";
+        case 'g':
+            return "g";
 
-			case 'j':
-				return "j";
+        case 'h':
+            return "h";
 
-			case 'k':
-				return "k";
+        case 'j':
+            return "j";
 
-			case 'l':
-				return "l";
+        case 'k':
+            return "k";
 
-			case 'z':
-				return "z";
+        case 'l':
+            return "l";
 
-			case 'x':
-				return "x";
+        case 'z':
+            return "z";
 
-			case 'c':
-				return "c";
+        case 'x':
+            return "x";
 
-			case 'v':
-				return "v";
+        case 'c':
+            return "c";
 
-			case 'b':
-				return "b";
+        case 'v':
+            return "v";
 
-			case 'n':
-				return "n";
+        case 'b':
+            return "b";
 
-			case 'm':
-				return "m";
-			default:
-				return "_";
-		}
-	}
+        case 'n':
+            return "n";
 
-	string input() {
-		SDL_Event event;
-		string str;
-		string tmp;
-		screenManager->clearScreen();
-		createButton(0,screenManager->getScreenHeight()/2,screenManager->getScreenWidth(),20,"Player Name: "+str,0xff00ff,0xffff00);
-		screenManager->updateScreen();
+        case 'm':
+            return "m";
+        default:
+            return "_";
+    }
+}
 
-		while (SDL_WaitEvent(&event)) {
-			if (event.type == SDL_QUIT) {
-				break;
-			} else if (event.key.keysym.sym == SDLK_BACKSPACE&& event.type == SDL_KEYDOWN) {
-				str = str.substr(0, str.size()-1);
-			} else if (event.key.keysym.sym == SDLK_RETURN) {
-				return str;
-			} else if (event.type == SDL_KEYDOWN) {
-				str.append(parseEvent(event.key.keysym.sym));
-			}
-			screenManager->clearScreen();
-			createButton(0,screenManager->getScreenHeight()/2,screenManager->getScreenWidth(),20,"Player Name: "+str,0xff00ff,0xffff00);
-			screenManager->updateScreen();
-		}
-		return str;
-	}
+/**
+ * @brief allows to enter some text
+ **/
+string input() {
+    SDL_Event event;
+    string str;
+    string tmp;
+    screenManager->clearScreen();
+    createButton(0, screenManager->getScreenHeight() / 2, screenManager->getScreenWidth(), 20,
+                 "Player Name: " + str, 0xff00ff, 0xffff00);
+    screenManager->updateScreen();
+
+    while (SDL_WaitEvent(&event)) {
+        if (event.type == SDL_QUIT) {
+            break;
+        } else if (event.key.keysym.sym == SDLK_BACKSPACE && event.type == SDL_KEYDOWN) {
+            str = str.substr(0, str.size() - 1);
+        } else if (event.key.keysym.sym == SDLK_RETURN) {
+            return str;
+        } else if (event.type == SDL_KEYDOWN) {
+            str.append(parseEvent(event.key.keysym.sym));
+        }
+        screenManager->clearScreen();
+        createButton(0, screenManager->getScreenHeight() / 2, screenManager->getScreenWidth(), 20,
+                     "Player Name: " + str, 0xff00ff, 0xffff00);
+        screenManager->updateScreen();
+    }
+    return str;
+}
 
 
 };

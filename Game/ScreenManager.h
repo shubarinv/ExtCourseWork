@@ -28,7 +28,7 @@ public:
 		if (!mainSurface) {
 			throw runtime_error("ScreenManager: Failed to init SDL\n" + (string) SDL_GetError());
 		}
-		SDL_WM_SetCaption("Курсовая rev 2.0 ", nullptr);
+		SDL_WM_SetCaption("Курсовая rev 3.0 ", nullptr);
 		screenUnit = max_y / 10;
 	}
 

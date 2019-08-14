@@ -26,7 +26,7 @@ int main() {
 	int tmp;
 	// ===== Show mainMenu ===== //
 	tmp = uiManager.showMainMenu(&eventManager, &screenManager, &uiManager);
-	if (tmp == 2||tmp==-1) { // player pressed show leaderboard
+	if (tmp == 2||tmp==-1) { // player pressed quit/ESC
 		return 0;
 	}
 
