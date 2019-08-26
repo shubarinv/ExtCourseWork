@@ -7,7 +7,6 @@
 
 
 #include <fstream>
-#include "asteroid.h"
 #include "SDL/SDL.h"
 
 class GameManager {
@@ -18,7 +17,6 @@ private:
     int elapsed = 0, current = 0, timeSinceSecond = 0, frames = 0, next{}; //avgFPS - Avg fps per second
     int framerate = 59;
     SDL_Event event{}; ///< Holds last event
-    list<Asteroid> asteroids;
 
     void prestartInit() {
         // ===== Setting GMmanager initial values
@@ -71,7 +69,7 @@ public:
         swtch = !swtch;
     }
 
-    int startGame(EventManager eventManager, UI_Manager uiManager, Player player) {
+    int startGame(EventManager eventManager, UI_Manager uiManager, Tank player) {
         prestartInit();
         SDL_Rect test;
         test.x = 100;
@@ -115,29 +113,7 @@ public:
             uiManager.drawHUD(player.getHealth(), player.getScore());
             player.reDraw();
             /* ==== Check for collisions ====*/
-            for (auto &asteroid : asteroids) {
-                player.setHealth(
-                        -asteroid.reDraw()); // asteroid returns some value if it hits base(lower part of screen)
-                player.weapon.particles.remove_if(
-                        Particle::removalCheck); // removes particle from list if it is offcreenj
-                for (auto &particle : player.weapon.particles) {
-                    asteroid.checkForOverlap(
-                            &particle); // checks if any particle overlaps particle(aka particle hit asteroid)
-                }
-                if (asteroid.shouldBreak) { // returns true if asteroid was hit enough times to break
-                    cout << "Asteroid Breaking" << endl;
-                    player.setScore(asteroid.getSize() * 7);
-                    asteroids.emplace_back(screenManager, asteroid.getX() + asteroid.getSize() * 10, asteroid.getY(),
-                                           asteroid.getMovementByX(),
-                                           asteroid.getMovementByY() / 2,
-                                           asteroid.getSize()); // creates asteroid in place of the one that should break
-                    asteroids.emplace_back(screenManager, asteroid.getX() - asteroid.getSize() * 10, asteroid.getY(),
-                                           asteroid.getMovementByX(),
-                                           asteroid.getMovementByY() / 2,
-                                           asteroid.getSize()); // creates asteroid in place of the one that should break
-                    asteroid.setIsOnScreen(false); // removes from screen asteroid that should break
-                }
-            }
+
             screenManager->updateScreen();
 
             capFPS();

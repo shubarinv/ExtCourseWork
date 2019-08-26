@@ -9,8 +9,9 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
 #include <fstream>
+#include <list>
 #include "GameObject.h"
-#include "asteroid.h"
+#include "ScreenManager.h"
 
 class UI_Manager {
 private:
@@ -246,7 +247,7 @@ void showLeaderBoard() {
     int i = 4;
     createButton(screenManager->getScreenWidth() / 2, screenManager->getScreenHeight() / 12,
                  screenManager->getScreenWidth() / 4, screenManager->getScreenHeight() / 20 + 20,
-                 "Player Name", 0x4d4d4d, 0xFFFFff);
+                 "Tank Name", 0x4d4d4d, 0xFFFFff);
     createButton(screenManager->getScreenWidth() / 2 + screenManager->getScreenWidth() / 4,
                  screenManager->getScreenHeight() / 12, screenManager->getScreenWidth() / 4,
                  screenManager->getScreenHeight() / 20 + 20, "Score", 0x4d4d4d, 0xFFFFff);
@@ -363,7 +364,7 @@ string input() {
     string tmp;
     screenManager->clearScreen();
     createButton(0, screenManager->getScreenHeight() / 2, screenManager->getScreenWidth(), 20,
-                 "Player Name: " + str, 0xff00ff, 0xffff00);
+                 "Tank Name: " + str, 0xff00ff, 0xffff00);
     screenManager->updateScreen();
 
     while (SDL_WaitEvent(&event)) {
@@ -378,7 +379,7 @@ string input() {
         }
         screenManager->clearScreen();
         createButton(0, screenManager->getScreenHeight() / 2, screenManager->getScreenWidth(), 20,
-                     "Player Name: " + str, 0xff00ff, 0xffff00);
+                     "Tank Name: " + str, 0xff00ff, 0xffff00);
         screenManager->updateScreen();
     }
     return str;

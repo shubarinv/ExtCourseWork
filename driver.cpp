@@ -4,7 +4,7 @@
 
 #include "Game/EventManager.h"
 #include "Game/UI_Manager.h"
-#include "Game/Player.h"
+#include "Game/Tank.h"
 #include "Game/GameManager.h"
 
 int main() {
@@ -13,7 +13,7 @@ int main() {
 	UI_Manager uiManager(&screenManager); ///< This one is required to draw UI
 	EventManager eventManager; ///< Checks for events
 	SDL_Event event; ///< Holds last event
-	Player player(&screenManager); ///< Player obj
+    Tank player(&screenManager); ///< Player obj
 	GameManager gmManager(&screenManager); ///< Implements gamelogic
 
 

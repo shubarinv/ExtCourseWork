@@ -10,7 +10,7 @@
 #include "ScreenManager.h"
 #include "Weapon.h"
 
-class Player : GameObject {
+class Tank : GameObject {
 private:
     int health{0}, movementDirection{0}, movementSpeed{0};
     ScreenManager *screenManager = nullptr;
@@ -19,7 +19,7 @@ private:
 public:
     Weapon weapon;
 
-    explicit Player(ScreenManager *screenMgr) {
+    explicit Tank(ScreenManager *screenMgr) {
         screenManager = screenMgr;
         health = 100;
         movementDirection = 0;
