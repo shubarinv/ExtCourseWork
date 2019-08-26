@@ -42,9 +42,9 @@ public:
             throw runtime_error("UI_Manager: Failed to init SDL_TTF ");
         }
 
-        fnt = TTF_OpenFont("Roboto-Regular.ttf", 20); ///< setting font and font size
+        fnt = TTF_OpenFont("Hack.ttf", 20); ///< setting font and font size
         if (!fnt) {
-            printf("ERROR_TTF_OpenFont: %s\n", TTF_GetError());
+            printf("UI_Manager: %s\n", TTF_GetError());
         }
 
         // ===== Generating background ==== //
@@ -124,19 +124,10 @@ public:
 
         screenMgr->updateScreen();
 
-        list <Asteroid> astroids;
-        for (int i = 0; i < 10; ++i) {
-            astroids.emplace_back(screenMgr);
-        }
         parseLeaderboard();
 
         /* Polling events */
         while (true) {
-            /* Asteroid spawn/deletion related code */
-            astroids.remove_if(Asteroid::removalCheck);
-            if (astroids.size() < 10) {
-                astroids.emplace_back(screenMgr);
-            }
 
             /* Handling input */
             event = eventMgr->getEvent();
@@ -161,9 +152,6 @@ public:
             screenMgr->clearScreen();
             drawBg();
             UI_Mgr->showLeaderBoard();
-            for (auto &asteroid : astroids) {
-                asteroid.reDraw();
-            }
             switch (selectedOption) {
                 case 1:
                     UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  start  <",
