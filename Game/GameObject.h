@@ -12,8 +12,8 @@ class GameObject {
 public:
 	bool initialised{false};
     struct coords {
-        int x1, x2;
-        int y1, y2;
+        int x1{1}, x2{1};
+        int y1{1}, y2{1};
     };
     coords location{};
 

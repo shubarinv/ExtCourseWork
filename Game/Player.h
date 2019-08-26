@@ -15,9 +15,7 @@ private:
     int health{0}, movementDirection{0}, movementSpeed{0};
     ScreenManager *screenManager = nullptr;
     int score{0};
-    int bodyColor = 0x3E4800;
-    SDL_Rect UTrackBody{};
-    SDL_Rect DTrackBody{};
+    SDL_Rect body{};
 public:
     Weapon weapon;
 
@@ -26,26 +24,10 @@ public:
         health = 100;
         movementDirection = 0;
         movementSpeed = 1;
-        UTrackBody.w = 40;
-        UTrackBody.h = 12;
-        UTrackBody.x = screenMgr->getScreenWidth() / 2 - UTrackBody.w;
-        UTrackBody.y = screenMgr->getScreenHeight() - 60;
+        body.x = location.x1;
+        body.y = location.y1;
 
-        DTrackBody.w = UTrackBody.w;
-        DTrackBody.h = UTrackBody.h;
-        DTrackBody.x = UTrackBody.x;
-        DTrackBody.y = UTrackBody.y + 26;
-
-
-        SDL_FillRect(screenMgr->getMainSurface(), &UTrackBody, bodyColor);
-        SDL_FillRect(screenMgr->getMainSurface(), &DTrackBody, bodyColor);
-
-        location.x1 = UTrackBody.x;
-        location.x2 = DTrackBody.x + DTrackBody.w;
-        location.y1 = UTrackBody.y;
-        location.y2 = location.y1 + DTrackBody.h;
-
-        weapon.init(screenManager, false);
+        weapon.init(screenManager);
         weapon.location = this->location;
 
         score = 0;
@@ -63,29 +45,34 @@ public:
     void updateLocation() {
         if (movementDirection == 1 || movementDirection == -1) {
             location.x1 += checkIfCanGo(movementDirection * movementSpeed, true);
-            location.x2 = location.x1 + UTrackBody.w;
+            location.x2 = location.x1 + body.w;
         } else {
             location.y1 += checkIfCanGo(movementDirection / -2 * movementSpeed, false);
-            location.y2 = location.y1 + 2 * UTrackBody.h;
+            location.y2 = location.y1 + 2 * body.h;
         }
     }
 
     [[deprecated]] void reDraw() {
         if (health > 0) {
             updateLocation();
-            if (abs(movementDirection) == 1) {
-                UTrackBody.x = location.x1;
-                UTrackBody.y = location.y1;
-                DTrackBody.x = location.x2 - DTrackBody.w;
-                UTrackBody.y = location.y2;
-                SDL_FillRect(screenManager->getMainSurface(), &UTrackBody, bodyColor);
-                SDL_FillRect(screenManager->getMainSurface(), &DTrackBody, bodyColor);
+            body.x = location.x1;
+            body.y = location.y1;
+            switch (movementDirection) {
+                case -1:
+                    screenManager->drawImage("../Game/Sprites/Tank_L.png", &body);
+                    break;
+                case 1:
+                    screenManager->drawImage("../Game/Sprites/Tank_R.png", &body);
+                    break;
+                case -2:
+                    screenManager->drawImage("../Game/Sprites/Tank_D.png", &body);
+                    break;
+                case 2:
+                    screenManager->drawImage("../Game/Sprites/Tank_U.png", &body);
+                    break;
+                default:
+                    break;
 
-                Draw_FillEllipse(screenManager->getMainSurface(), UTrackBody.x + UTrackBody.w / 2,
-                                 (location.y1 + location.y2) / 2 + UTrackBody.h, 20, 7, 0x436F3E);
-            } else {
-                Draw_FillEllipse(screenManager->getMainSurface(), UTrackBody.x + UTrackBody.w / 2,
-                                 (location.y1 + location.y2) / 2 + UTrackBody.h, 7, 20, 0x436F3E);
             }
             weapon.update(location);
         }
@@ -108,10 +95,6 @@ public:
 
     void shoot() {
         weapon.shoot();
-    }
-
-    coords getCoords() {
-        return location;
     }
 
     void setHealth(int deltaHealth) {
