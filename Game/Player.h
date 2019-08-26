@@ -48,11 +48,11 @@ public:
             location.x2 = location.x1 + body.w;
         } else {
             location.y1 += checkIfCanGo(movementDirection / -2 * movementSpeed, false);
-            location.y2 = location.y1 + 2 * body.h;
+            location.y2 = location.y1 + body.h;
         }
     }
 
-    [[deprecated]] void reDraw() {
+    void reDraw() {
         if (health > 0) {
             updateLocation();
             body.x = location.x1;
