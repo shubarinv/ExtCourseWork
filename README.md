@@ -1,6 +1,3 @@
-# AsterCourseWork2019
-My final attempt to create coursework using C++ and SDL
+# ExtCouseWork
 
-Used some code from previous attempts
-- https://github.com/vhundef/CourseWork2019SPR-OLD-
-- https://github.com/vhundef/SPRCourseWork2019_OLD_2
+ещё одна курсовая
