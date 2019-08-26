@@ -70,7 +70,7 @@ public:
             DTrackBody.x = location.x2 - DTrackBody.w;
             SDL_FillRect(screenManager->getMainSurface(), &UTrackBody, bodyColor);
             SDL_FillRect(screenManager->getMainSurface(), &DTrackBody, bodyColor);
-			
+
             Draw_FillEllipse(screenManager->getMainSurface(), UTrackBody.x + UTrackBody.w / 2,
                              (location.y1 + location.y2) / 2 + UTrackBody.h, 20, 7, 0x436F3E);
 

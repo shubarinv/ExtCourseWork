@@ -50,7 +50,7 @@ public:
     }
 
 private:
-    void updateLocation() {
+    [[deprecated]] void updateLocation() {
             if (bIsOnScreen) {
                 if (particle.y >= screenManager->getScreenHeight() || particle.y <= 0)
                     bIsOnScreen = false;
@@ -71,10 +71,16 @@ class Weapon : public GameObject {
 private:
     ScreenManager *screenManager{};
 public:
-    void init(ScreenManager *screenMgr, bool isEnemy) {
+    [[deprecated]]void init(ScreenManager *screenMgr, bool isEnemy) {
         cout << "Weapon was spawned: " << this << endl;
         screenManager = screenMgr;
 	    initialised = true;
+    }
+
+    void init(ScreenManager *screenMgr) {
+        cout << "Weapon was spawned: " << this << endl;
+        screenManager = screenMgr;
+        initialised = true;
     }
 
     Weapon() {
