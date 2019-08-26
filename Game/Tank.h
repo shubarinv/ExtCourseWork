@@ -74,7 +74,7 @@ public:
                     break;
 
             }
-            weapon.update(location);
+            weapon.update(location, movementDirection);
         }
     }
 

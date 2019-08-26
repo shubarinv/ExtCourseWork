@@ -14,21 +14,29 @@ private:
     bool bIsOnScreen{true};
     ScreenManager *screenManager{};
     SDL_Rect particle{};
+    int movementDirrection{-0};
 public:
     Particle() {
         bIsOnScreen = true;
-	    initialised = false;
+        initialised = false;
     }
-    void init(ScreenManager *screenMgr, coords loc) {
+
+    void init(ScreenManager *screenMgr, coords loc, int movementDir) {
         cout << "Particle was spawned: " << this << endl;
-        particle.h = 10;
-        particle.w = 5;
+        if (abs(movementDir) == 1) {
+            particle.h = 5;
+            particle.w = 10;
+        } else {
+            particle.h = 10;
+            particle.w = 5;
+        }
         particle.x = (loc.x1 + loc.x2) / 2;
         particle.y = (loc.y1 + loc.y2) / 2;
         screenManager = screenMgr;
         location.x1 = particle.x;
         location.x2 = particle.x + particle.w;
-	    initialised = true;
+        movementDirrection = movementDir;
+        initialised = true;
     }
 
     [[nodiscard]] bool isOnScreen() const {
@@ -40,8 +48,8 @@ public:
     }
 
     void reDraw() {
-	    if (!initialised) cout << "WARNING: Particle is UNINITIALISED, but got reDraw command" << endl;
-	    if (initialised && bIsOnScreen) {
+        if (!initialised) cout << "WARNING: Particle is UNINITIALISED, but got reDraw command" << endl;
+        if (initialised && bIsOnScreen) {
             updateLocation();
             SDL_FillRect(screenManager->getMainSurface(), &particle, 0xff0000);
         } else {
@@ -50,19 +58,39 @@ public:
     }
 
 private:
-    [[deprecated]] void updateLocation() {
-            if (bIsOnScreen) {
-                if (particle.y >= screenManager->getScreenHeight() || particle.y <= 0)
-                    bIsOnScreen = false;
-                particle.y--;
-                location.y1 = particle.y;
-                location.y2 = particle.y + particle.h;
+    void updateLocation() {
+        if (bIsOnScreen) {
+            switch (movementDirrection) {
+                case -1:
+                    particle.x--;
+                    break;
+                case 1:
+                    particle.x++;
+                    break;
+                case -2:
+                    particle.y++;
+                    break;
+                case 2:
+                    particle.y--;
+                    break;
+                default:
+                    break;
             }
+
+            if (particle.y >= screenManager->getScreenHeight() || particle.y <= 0 || particle.x <= 0 ||
+                particle.x >= screenManager->getScreenWidth())
+                bIsOnScreen = false;
+
+            location.y1 = particle.y;
+            location.y2 = particle.y + particle.h;
+            location.x1 = particle.x;
+            location.x2 = particle.x + particle.w;
         }
+    }
 
 public:
     static bool removalCheck(Particle prtcl) {
-	    return !prtcl.isOnScreen();
+        return !prtcl.isOnScreen();
     }
 };
 
@@ -70,11 +98,12 @@ public:
 class Weapon : public GameObject {
 private:
     ScreenManager *screenManager{};
+    int facingDirrection{-0};
 public:
     [[deprecated]]void init(ScreenManager *screenMgr, bool isEnemy) {
         cout << "Weapon was spawned: " << this << endl;
         screenManager = screenMgr;
-	    initialised = true;
+        initialised = true;
     }
 
     void init(ScreenManager *screenMgr) {
@@ -84,18 +113,19 @@ public:
     }
 
     Weapon() {
-	    initialised = false;
+        initialised = false;
     }
 
     void shoot() {
-	    if (!initialised) throw runtime_error("ERROR: attempt to call shoot on uninitialised Weapon instance\n");
+        if (!initialised) throw runtime_error("ERROR: attempt to call shoot on uninitialised Weapon instance\n");
         particles.push_back(*new Particle());
-        particles.back().init(screenManager, location);
+        particles.back().init(screenManager, location, facingDirrection);
     }
 
-    void update(coords newloc) {
+    void update(coords newloc, int movementDirrection) {
         location = newloc;
-	    particles.remove_if(Particle::removalCheck);
+        facingDirrection = movementDirrection;
+        particles.remove_if(Particle::removalCheck);
         if (!particles.empty()) {
             for (auto &particle : particles) {
                 particle.reDraw();
@@ -104,7 +134,7 @@ public:
         }
     }
 
-    list <Particle> particles;
+    list<Particle> particles;
 };
 
 
