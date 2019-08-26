@@ -12,19 +12,20 @@
 
 class Player : GameObject {
 private:
-	int health{0}, movementDirection{0}, movementSpeed{0};
-	ScreenManager *screenManager = nullptr;
-	int score{0};
+    int health{0}, movementDirection{0}, movementSpeed{0};
+    ScreenManager *screenManager = nullptr;
+    int score{0};
     int bodyColor = 0x3E4800;
     SDL_Rect UTrackBody{};
     SDL_Rect DTrackBody{};
 public:
-	Weapon weapon;
-	explicit Player(ScreenManager *screenMgr) {
-		screenManager = screenMgr;
+    Weapon weapon;
+
+    explicit Player(ScreenManager *screenMgr) {
+        screenManager = screenMgr;
         health = 100;
-		movementDirection = 0;
-		movementSpeed = 1;
+        movementDirection = 0;
+        movementSpeed = 1;
         UTrackBody.w = 40;
         UTrackBody.h = 12;
         UTrackBody.x = screenMgr->getScreenWidth() / 2 - UTrackBody.w;
@@ -44,80 +45,92 @@ public:
         location.y1 = UTrackBody.y;
         location.y2 = location.y1 + DTrackBody.h;
 
-		weapon.init(screenManager, false);
-		weapon.location = this->location;
+        weapon.init(screenManager, false);
+        weapon.location = this->location;
 
-		score = 0;
-	}
+        score = 0;
+    }
 
-	void updateLocation() {
-		location.x1 += movementDirection * movementSpeed;
-		location.x2 += movementDirection * movementSpeed;
-		// ==== Location checks (so that player won't go off screen) ==== //
-		if ((location.x2 >= screenManager->getScreenWidth() - 2) && movementDirection == 1)
-			movementDirection = 0;
+    int checkIfCanGo(int deltaLoc, bool xAxis) {
+        if (xAxis) {
+            if (location.x1 + deltaLoc < 0 || location.x2 + deltaLoc > screenManager->getScreenWidth()) return 0;
+        } else {
+            if (location.y1 + deltaLoc < 0 || location.y2 + deltaLoc > screenManager->getScreenHeight()) return 0;
+        }
+        return deltaLoc;
+    }
 
-		if ((location.x1 - 2 < 0) && movementDirection == -1)
-			movementDirection = 0;
+    void updateLocation() {
+        if (movementDirection == 1 || movementDirection == -1) {
+            location.x1 += checkIfCanGo(movementDirection * movementSpeed, true);
+            location.x2 = location.x1 + UTrackBody.w;
+        } else {
+            location.y1 += checkIfCanGo(movementDirection / -2 * movementSpeed, false);
+            location.y2 = location.y1 + 2 * UTrackBody.h;
+        }
+    }
 
-	}
+    [[deprecated]] void reDraw() {
+        if (health > 0) {
+            updateLocation();
+            if (abs(movementDirection) == 1) {
+                UTrackBody.x = location.x1;
+                UTrackBody.y = location.y1;
+                DTrackBody.x = location.x2 - DTrackBody.w;
+                UTrackBody.y = location.y2;
+                SDL_FillRect(screenManager->getMainSurface(), &UTrackBody, bodyColor);
+                SDL_FillRect(screenManager->getMainSurface(), &DTrackBody, bodyColor);
 
-	void reDraw() {
-		if (health > 0) {
-			updateLocation();
-            UTrackBody.x = location.x1;
+                Draw_FillEllipse(screenManager->getMainSurface(), UTrackBody.x + UTrackBody.w / 2,
+                                 (location.y1 + location.y2) / 2 + UTrackBody.h, 20, 7, 0x436F3E);
+            } else {
+                Draw_FillEllipse(screenManager->getMainSurface(), UTrackBody.x + UTrackBody.w / 2,
+                                 (location.y1 + location.y2) / 2 + UTrackBody.h, 7, 20, 0x436F3E);
+            }
+            weapon.update(location);
+        }
+    }
 
-            DTrackBody.x = location.x2 - DTrackBody.w;
-            SDL_FillRect(screenManager->getMainSurface(), &UTrackBody, bodyColor);
-            SDL_FillRect(screenManager->getMainSurface(), &DTrackBody, bodyColor);
+    /**
+     * @param direction -1=left ; 1=right
+     **/
+    void setMovementDirection(int direction) {
+        movementDirection = direction;
+    }
 
-            Draw_FillEllipse(screenManager->getMainSurface(), UTrackBody.x + UTrackBody.w / 2,
-                             (location.y1 + location.y2) / 2 + UTrackBody.h, 20, 7, 0x436F3E);
+    int getScore() {
+        return score;
+    }
 
-			weapon.update(location);
-		}
-	}
+    void setScore(int Deltascore) {
+        score += Deltascore;
+    }
 
-	/**
-	 * @param direction -1=left ; 1=right
-	 **/
-	void setMovementDirection(int direction) {
-		movementDirection = direction;
-	}
+    void shoot() {
+        weapon.shoot();
+    }
 
-	int getScore() {
-		return score;
-	}
+    coords getCoords() {
+        return location;
+    }
 
-	void setScore(int Deltascore) {
-		score += Deltascore;
-	}
+    void setHealth(int deltaHealth) {
+        health += deltaHealth;
+    }
 
-	void shoot() {
-		weapon.shoot();
-	}
+    int getHealth() {
+        return health;
+    }
 
-	coords getCoords() {
-		return location;
-	}
+    int getMovementSpeed() const {
+        return movementSpeed;
+    }
 
-	void setHealth(int deltaHealth) {
-		health += deltaHealth;
-	}
+    void setMovementSpeed(int mvSpeed) {
+        movementSpeed = mvSpeed;
+    }
 
-	int getHealth() {
-		return health;
-	}
-
-	int getMovementSpeed() const {
-		return movementSpeed;
-	}
-
-	void setMovementSpeed(int mvSpeed) {
-		movementSpeed = mvSpeed;
-	}
-
-	coords location{};
+    coords location{};
 
 };
 
