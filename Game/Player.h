@@ -15,34 +15,34 @@ private:
 	int health{0}, movementDirection{0}, movementSpeed{0};
 	ScreenManager *screenManager = nullptr;
 	int score{0};
-	int bodyColor = 0x727272;
-	SDL_Rect LweaponBody{};
-	SDL_Rect RweaponBody{};
+    int bodyColor = 0x3E4800;
+    SDL_Rect UTrackBody{};
+    SDL_Rect DTrackBody{};
 public:
 	Weapon weapon;
 	explicit Player(ScreenManager *screenMgr) {
 		screenManager = screenMgr;
-		health = 1000;
+        health = 100;
 		movementDirection = 0;
 		movementSpeed = 1;
-		LweaponBody.w = 12;
-		LweaponBody.h = 40;
-		LweaponBody.x = screenMgr->getScreenWidth() / 2 - LweaponBody.w;
-		LweaponBody.y = screenMgr->getScreenHeight() - 70;
+        UTrackBody.w = 40;
+        UTrackBody.h = 12;
+        UTrackBody.x = screenMgr->getScreenWidth() / 2 - UTrackBody.w;
+        UTrackBody.y = screenMgr->getScreenHeight() - 60;
 
-		RweaponBody.w = LweaponBody.w;
-		RweaponBody.h = LweaponBody.h;
-		RweaponBody.x = LweaponBody.x + RweaponBody.w + 15;
-		RweaponBody.y = LweaponBody.y;
+        DTrackBody.w = UTrackBody.w;
+        DTrackBody.h = UTrackBody.h;
+        DTrackBody.x = UTrackBody.x;
+        DTrackBody.y = UTrackBody.y + 26;
 
 
-		SDL_FillRect(screenMgr->getMainSurface(), &LweaponBody, bodyColor);
-		SDL_FillRect(screenMgr->getMainSurface(), &RweaponBody, bodyColor);
+        SDL_FillRect(screenMgr->getMainSurface(), &UTrackBody, bodyColor);
+        SDL_FillRect(screenMgr->getMainSurface(), &DTrackBody, bodyColor);
 
-		location.x1 = LweaponBody.x;
-		location.x2 = RweaponBody.x + RweaponBody.w;
-		location.y1 = LweaponBody.y;
-		location.y2 = location.y1 + RweaponBody.h;
+        location.x1 = UTrackBody.x;
+        location.x2 = DTrackBody.x + DTrackBody.w;
+        location.y1 = UTrackBody.y;
+        location.y2 = location.y1 + DTrackBody.h;
 
 		weapon.init(screenManager, false);
 		weapon.location = this->location;
@@ -65,13 +65,14 @@ public:
 	void reDraw() {
 		if (health > 0) {
 			updateLocation();
-			LweaponBody.x = location.x1;
+            UTrackBody.x = location.x1;
 
-			RweaponBody.x = location.x2 - RweaponBody.w;
-			SDL_FillRect(screenManager->getMainSurface(), &LweaponBody, bodyColor);
-			SDL_FillRect(screenManager->getMainSurface(), &RweaponBody, bodyColor);
-			Draw_FillEllipse(screenManager->getMainSurface(), LweaponBody.x + LweaponBody.w + 7,
-			                 (location.y1 + location.y2) / 2, 7, 20, 0x00ff00);
+            DTrackBody.x = location.x2 - DTrackBody.w;
+            SDL_FillRect(screenManager->getMainSurface(), &UTrackBody, bodyColor);
+            SDL_FillRect(screenManager->getMainSurface(), &DTrackBody, bodyColor);
+			
+            Draw_FillEllipse(screenManager->getMainSurface(), UTrackBody.x + UTrackBody.w / 2,
+                             (location.y1 + location.y2) / 2 + UTrackBody.h, 20, 7, 0x436F3E);
 
 			weapon.update(location);
 		}

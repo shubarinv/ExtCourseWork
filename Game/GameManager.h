@@ -24,7 +24,6 @@ private:
 		// ===== Setting GMmanager initial values
 		setWave(1);
 		setFramerate(300);
-		asteroids.emplace_back(screenManager);
 	}
 
 	static void writeScoreToFile(const string& playerName, int Score) {
@@ -74,11 +73,7 @@ public:
 
 	int startGame(EventManager eventManager, UI_Manager uiManager, Player player) {
 		prestartInit();
-		player.setHealth(-999);
 		while (true) {
-			if (asteroids.empty()) {
-				asteroids.emplace_back(screenManager);
-			}
 			capFPS();
 
 			event = eventManager.getEvent();
@@ -107,7 +102,6 @@ public:
 			uiManager.drawBg();
 			uiManager.drawHUD(player.getHealth(), player.getScore());
 			player.reDraw();
-			asteroids.remove_if(Asteroid::removalCheck); // removes asterod from list if asteroid is offscreen
 			/* ==== Check for collisions ====*/
 			for (auto &asteroid : asteroids) {
 				player.setHealth(-asteroid.reDraw()); // asteroid returns some value if it hits base(lower part of screen)

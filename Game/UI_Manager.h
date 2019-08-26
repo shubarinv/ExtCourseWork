@@ -18,8 +18,6 @@ private:
     ScreenManager *screenManager = nullptr;
     SDL_Color text_color;
     SDL_Surface *text_surface = nullptr;
-    int bgX[100];
-    int bgY[100];
 
 
     struct LdbrdRecord {
@@ -46,12 +44,6 @@ public:
         if (!fnt) {
             printf("UI_Manager: %s\n", TTF_GetError());
         }
-
-        // ===== Generating background ==== //
-        for (int i = 0; i < 100; i++) {
-            bgX[i] = GameObject::randIntInRange(1, screenManager->getScreenWidth() - 1);
-            bgY[i] = GameObject::randIntInRange(1, screenManager->getScreenHeight() - 1);
-        }
     }
 
     /**
@@ -63,8 +55,6 @@ public:
         text_color.r = (textColor & 0x00ff0000) / 0x10000;
         text_color.g = (textColor & 0x0000ff00) / 0x100;
         text_color.b = textColor & 0x000000ff;
-        // text_color.g=textColor%10-textColor%1000;
-        //text_color.b=textColor%1000;
         text_surface = TTF_RenderUTF8_Solid(fnt, text.c_str(), text_color);
 
         SDL_Rect textBg;
@@ -102,9 +92,9 @@ public:
     /**
      * @brief Draws Background (stars (white pixels) in background)
     **/
-    void drawBg() {
+    [[deprecated]]  void drawBg() {
         for (int i = 0; i < 100; ++i) {
-            Draw_Pixel(screenManager->getMainSurface(), bgX[i], bgY[i], 0xF5F5DC);
+            //Draw_Pixel(screenManager->getMainSurface(), bgX[i], bgY[i], 0xF5F5DC);
         }
     }
 
@@ -150,7 +140,6 @@ public:
             /* Redrawing menu/leaderboard/asteroids */
             SDL_Delay(5);
             screenMgr->clearScreen();
-            drawBg();
             UI_Mgr->showLeaderBoard();
             switch (selectedOption) {
                 case 1:
@@ -164,6 +153,8 @@ public:
                     UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
                                      (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.5), ">  quit  <",
                                      0xffffff);
+                    break;
+                default:
                     break;
             }
             screenMgr->updateScreen();
@@ -240,6 +231,8 @@ int showGameOver(EventManager *eventMgr, ScreenManager *screenMgr, int score) {
                 drawText((int) (0.5 * screenMgr->screenUnit),
                          (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), ">  quit  <",
                          0xffffff);
+                break;
+            default:
                 break;
         }
         screenMgr->updateScreen();
