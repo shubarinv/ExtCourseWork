@@ -16,12 +16,15 @@ private:
     ScreenManager *screenManager;
     int elapsed = 0, current = 0, timeSinceSecond = 0, frames = 0, next{}; //avgFPS - Avg fps per second
     int framerate = 59;
+    list<Tank> tanks;
     SDL_Event event{}; ///< Holds last event
 
     void prestartInit() {
         // ===== Setting GMmanager initial values
         setWave(1);
         setFramerate(300);
+        tanks.emplace_back(screenManager);
+
     }
 
     static void writeScoreToFile(const string &playerName, int Score) {
@@ -69,16 +72,20 @@ public:
         swtch = !swtch;
     }
 
+    static bool checkForCollision(Particle *particle, Tank *tank) {
+        return particle->location.x1 >= tank->location.x1 &&
+               particle->location.x2 <= tank->location.x2 &&
+               particle->location.y1 >= tank->location.y1 &&
+               particle->location.y2 <= tank->location.y2;
+    }
+
     int startGame(EventManager eventManager, UI_Manager uiManager, Tank player) {
         prestartInit();
-        SDL_Rect test;
-        test.x = 100;
-        test.y = 100;
 
         while (true) {
             capFPS();
-
-
+            tanks.remove_if(Tank::removalCheck);
+            
             event = eventManager.getEvent();
             {
                 if (event.type == SDL_QUIT) {
@@ -101,19 +108,34 @@ public:
 
                 if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE)
                     player.shoot();
-                if (event.type == SDL_KEYUP) {
-                    cout << "No event" << timeSinceSecond << endl;
+                if (event.type == SDL_KEYUP)
                     player.setMovementSpeed(0);
-                }
+
             }
             screenManager->clearScreen();
-            screenManager->drawImage("../Game/Sprites/Tank_L.png", &test);
+
             /* ==== Redrawing game objects ====*/
-            uiManager.drawBg();
+            for (auto &tank : tanks) {
+                tank.reDraw(); // checks if any particle overlaps particle(aka particle hit asteroid)
+            }
+
+            //uiManager.drawBg();
             uiManager.drawHUD(player.getHealth(), player.getScore());
             player.reDraw();
-            /* ==== Check for collisions ====*/
 
+            /* ==== Check for collisions ====*/
+            for (auto &particle : player.weapon.particles) {
+                for (auto &tank : tanks) {
+                    if (checkForCollision(&particle, &tank)) {
+                        particle.setIsOnScreem(false);
+                        tank.setHealth(-25); // THIS IS TEMPORARY
+                    }
+                }
+            }
+
+            for (auto &tank : tanks) {
+                // Not yet implemented, will check for enemy particles colliding with player
+            }
             screenManager->updateScreen();
 
             capFPS();

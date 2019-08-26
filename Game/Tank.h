@@ -22,15 +22,24 @@ public:
     explicit Tank(ScreenManager *screenMgr) {
         screenManager = screenMgr;
         health = 100;
-        movementDirection = 0;
-        movementSpeed = 1;
-        body.x = location.x1;
-        body.y = location.y1;
+        score = 0;
+        movementDirection = randIntInRange(-2, -1);
+        movementSpeed = 0;
+
+        body.x = randIntInRange(0, screenManager->getScreenWidth());
+        body.y = randIntInRange(0, screenManager->getScreenHeight());
+        body.h = 42;
+        body.w = body.h;
+
+        location.x1 = body.x;
+        location.x2 = body.x + body.w;
+        location.y1 = body.y;
+        location.y2 = body.y + body.h;
 
         weapon.init(screenManager);
         weapon.location = this->location;
 
-        score = 0;
+        cout << "Spawned tank(" << this << ")" << endl;
     }
 
     int checkIfCanGo(int deltaLoc, bool xAxis) {
@@ -79,7 +88,7 @@ public:
     }
 
     /**
-     * @param direction -1=left ; 1=right
+     * @param direction -1=left ; 1=right ; 2=up ; -2=down
      **/
     void setMovementDirection(int direction) {
         movementDirection = direction;
@@ -99,10 +108,15 @@ public:
 
     void setHealth(int deltaHealth) {
         health += deltaHealth;
+        cout << "Tank(" << this << ") HP changed to:" << getHealth() << endl;
     }
 
     int getHealth() {
         return health;
+    }
+
+    static bool removalCheck(const Tank &tank) {
+        return tank.health <= 0;
     }
 
     int getMovementSpeed() const {
