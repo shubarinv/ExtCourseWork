@@ -8,6 +8,7 @@
 
 #include <fstream>
 #include "SDL/SDL.h"
+#include "MapManager.h"
 
 class GameManager {
 private:
@@ -18,6 +19,7 @@ private:
     int framerate = 59;
     list<Tank> tanks;
     SDL_Event event{}; ///< Holds last event
+
 
     void prestartInit() {
         // ===== Setting GMmanager initial values
@@ -81,11 +83,11 @@ public:
 
     int startGame(EventManager eventManager, UI_Manager uiManager, Tank player) {
         prestartInit();
-
+        MapManager mapManager(screenManager);
         while (true) {
             capFPS();
             tanks.remove_if(Tank::removalCheck);
-            
+
             event = eventManager.getEvent();
             {
                 if (event.type == SDL_QUIT) {
@@ -113,7 +115,7 @@ public:
 
             }
             screenManager->clearScreen();
-
+            mapManager.reDraw();
             /* ==== Redrawing game objects ====*/
             for (auto &tank : tanks) {
                 tank.reDraw(); // checks if any particle overlaps particle(aka particle hit asteroid)
