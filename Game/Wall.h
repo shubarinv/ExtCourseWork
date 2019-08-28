@@ -13,6 +13,12 @@
 class Wall : GameObject {
 private:
     int hp{100};
+public:
+    int getHp() const {
+        return hp;
+    }
+
+private:
     SDL_Rect block{};
     ScreenManager *screenManager{};
 
@@ -42,6 +48,12 @@ public:
             cout << "WALL(" << this << ")->SetLocation Unable to set location, coords out of bounds " << "X:" << x
                  << "Y:" << y << endl;
     }
+
+    int getSize() { return block.w; }
+
+    int getX() { return block.x; }
+
+    int getY() { return block.y; }
 
 };
 

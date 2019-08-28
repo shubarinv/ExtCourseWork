@@ -9,6 +9,7 @@
 #include "GameObject.h"
 #include "ScreenManager.h"
 #include "Weapon.h"
+#include "MapManager.h"
 
 class Tank : GameObject {
 private:
@@ -16,10 +17,11 @@ private:
     ScreenManager *screenManager = nullptr;
     int score{0};
     SDL_Rect body{};
+    MapManager *mapManager;
 public:
     Weapon weapon;
 
-    explicit Tank(ScreenManager *screenMgr) {
+    explicit Tank(ScreenManager *screenMgr, MapManager *mpManager) {
         screenManager = screenMgr;
         health = 100;
         score = 0;
@@ -38,25 +40,38 @@ public:
 
         weapon.init(screenManager);
         weapon.location = this->location;
-
+        mapManager = mpManager;
         cout << "Spawned tank(" << this << ")" << endl;
     }
 
-    int checkIfCanGo(int deltaLoc, bool xAxis) {
-        if (xAxis) {
-            if (location.x1 + deltaLoc < 0 || location.x2 + deltaLoc > screenManager->getScreenWidth()) return 0;
+    int checkIfCanGo(int deltaLoc) {
+        GameObject::coords tmpCoords;
+        tmpCoords.y1 = location.y1;
+        tmpCoords.y2 = location.y2;
+        if (movementDirection == 1 || movementDirection == -1) {
+            tmpCoords.x1 = location.x1 + movementDirection * movementSpeed;
+            tmpCoords.x2 = tmpCoords.x1 + body.w;
+            tmpCoords.y1 = location.y1;
+            tmpCoords.y2 = location.y2;
         } else {
-            if (location.y1 + deltaLoc < 0 || location.y2 + deltaLoc > screenManager->getScreenHeight()) return 0;
+            tmpCoords.x1 = location.x1;
+            tmpCoords.x2 = location.x2;
+            tmpCoords.y1 = location.y1 + movementDirection / -2 * movementSpeed;
+            tmpCoords.y2 = tmpCoords.y1 + body.h;
         }
+        if (mapManager->checkforCollision(tmpCoords))
+            return 0;
+
         return deltaLoc;
     }
 
     void updateLocation() {
-        if (movementDirection == 1 || movementDirection == -1) {
-            location.x1 += checkIfCanGo(movementDirection * movementSpeed, true);
+        if ((movementDirection == 1 || movementDirection == -1) &&
+            checkIfCanGo(movementDirection * movementSpeed) != 0) {
+            location.x1 += movementDirection * movementSpeed;
             location.x2 = location.x1 + body.w;
-        } else {
-            location.y1 += checkIfCanGo(movementDirection / -2 * movementSpeed, false);
+        } else if (checkIfCanGo(movementDirection / -2 * movementSpeed) != 0) {
+            location.y1 += movementDirection / -2 * movementSpeed;
             location.y2 = location.y1 + body.h;
         }
     }

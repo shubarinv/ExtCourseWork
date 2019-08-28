@@ -13,8 +13,10 @@ int main() {
 	UI_Manager uiManager(&screenManager); ///< This one is required to draw UI
 	EventManager eventManager; ///< Checks for events
 	SDL_Event event; ///< Holds last event
-    Tank player(&screenManager); ///< Player obj
-	GameManager gmManager(&screenManager); ///< Implements gamelogic
+    MapManager mapManager(&screenManager);
+    Tank player(&screenManager, &mapManager); ///< Player obj
+    GameManager gmManager(&screenManager, &mapManager); ///< Implements gamelogic
+
 
 
 	int tmp;

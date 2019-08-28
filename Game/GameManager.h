@@ -12,7 +12,7 @@
 
 class GameManager {
 private:
-
+    MapManager *mapManager;
     int wave{0};
     ScreenManager *screenManager;
     int elapsed = 0, current = 0, timeSinceSecond = 0, frames = 0, next{}; //avgFPS - Avg fps per second
@@ -25,7 +25,7 @@ private:
         // ===== Setting GMmanager initial values
         setWave(1);
         setFramerate(300);
-        tanks.emplace_back(screenManager);
+        tanks.emplace_back(screenManager, mapManager);
 
     }
 
@@ -39,9 +39,9 @@ private:
 
 
 public:
-
-    explicit GameManager(ScreenManager *screenMgr) {
+    GameManager(ScreenManager *screenMgr, MapManager *mapMgr) {
         screenManager = screenMgr;
+        mapManager = mapMgr;
     }
 
     void setFramerate(int purposedFPS) {
@@ -83,7 +83,7 @@ public:
 
     int startGame(EventManager eventManager, UI_Manager uiManager, Tank player) {
         prestartInit();
-        MapManager mapManager(screenManager);
+
         while (true) {
             capFPS();
             tanks.remove_if(Tank::removalCheck);
@@ -115,7 +115,7 @@ public:
 
             }
             screenManager->clearScreen();
-            mapManager.reDraw();
+            mapManager->reDraw();
             /* ==== Redrawing game objects ====*/
             for (auto &tank : tanks) {
                 tank.reDraw(); // checks if any particle overlaps particle(aka particle hit asteroid)
@@ -132,6 +132,9 @@ public:
                         particle.setIsOnScreem(false);
                         tank.setHealth(-25); // THIS IS TEMPORARY
                     }
+                }
+                if (mapManager->checkforCollision(particle.location)) {
+                    particle.setIsOnScreem(false);
                 }
             }
 
