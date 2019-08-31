@@ -9,6 +9,7 @@
 #include <fstream>
 #include "SDL/SDL.h"
 #include "MapManager.h"
+#include "BotController.h"
 
 class GameManager {
 private:
@@ -17,15 +18,17 @@ private:
     ScreenManager *screenManager;
     int elapsed = 0, current = 0, timeSinceSecond = 0, frames = 0, next{}; //avgFPS - Avg fps per second
     int framerate = 59;
+    list<BotController> bots;
     list<Tank> tanks;
     SDL_Event event{}; ///< Holds last event
 
 
     void prestartInit() {
-        // ===== Setting GMmanager initial values
+        // ===== Setting initial values
         setWave(1);
-        setFramerate(300);
+        setFramerate(150);
         tanks.emplace_back(screenManager, mapManager);
+        bots.emplace_back(&tanks.back());
 
     }
 
@@ -90,6 +93,7 @@ public:
 
             event = eventManager.getEvent();
             {
+
                 if (event.type == SDL_QUIT) {
                     cout << "EventManager: got ESC button press. Quiting..." << endl;
                     break;
@@ -117,8 +121,9 @@ public:
             screenManager->clearScreen();
             mapManager->reDraw();
             /* ==== Redrawing game objects ====*/
-            for (auto &tank : tanks) {
-                tank.reDraw(); // checks if any particle overlaps particle(aka particle hit asteroid)
+            for (auto &bot : bots) {
+                bot.moveTank();
+                bot.controlledTank->reDraw();
             }
 
             //uiManager.drawBg();
@@ -138,7 +143,7 @@ public:
                 }
             }
 
-            for (auto &tank : tanks) {
+            for (auto &tank : bots) {
                 // Not yet implemented, will check for enemy particles colliding with player
             }
             screenManager->updateScreen();

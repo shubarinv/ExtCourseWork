@@ -166,19 +166,19 @@ public:
 /**
  * @brief reads file that's called leaderBoard, then adds data from this file to the list
  **/
-void parseLeaderboard() {
-    leaderBoardParsed.clear();
-    std::ifstream infile("leaderBoard");
-    string name;
-    int score;
-    while (infile >> name >> score) {
-        leaderBoardParsed.emplace_back(name, score);
+    void parseLeaderboard() {
+        leaderBoardParsed.clear();
+        std::ifstream infile("leaderBoard");
+        string name;
+        int score;
+        while (infile >> name >> score) {
+            leaderBoardParsed.emplace_back(name, score);
+        }
+        infile.close();
+        if (leaderBoardParsed.empty()) {
+            cout << "WARNING: LeaderBoard Empty either file is empty or error occured" << endl;
+        }
     }
-    infile.close();
-    if (leaderBoardParsed.empty()) {
-        cout << "WARNING: LeaderBoard Empty either file is empty or error occured" << endl;
-    }
-}
 
 /**
  * @brief shows gameOver and leaderboard screen
@@ -243,147 +243,87 @@ int showGameOver(EventManager *eventMgr, ScreenManager *screenMgr, int score) {
 /**
  * @brief shows leaderBoard
  **/
-void showLeaderBoard() {
-    int i = 4;
-    createButton(screenManager->getScreenWidth() / 2, screenManager->getScreenHeight() / 12,
-                 screenManager->getScreenWidth() / 4, screenManager->getScreenHeight() / 20 + 20,
-                 "Tank Name", 0x4d4d4d, 0xFFFFff);
-    createButton(screenManager->getScreenWidth() / 2 + screenManager->getScreenWidth() / 4,
-                 screenManager->getScreenHeight() / 12, screenManager->getScreenWidth() / 4,
-                 screenManager->getScreenHeight() / 20 + 20, "Score", 0x4d4d4d, 0xFFFFff);
-    for (auto &record : leaderBoardParsed) {
-        createButton(screenManager->getScreenWidth() / 2, screenManager->getScreenHeight() / 20 + 20 * i,
-                     screenManager->getScreenWidth() / 4, 20,
-                     record.name, 0x4d4d4d, 0xFFFF00);
+    void showLeaderBoard() {
+        int i = 4;
+        createButton(screenManager->getScreenWidth() / 2, screenManager->getScreenHeight() / 12,
+                     screenManager->getScreenWidth() / 4, screenManager->getScreenHeight() / 20 + 20,
+                     "Player Name", 0x4d4d4d, 0xFFFFff);
         createButton(screenManager->getScreenWidth() / 2 + screenManager->getScreenWidth() / 4,
-                     screenManager->getScreenHeight() / 20 + 20 * i,
-                     screenManager->getScreenWidth() / 4, 20, to_string(record.score), 0x4d4d4d, 0xFFFF00);
-        Draw_HLine(screenManager->getMainSurface(), screenManager->getScreenWidth() / 2,
-                   screenManager->getScreenHeight() / 20 + 20 * i + 19,
-                   screenManager->getScreenWidth(), 0x0);
-        Draw_VLine(screenManager->getMainSurface(),
-                   screenManager->getScreenWidth() / 2 + screenManager->getScreenWidth() / 4,
-                   screenManager->getScreenHeight() / 20 + 20 * i,
-                   screenManager->getScreenHeight() / 20 + 20 * i + 18, 0xffffff);
-        i++;
+                     screenManager->getScreenHeight() / 12, screenManager->getScreenWidth() / 4,
+                     screenManager->getScreenHeight() / 20 + 20, "Score", 0x4d4d4d, 0xFFFFff);
+        for (auto &record : leaderBoardParsed) {
+            createButton(screenManager->getScreenWidth() / 2, screenManager->getScreenHeight() / 20 + 20 * i,
+                         screenManager->getScreenWidth() / 4, 20,
+                         record.name, 0x4d4d4d, 0xFFFF00);
+            createButton(screenManager->getScreenWidth() / 2 + screenManager->getScreenWidth() / 4,
+                         screenManager->getScreenHeight() / 20 + 20 * i,
+                         screenManager->getScreenWidth() / 4, 20, to_string(record.score), 0x4d4d4d, 0xFFFF00);
+            Draw_HLine(screenManager->getMainSurface(), screenManager->getScreenWidth() / 2,
+                       screenManager->getScreenHeight() / 20 + 20 * i + 19,
+                       screenManager->getScreenWidth(), 0x0);
+            Draw_VLine(screenManager->getMainSurface(),
+                       screenManager->getScreenWidth() / 2 + screenManager->getScreenWidth() / 4,
+                       screenManager->getScreenHeight() / 20 + 20 * i,
+                       screenManager->getScreenHeight() / 20 + 20 * i + 18, 0xffffff);
+            i++;
+        }
     }
-}
 
 /**
  * @brief turns SDL_Event to String
  **/
-static string parseEvent(char param) {
-    switch ((char) param) {
-        case 'q':
-            return "q";
-        case 'w':
-            return "w";
-
-        case 'e':
-            return "e";
-
-        case 'r':
-            return "r";
-
-        case 't':
-            return "t";
-
-        case 'y':
-            return "y";
-
-        case 'u':
-            return "u";
-
-        case 'i':
-            return "i";
-
-        case 'o':
-            return "o";
-
-        case 'p':
-            return "p";
-
-        case 'a':
-            return "a";
-
-        case 's':
-            return "s";
-
-        case 'd':
-            return "d";
-
-        case 'f':
-            return "f";
-
-        case 'g':
-            return "g";
-
-        case 'h':
-            return "h";
-
-        case 'j':
-            return "j";
-
-        case 'k':
-            return "k";
-
-        case 'l':
-            return "l";
-
-        case 'z':
-            return "z";
-
-        case 'x':
-            return "x";
-
-        case 'c':
-            return "c";
-
-        case 'v':
-            return "v";
-
-        case 'b':
-            return "b";
-
-        case 'n':
-            return "n";
-
-        case 'm':
-            return "m";
-        default:
-            return "_";
+    static string parseEvent(char param) {
+        string str;
+        char alphabet[27] = {"qwertyuiopasdfghjklzxcvbnm"};
+        for (int i = 0; i < 26; i++) {
+            if (param == alphabet[i]) str += alphabet[i];
+        }
+        return str;
     }
-}
 
 /**
  * @brief allows to enter some text
  **/
-string input() {
-    SDL_Event event;
-    string str;
-    string tmp;
-    screenManager->clearScreen();
-    createButton(0, screenManager->getScreenHeight() / 2, screenManager->getScreenWidth(), 20,
-                 "Tank Name: " + str, 0xff00ff, 0xffff00);
-    screenManager->updateScreen();
-
-    while (SDL_WaitEvent(&event)) {
-        if (event.type == SDL_QUIT) {
-            break;
-        } else if (event.key.keysym.sym == SDLK_BACKSPACE && event.type == SDL_KEYDOWN) {
-            str = str.substr(0, str.size() - 1);
-        } else if (event.key.keysym.sym == SDLK_RETURN) {
-            return str;
-        } else if (event.type == SDL_KEYDOWN) {
-            str.append(parseEvent(event.key.keysym.sym));
-        }
+    string input() {
+        SDL_Event event;
+        string str;
+        string tmp;
         screenManager->clearScreen();
+        createButton(0, screenManager->getScreenHeight() / 6, screenManager->getScreenWidth(), 20,
+                     "Please enter player name", 0x00, 0xffff00);
+
         createButton(0, screenManager->getScreenHeight() / 2, screenManager->getScreenWidth(), 20,
-                     "Tank Name: " + str, 0xff00ff, 0xffff00);
+                     "Player Name: " + str, 0x3C3C3C, 0xffff00);
+
+        createButton(0, screenManager->getScreenHeight() - screenManager->getScreenHeight() / 6,
+                     screenManager->getScreenWidth(), 20,
+                     "Press enter to continue", 0x00, 0xffff00);
         screenManager->updateScreen();
+
+        while (SDL_WaitEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                break;
+            } else if (event.key.keysym.sym == SDLK_BACKSPACE && event.type == SDL_KEYDOWN) {
+                str = str.substr(0, str.size() - 1);
+            } else if (event.key.keysym.sym == SDLK_RETURN) {
+                return str;
+            } else if (event.type == SDL_KEYDOWN) {
+                str.append(parseEvent(event.key.keysym.sym));
+            }
+            screenManager->clearScreen();
+            createButton(0, screenManager->getScreenHeight() / 6, screenManager->getScreenWidth(), 20,
+                         "Please enter player name", 0x00, 0xffff00);
+
+            createButton(0, screenManager->getScreenHeight() / 2, screenManager->getScreenWidth(), 20,
+                         "Player Name: " + str, 0x3C3C3C, 0xffff00);
+
+            createButton(0, screenManager->getScreenHeight() - screenManager->getScreenHeight() / 6,
+                         screenManager->getScreenWidth(), 20,
+                         "Press enter to continue", 0x00, 0xffff00);
+            screenManager->updateScreen();
+        }
+        return str;
     }
-    return str;
-}
 
 
 };

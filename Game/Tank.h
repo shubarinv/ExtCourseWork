@@ -27,9 +27,11 @@ public:
         score = 0;
         movementDirection = randIntInRange(-2, -1);
         movementSpeed = 0;
+        mapManager = mpManager;
 
-        body.x = randIntInRange(0, screenManager->getScreenWidth());
-        body.y = randIntInRange(0, screenManager->getScreenHeight());
+        // loc on map spawn
+        body.x = 55;
+        body.y = 55;
         body.h = 42;
         body.w = body.h;
 
@@ -40,7 +42,6 @@ public:
 
         weapon.init(screenManager);
         weapon.location = this->location;
-        mapManager = mpManager;
         cout << "Spawned tank(" << this << ")" << endl;
     }
 
@@ -63,6 +64,25 @@ public:
             return 0;
 
         return deltaLoc;
+    }
+
+    bool checkIfCanGo(int deltaLoc, int movementDir) {
+        GameObject::coords tmpCoords;
+        tmpCoords.y1 = location.y1;
+        tmpCoords.y2 = location.y2;
+        if (movementDir == 1 || movementDir == -1) {
+            tmpCoords.x1 = location.x1 + deltaLoc;
+            tmpCoords.x2 = tmpCoords.x1 + body.w;
+            tmpCoords.y1 = location.y1;
+            tmpCoords.y2 = location.y2;
+        } else {
+            tmpCoords.x1 = location.x1;
+            tmpCoords.x2 = location.x2;
+            tmpCoords.y1 = location.y1 + deltaLoc;
+            tmpCoords.y2 = tmpCoords.y1 + body.h;
+        }
+        return !mapManager->checkforCollision(tmpCoords, true);
+
     }
 
     void updateLocation() {
@@ -142,7 +162,7 @@ public:
         movementSpeed = mvSpeed;
     }
 
-    coords location{};
+    coords location{1, 1, 1, 1};
 
 };
 

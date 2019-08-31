@@ -59,6 +59,7 @@ public:
     static bool removalCheck(const Wall &wall) {
         return wall.getHp() <= 0;
     }
+
     void reDraw() {
         map.remove_if(removalCheck);
         for (auto &wall : map) {
@@ -66,7 +67,7 @@ public:
         }
     }
 
-    bool checkforCollision(GameObject::coords coords) {
+    bool checkforCollision(GameObject::coords coords, bool pathChecking = false) {
         c2AABB obj, wallR;
         obj.min = c2V(coords.x1, coords.y1);
         obj.max = c2V(coords.x2, coords.y2);
@@ -74,8 +75,10 @@ public:
             wallR.min = c2V(wall.getX(), wall.getY());
             wallR.max = c2V(wall.getX() + wall.getSize(), wall.getY() + wall.getSize());
             if (c2AABBtoAABB(obj, wallR) != 0) {
-                if (coords.x2 - coords.x1 <= 20)
-                    wall.setHp(-50);
+                if (!pathChecking) {
+                    if (coords.x2 - coords.x1 <= 20)
+                        wall.setHp(-50);
+                }
                 return true;
             }
 
