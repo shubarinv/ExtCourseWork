@@ -18,7 +18,6 @@
 class MapManager {
 private:
     ScreenManager *screenManager;
-    //TODO function that reads maps from file
     list<Wall> map;
 
     void readMapFromFile() {
@@ -33,6 +32,9 @@ private:
                 } else if (line[0] == '-') {
                     cout << "MAP" << line << endl;
                     rowNum = 0;
+                    if (!map.empty()) {
+                        map.clear();
+                    }
                 } else if (!line.empty()) {
                     column = 0;
                     for (char i : line) {
@@ -67,7 +69,7 @@ public:
         }
     }
 
-    bool checkforCollision(GameObject::coords coords, bool pathChecking = false) {
+    bool checkForCollision(GameObject::coords coords, bool pathChecking = false) {
         c2AABB obj, wallR;
         obj.min = c2V(coords.x1, coords.y1);
         obj.max = c2V(coords.x2, coords.y2);

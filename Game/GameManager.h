@@ -26,7 +26,7 @@ private:
     void prestartInit() {
         // ===== Setting initial values
         setWave(1);
-        setFramerate(150);
+        setFramerate(100);
         tanks.emplace_back(screenManager, mapManager);
         bots.emplace_back(&tanks.back());
 
@@ -138,7 +138,7 @@ public:
                         tank.setHealth(-25); // THIS IS TEMPORARY
                     }
                 }
-                if (mapManager->checkforCollision(particle.location)) {
+                if (mapManager->checkForCollision(particle.location)) {
                     particle.setIsOnScreem(false);
                 }
             }

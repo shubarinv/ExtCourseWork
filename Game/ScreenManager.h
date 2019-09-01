@@ -67,7 +67,7 @@ public:
 
     // === GETTERS AND SETTERS ====
 
-    SDL_Surface *
+    [[nodiscard]] SDL_Surface *
     getMainSurface() const { ///<@brief returns pointer to surface that contains every single thing on screen
         return mainSurface;
     }

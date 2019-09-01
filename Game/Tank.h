@@ -60,7 +60,7 @@ public:
             tmpCoords.y1 = location.y1 + movementDirection / -2 * movementSpeed;
             tmpCoords.y2 = tmpCoords.y1 + body.h;
         }
-        if (mapManager->checkforCollision(tmpCoords))
+        if (mapManager->checkForCollision(tmpCoords))
             return 0;
 
         return deltaLoc;
@@ -81,7 +81,7 @@ public:
             tmpCoords.y1 = location.y1 + deltaLoc;
             tmpCoords.y2 = tmpCoords.y1 + body.h;
         }
-        return !mapManager->checkforCollision(tmpCoords, true);
+        return !mapManager->checkForCollision(tmpCoords, true);
 
     }
 

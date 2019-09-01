@@ -91,15 +91,6 @@ public:
     }
 
     /**
-     * @brief Draws Background (stars (white pixels) in background)
-    **/
-    [[deprecated]]  void drawBg() {
-        for (int i = 0; i < 100; ++i) {
-            //Draw_Pixel(screenManager->getMainSurface(), bgX[i], bgY[i], 0xF5F5DC);
-        }
-    }
-
-    /**
      * @brief Draws mainMenu
      * @return (-1) if player pressed ESC, (1) if player pressed start, (2) if player pressed quit
     **/
@@ -214,7 +205,6 @@ int showGameOver(EventManager *eventMgr, ScreenManager *screenMgr, int score) {
         /* UI redraw */
         SDL_Delay(5);
         screenMgr->clearScreen();
-        drawBg();
         showLeaderBoard();
         drawText(screenMgr->getScreenWidth() / 2 - 50, screenMgr->getScreenHeight() - 50,
                  "GAME OVER!\nScore:" + to_string(score),

@@ -17,6 +17,7 @@ private:
         bool down;
         int chosenOption{0};
     } canGo, canGoPrev;
+
 public:
     BotController(Tank *ctrledTank) {
         controlledTank = ctrledTank;
@@ -35,83 +36,87 @@ public:
         cout << "Can Go Left:" << canGo.left << " Right:" << canGo.right << " Up:" << canGo.up << " Down:" << canGo.down
              << endl;
 
-        if (canGo.right && canGoPrev.chosenOption != -1) {
-            if (canGo.down && GameObject::randIntInRange(1, 2) == 1) {
-                cout << "Going down" << endl;
-                canGo.chosenOption = -2;
-                return -2;
-            } else if (canGo.up && GameObject::randIntInRange(1, 2) == 1) {
-                cout << "Going up" << endl;
-                canGo.chosenOption = 2;
-                return 2;
-            }
-            cout << "Going right" << endl;
-            canGo.chosenOption = 1;
-            return 1;
-        }
-        if (canGo.left && canGoPrev.chosenOption != 1) {
-            if (canGo.down && GameObject::randIntInRange(1, 2) == 1) {
-                cout << "Going down" << endl;
-                canGo.chosenOption = -2;
-                return -2;
-            } else if (canGo.up && GameObject::randIntInRange(1, 2) == 1) {
-                cout << "Going up" << endl;
-                canGo.chosenOption = 2;
-                return 2;
-            }
-            cout << "Going left" << endl;
-            canGo.chosenOption = -1;
-            return -1;
-        }
-        if (canGo.down && canGoPrev.chosenOption != 2) {
-            if (canGo.right && GameObject::randIntInRange(1, 2) == 1) {
-                cout << "Going right" << endl;
-                canGo.chosenOption = 1;
-                return 1;
-            } else if (canGo.left && GameObject::randIntInRange(1, 2) == 1) {
-                cout << "Going left" << endl;
-                canGo.chosenOption = -1;
-                return -1;
-            }
-            cout << "Going down" << endl;
-            canGo.chosenOption = -2;
-            return -2;
-        }
-        if (canGo.up && canGoPrev.chosenOption != -2) {
-            if (canGo.right && GameObject::randIntInRange(1, 2) == 1) {
-                cout << "Going right" << endl;
-                canGo.chosenOption = 1;
-                return 1;
-            } else if (canGo.left && GameObject::randIntInRange(1, 2) == 1) {
-                cout << "Going left" << endl;
-                canGo.chosenOption = -1;
-                return -1;
-            }
-            cout << "Going up" << endl;
-            canGo.chosenOption = 2;
-            return 2;
-        }
-        if (canGo.left) {
-            cout << "Going left_G" << endl;
-            canGo.chosenOption = -1;
-            return -1;
-        } else if (canGo.right) {
-            cout << "Going right_G" << endl;
-            canGo.chosenOption = 1;
-            return 1;
-        } else if (canGo.up) {
-            cout << "Going up_G" << endl;
-            canGo.chosenOption = 2;
-            return 2;
-        } else if (canGo.down) {
-            cout << "Going down_G" << endl;
-            canGo.chosenOption = -2;
-            return -2;
-        } else {
-            cout << "How the hell??" << endl;
-            return 1;
-        }
+        int pathL{0}, pathR{0}, pathU{0}, pathD{0}, i = 1;
 
+        if (canGo.left)
+            while (controlledTank->checkIfCanGo(-pathL * 50, -1)) {
+                pathL++;
+            }
+        cout << "L " << pathL << endl;
+
+        if (canGo.right)
+            while (controlledTank->checkIfCanGo(pathR * 50, 1)) {
+                pathR++;
+            }
+        cout << "R " << pathR << endl;
+
+        if (canGo.up)
+            while (controlledTank->checkIfCanGo(-pathU * 50, 2)) {
+                pathU++;
+            }
+        cout << "U " << pathU << endl;
+
+        if (canGo.down)
+            while (controlledTank->checkIfCanGo(pathD * 50, -2)) {
+                pathD++;
+            }
+        cout << "D " << pathD << endl;
+
+
+        if (pathL > pathR && pathL > pathD && pathL > pathU) {
+            if (canGoPrev.chosenOption == 1 && canGo.right) {
+                canGo.chosenOption = 1;
+                return 1;
+            }
+            canGo.chosenOption = -1;
+            return -1;
+        }
+        if (pathR > pathL && pathR > pathD && pathR > pathU) {
+            if (canGoPrev.chosenOption == -1 && canGo.left) {
+                canGo.chosenOption = -1;
+                return -1;
+            }
+            canGo.chosenOption = 1;
+            return 1;
+        }
+        if (pathD > pathR && pathL > pathD && pathD > pathU) {
+            if (canGoPrev.chosenOption == 2 && canGo.up) {
+                canGo.chosenOption = 2;
+                return 2;
+            }
+            canGo.chosenOption = -2;
+            return -2;
+
+        }
+        if (pathU > pathR && pathU > pathD && pathL > pathU) {
+            if (canGoPrev.chosenOption == -2 && canGo.down) {
+                canGo.chosenOption = -2;
+                return -2;
+            }
+            canGo.chosenOption = 2;
+            return 2;
+
+        } else {
+            if (canGo.left && !canGo.right && !canGo.up && !canGo.down) {
+                canGo.chosenOption = -1;
+                return -1;
+            }
+            if (canGo.right && !canGo.left && !canGo.up && !canGo.down) {
+                canGo.chosenOption = 1;
+                return 1;
+            }
+            if (canGo.up && !canGo.left && !canGo.right && !canGo.down) {
+                canGo.chosenOption = 2;
+                return 2;
+            }
+            if (canGo.down && !canGo.up && !canGo.left && !canGo.right) {
+                canGo.chosenOption = -2;
+                return -2;
+            } else {
+                canGo.chosenOption = canGoPrev.chosenOption;
+                return canGoPrev.chosenOption;
+            }
+        }
     }
 
     void moveTank() {
