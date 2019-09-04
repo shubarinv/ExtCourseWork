@@ -62,16 +62,16 @@ private:
         if (bIsOnScreen) {
             switch (movementDirrection) {
                 case -1:
-                    particle.x--;
+                    particle.x -= 2;
                     break;
                 case 1:
-                    particle.x++;
+                    particle.x += 2;
                     break;
                 case -2:
-                    particle.y++;
+                    particle.y += 2;
                     break;
                 case 2:
-                    particle.y--;
+                    particle.y -= 2;
                     break;
                 default:
                     break;

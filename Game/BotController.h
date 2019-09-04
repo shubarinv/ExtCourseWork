@@ -6,6 +6,8 @@
 #define NEWCOURSEWORK_BOTCONTROLLER_H
 
 
+#include <chrono>
+#include <ctime>
 #include "Tank.h"
 
 class BotController {
@@ -18,6 +20,8 @@ private:
         int chosenOption{0};
     } canGo;
     int stopThreshold{0}, leftToGo{0};
+    time_t prevTime;
+    GameObject::coords prevLocation;
 
     void get_Direction() {
         int tmp = GameObject::randIntInRange(1, 4);
@@ -101,13 +105,14 @@ private:
             else if (tmp == 3) canGo.chosenOption = 2;
             else canGo.chosenOption = -2;
         }
-        cout<<"Will go"<<canGo.chosenOption<<endl;
+        cout << "Will go" << canGo.chosenOption << endl;
         get_purposedMovement();
     }
 
     void get_purposedMovement() {
-        stopThreshold = GameObject::randIntInRange(1, get_Distance());
-        cout<<"For "<<stopThreshold<<endl;
+        if (get_Distance() > 1)
+            stopThreshold = GameObject::randIntInRange(2, get_Distance());
+        cout << "For " << stopThreshold << endl;
     }
 
     int get_Distance() {
@@ -153,6 +158,11 @@ public:
         if (leftToGo == 0) {
             get_Direction();
         }
+        if (prevLocation.x1 == controlledTank->location.x1 && prevLocation.y1 == controlledTank->location.y1) {
+            cout << "Stuck? left to go: " << leftToGo << endl;
+            get_Direction();
+        }
+        prevLocation = controlledTank->location;
         return canGo.chosenOption;
 
     }
@@ -164,6 +174,28 @@ public:
 /*  GameObject::coords getBotCoords(){
       return controlledTank.location;
   }*/
+
+    void shootPlayer(GameObject::coords loc) {
+        time_t tmp;
+        time(&tmp);
+        if (tmp - prevTime <= -1) {
+            if (controlledTank->location.x1 >= loc.x1 && controlledTank->location.x2 >= loc.x2) {
+                cout << "good by X" << endl;
+            }
+            if (controlledTank->location.y1 >= loc.y1 && controlledTank->location.y2 >= loc.y2) {
+                cout << "good by Y" << endl;
+                if (controlledTank->location.y1 > loc.y1) {
+                    controlledTank->setMovementDirection(-2);
+                    controlledTank->weapon.shoot();
+                    prevTime = tmp;
+                } else {
+                    controlledTank->setMovementDirection(2);
+                    controlledTank->weapon.shoot();
+                    prevTime = tmp;
+                }
+            }
+        }
+    }
 };
 
 

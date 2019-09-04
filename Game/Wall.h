@@ -21,6 +21,15 @@ public:
 private:
     SDL_Rect block{};
     ScreenManager *screenManager{};
+    int relX, relY;
+public:
+    int getRelX() const {
+        return relX;
+    }
+
+    int getRelY() const {
+        return relY;
+    }
 
 public:
     explicit Wall(ScreenManager *screenMgr,bool isLimiter) {
@@ -42,6 +51,8 @@ public:
         if (x * block.h <= screenManager->getScreenWidth() && x * block.h >= 0 &&
             y * block.h <= screenManager->getScreenHeight() &&
             y * block.h >= 0) {
+            relX = x;
+            relY = y;
             block.x = x * block.h;
             block.y = y * block.h;
             cout << "WALL(" << this << ")->SetLocation X:" << x << " Y:" << y << " OK" << endl;
@@ -55,6 +66,7 @@ public:
     int getX() { return block.x; }
 
     int getY() { return block.y; }
+
 
 };
 

@@ -124,6 +124,7 @@ public:
             for (auto &bot : bots) {
                 bot.moveTank();
                 bot.controlledTank->reDraw();
+                bot.shootPlayer(player.location);
             }
 
             //uiManager.drawBg();

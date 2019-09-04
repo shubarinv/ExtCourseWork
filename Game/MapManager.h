@@ -19,7 +19,6 @@ class MapManager {
 private:
     ScreenManager *screenManager;
     list<Wall> map;
-
     void readMapFromFile() {
         std::ifstream mapsFile("../Game/maps.tnks");
         if (mapsFile.is_open()) {
@@ -72,6 +71,7 @@ public:
             wall.reDraw();
         }
     }
+
 
     bool checkForCollision(GameObject::coords coords, bool pathChecking = false) {
         c2AABB obj, wallR;
