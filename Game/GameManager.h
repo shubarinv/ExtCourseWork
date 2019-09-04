@@ -28,7 +28,7 @@ private:
         setWave(1);
         setFramerate(100);
         tanks.emplace_back(screenManager, mapManager);
-        bots.emplace_back(&tanks.back());
+        bots.emplace_back(&tanks.back(), screenManager);
 
     }
 
@@ -144,8 +144,16 @@ public:
                 }
             }
 
-            for (auto &tank : bots) {
-                // Not yet implemented, will check for enemy particles colliding with player
+            for (auto &tank : tanks) {
+                for (auto &particle : tank.weapon.particles) {
+                    if (checkForCollision(&particle, &player)) {
+                        particle.setIsOnScreem(false);
+                        player.setHealth(-25); // THIS IS TEMPORARY
+                    }
+                    if (mapManager->checkForCollision(particle.location)) {
+                        // particle.setIsOnScreem(false);
+                    }
+                }
             }
             screenManager->updateScreen();
 

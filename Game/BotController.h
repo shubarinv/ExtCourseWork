@@ -144,10 +144,13 @@ private:
         return tmp;
     }
 
+    ScreenManager *screenManager;
+
 public:
-    explicit BotController(Tank *ctrledTank) {
+    BotController(Tank *ctrledTank, ScreenManager *screenMgr) {
         controlledTank = ctrledTank;
         controlledTank->setMovementSpeed(1);
+        screenManager = screenMgr;
     }
 
     Tank *controlledTank;
@@ -176,22 +179,51 @@ public:
   }*/
 
     void shootPlayer(GameObject::coords loc) {
+        c2AABB obj, wallR;
         time_t tmp;
         time(&tmp);
-        if (tmp - prevTime <= -1) {
-            if (controlledTank->location.x1 >= loc.x1 && controlledTank->location.x2 >= loc.x2) {
-                cout << "good by X" << endl;
+        if (abs(tmp - prevTime) >= 1) {
+            obj.min = c2V(loc.x1, loc.y1);
+            obj.max = c2V(loc.x2, loc.y2);
+            if (canGo.up) {
+                wallR.min = c2V(controlledTank->location.x1, 0);
+                wallR.max = c2V(controlledTank->location.x2, controlledTank->location.y1);
+                if (c2AABBtoAABB(obj, wallR) != 0) { // UP
+                    controlledTank->weapon.update(controlledTank->location, 2);
+                    controlledTank->weapon.shoot();
+                    prevTime = tmp;
+
+                    return;
+                }
             }
-            if (controlledTank->location.y1 >= loc.y1 && controlledTank->location.y2 >= loc.y2) {
-                cout << "good by Y" << endl;
-                if (controlledTank->location.y1 > loc.y1) {
-                    controlledTank->setMovementDirection(-2);
+            if (canGo.down) {
+                wallR.min = c2V(controlledTank->location.x1, controlledTank->location.y2);
+                wallR.max = c2V(controlledTank->location.x2, screenManager->getScreenHeight());
+                if (c2AABBtoAABB(obj, wallR) != 0) { // Down
+                    controlledTank->weapon.update(controlledTank->location, -2);
                     controlledTank->weapon.shoot();
                     prevTime = tmp;
-                } else {
-                    controlledTank->setMovementDirection(2);
+                    return;
+                }
+            }
+            if (canGo.left) {
+                wallR.min = c2V(0, controlledTank->location.y1);
+                wallR.max = c2V(controlledTank->location.x1, controlledTank->location.y2);
+                if (c2AABBtoAABB(obj, wallR) != 0) { // Left
+                    controlledTank->weapon.update(controlledTank->location, -1);
                     controlledTank->weapon.shoot();
                     prevTime = tmp;
+                    return;
+                }
+            }
+            if (canGo.right) {
+                wallR.min = c2V(controlledTank->location.x1, controlledTank->location.y1);
+                wallR.max = c2V(screenManager->getScreenWidth(), controlledTank->location.y2);
+                if (c2AABBtoAABB(obj, wallR) != 0) { // Right
+                    controlledTank->weapon.update(controlledTank->location, 1);
+                    controlledTank->weapon.shoot();
+                    prevTime = tmp;
+                    return;
                 }
             }
         }
