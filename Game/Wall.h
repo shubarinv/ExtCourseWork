@@ -23,10 +23,11 @@ private:
     ScreenManager *screenManager{};
 
 public:
-    explicit Wall(ScreenManager *screenMgr) {
+    explicit Wall(ScreenManager *screenMgr,bool isLimiter) {
         block.h = 50;
         block.w = block.h;
         screenManager = screenMgr;
+        if(isLimiter) hp=1000000000;
     }
 
     void reDraw() {

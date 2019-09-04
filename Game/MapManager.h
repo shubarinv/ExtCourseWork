@@ -39,8 +39,12 @@ private:
                     column = 0;
                     for (char i : line) {
                         if (i != ' ' && i != '\n') {
-                            if (i != '0') {
-                                map.emplace_back(screenManager);
+                            if (i == '1') {
+                                map.emplace_back(screenManager, false);
+                                map.back().setLocation(column, rowNum);
+                            }
+                            if (i == '2') {
+                                map.emplace_back(screenManager, true);
                                 map.back().setLocation(column, rowNum);
                             }
                             column++;

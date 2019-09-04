@@ -58,7 +58,7 @@ FIND_LIBRARY(SDLDRAW_LIBRARY
         PATHS
         ~/Library/Frameworks
         /Library/Frameworks
-        /usr/local
+        /usr/local/lib
         /usr
         /sw
         /opt/local

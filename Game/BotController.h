@@ -11,15 +11,15 @@
 class BotController {
 private:
     struct whereCanGo {
-        bool left;
-        bool right;
-        bool up;
-        bool down;
+        bool left{};
+        bool right{};
+        bool up{};
+        bool down{};
         int chosenOption{0};
     } canGo, canGoPrev;
 
 public:
-    BotController(Tank *ctrledTank) {
+    explicit BotController(Tank *ctrledTank) {
         controlledTank = ctrledTank;
         controlledTank->setMovementSpeed(1);
     }
@@ -96,25 +96,30 @@ public:
             canGo.chosenOption = 2;
             return 2;
 
-        } else {
-            if (canGo.left && !canGo.right && !canGo.up && !canGo.down) {
-                canGo.chosenOption = -1;
-                return -1;
-            }
-            if (canGo.right && !canGo.left && !canGo.up && !canGo.down) {
-                canGo.chosenOption = 1;
-                return 1;
-            }
-            if (canGo.up && !canGo.left && !canGo.right && !canGo.down) {
-                canGo.chosenOption = 2;
-                return 2;
-            }
-            if (canGo.down && !canGo.up && !canGo.left && !canGo.right) {
+        }
+        if (canGo.left && !canGo.right && !canGo.up && !canGo.down) {
+            canGo.chosenOption = -1;
+            return -1;
+        }
+        if (canGo.right && !canGo.left && !canGo.up && !canGo.down) {
+            canGo.chosenOption = 1;
+            return 1;
+        }
+        if (canGo.up && !canGo.left && !canGo.right && !canGo.down) {
+            canGo.chosenOption = 2;
+            return 2;
+        }
+        if (canGo.down && !canGo.up && !canGo.left && !canGo.right) {
+            canGo.chosenOption = -2;
+            return -2;
+        }
+        if (canGo.down && canGo.right) {
+            if (GameObject::randIntInRange(1, 100) == 10) {
                 canGo.chosenOption = -2;
                 return -2;
             } else {
-                canGo.chosenOption = canGoPrev.chosenOption;
-                return canGoPrev.chosenOption;
+                canGo.chosenOption = 1;
+                return 1;
             }
         }
     }
