@@ -27,7 +27,8 @@ private:
         // ===== Setting initial values
         setWave(1);
         setFramerate(100);
-
+        tanks.clear();
+        bots.clear();
         tanks.emplace_back(screenManager, mapManager);
         bots.emplace_back(&tanks.back(), screenManager);
         tanks.back().spawnAtRandomLocation();
