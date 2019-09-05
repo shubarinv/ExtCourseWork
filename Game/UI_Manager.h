@@ -87,7 +87,7 @@ public:
     **/
     void drawHUD(int health, int money) {
         drawText(10, 10, "Health:" + to_string(health), 0xFFFFFF);
-        drawText(screenManager->getScreenWidth() - 100, 10, "Score:" + to_string(money), 0xFFFFFF);
+        drawText(screenManager->getScreenWidth() - 125, 10, "Score:" + to_string(money), 0xFFFFFF);
     }
 
     /**
@@ -129,7 +129,7 @@ public:
                 else
                     selectedOption--;
             }
-            /* Redrawing menu/leaderboard/asteroids */
+            /* Redrawing menu/leaderboard */
             SDL_Delay(5);
             screenMgr->clearScreen();
             UI_Mgr->showLeaderBoard();
@@ -167,7 +167,7 @@ public:
         }
         infile.close();
         if (leaderBoardParsed.empty()) {
-            cout << "WARNING: LeaderBoard Empty either file is empty or error occured" << endl;
+            cout << "WARNING: LeaderBoard Empty either file is empty or error occurred" << endl;
         }
     }
 

@@ -141,6 +141,7 @@ public:
                 for (auto &tank : tanks) {
                     if (checkForCollision(&particle, &tank)) {
                         particle.setIsOnScreem(false);
+                        player.setScore(15);
                         tank.setHealth(-25); // THIS IS TEMPORARY
                     }
                 }
