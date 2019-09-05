@@ -89,8 +89,13 @@ public:
 
         while (true) {
             capFPS();
-            tanks.remove_if(Tank::removalCheck);
 
+            tanks.remove_if(Tank::removalCheck);
+            bots.remove_if(BotController::removalCheck);
+            if (bots.empty()) {
+                tanks.emplace_back(screenManager, mapManager);
+                bots.emplace_back(&tanks.back(), screenManager);
+            }
             event = eventManager.getEvent();
             {
 
@@ -151,8 +156,9 @@ public:
                         player.setHealth(-25); // THIS IS TEMPORARY
                     }
                     if (mapManager->checkForCollision(particle.location)) {
-                        // particle.setIsOnScreem(false);
+                        particle.setIsOnScreem(false);
                     }
+
                 }
             }
             screenManager->updateScreen();

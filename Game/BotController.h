@@ -139,7 +139,7 @@ private:
                 }
                 break;
             default:
-                cout << "WHAT THE HELL???" << endl;
+                cout << "canGoChosenOption not set" << endl;
         }
         return tmp;
     }
@@ -227,6 +227,10 @@ public:
                 }
             }
         }
+    }
+
+    static bool removalCheck(const BotController &botController) {
+        return botController.controlledTank->getHealth() <= 0;
     }
 };
 
