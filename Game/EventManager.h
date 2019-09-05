@@ -6,7 +6,9 @@
 #define COURSEWORK_EVENTMANAGER_H
 
 #include <SDL/SDL_events.h>
+#include <string>
 
+using namespace std;
 class EventManager {
 
 
@@ -24,6 +26,19 @@ public:
 
         return event;
     }
+
+    /**
+ * @brief turns SDL_Event to String
+ **/
+    static string eventToStr(char param) {
+        string str;
+        char alphabet[] = {"qwertyuiopasdfghjklzxcvbnm[];./,'-=+1234567890"};
+        for (char i : alphabet) {
+            if (param == i) str += i;
+        }
+        return str;
+    }
+
 };
 
 

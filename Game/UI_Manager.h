@@ -260,18 +260,6 @@ int showGameOver(EventManager *eventMgr, ScreenManager *screenMgr, int score) {
     }
 
 /**
- * @brief turns SDL_Event to String
- **/
-    static string parseEvent(char param) {
-        string str;
-        char alphabet[27] = {"qwertyuiopasdfghjklzxcvbnm"};
-        for (int i = 0; i < 26; i++) {
-            if (param == alphabet[i]) str += alphabet[i];
-        }
-        return str;
-    }
-
-/**
  * @brief allows to enter some text
  **/
     string input() {
@@ -298,7 +286,7 @@ int showGameOver(EventManager *eventMgr, ScreenManager *screenMgr, int score) {
             } else if (event.key.keysym.sym == SDLK_RETURN) {
                 return str;
             } else if (event.type == SDL_KEYDOWN) {
-                str.append(parseEvent(event.key.keysym.sym));
+                str.append(EventManager::eventToStr(event.key.keysym.sym));
             }
             screenManager->clearScreen();
             createButton(0, screenManager->getScreenHeight() / 6, screenManager->getScreenWidth(), 20,
