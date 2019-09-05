@@ -73,7 +73,7 @@ public:
     }
 
 
-    bool checkForCollision(GameObject::coords coords, bool pathChecking = false) {
+    bool checkForCollision(GameObject::coords coords, bool pathChecking = false, int wallDmg = 50) {
         c2AABB obj, wallR;
         obj.min = c2V(coords.x1, coords.y1);
         obj.max = c2V(coords.x2, coords.y2);
@@ -83,7 +83,7 @@ public:
             if (c2AABBtoAABB(obj, wallR) != 0) {
                 if (!pathChecking) {
                     if (coords.x2 - coords.x1 <= 20)
-                        wall.setHp(-50);
+                        wall.setHp(-wallDmg);
                 }
                 return true;
             }

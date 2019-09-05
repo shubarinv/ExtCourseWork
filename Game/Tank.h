@@ -30,8 +30,9 @@ public:
         mapManager = mpManager;
 
         // loc on map spawn
-        body.x = 55;
-        body.y = 55;
+
+        body.x = GameObject::randIntInRange(100, screenManager->getScreenWidth() - 100);
+        body.y = GameObject::randIntInRange(100, screenManager->getScreenHeight() - 100);
         body.h = 42;
         body.w = body.h;
 
@@ -39,12 +40,24 @@ public:
         location.x2 = body.x + body.w;
         location.y1 = body.y;
         location.y2 = body.y + body.h;
-
         weapon.init(screenManager);
         weapon.location = this->location;
         cout << "Spawned tank(" << this << ")" << endl;
     }
 
+    void spawnAtRandomLocation() {
+        while (mapManager->checkForCollision(location) != 0) {
+            body.x = GameObject::randIntInRange(100, screenManager->getScreenWidth() - 100);
+            body.y = GameObject::randIntInRange(100, screenManager->getScreenHeight() - 100);
+            body.h = 42;
+            body.w = body.h;
+
+            location.x1 = body.x;
+            location.x2 = body.x + body.w;
+            location.y1 = body.y;
+            location.y2 = body.y + body.h;
+        }
+    }
     int checkIfCanGo(int deltaLoc) {
         GameObject::coords tmpCoords;
         tmpCoords.y1 = location.y1;

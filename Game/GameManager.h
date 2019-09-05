@@ -27,8 +27,10 @@ private:
         // ===== Setting initial values
         setWave(1);
         setFramerate(100);
+
         tanks.emplace_back(screenManager, mapManager);
         bots.emplace_back(&tanks.back(), screenManager);
+        tanks.back().spawnAtRandomLocation();
 
     }
 
@@ -86,7 +88,7 @@ public:
 
     int startGame(EventManager eventManager, UI_Manager uiManager, Tank player) {
         prestartInit();
-
+        player.spawnAtRandomLocation();
         while (true) {
             capFPS();
 
@@ -95,6 +97,7 @@ public:
             if (bots.empty()) {
                 tanks.emplace_back(screenManager, mapManager);
                 bots.emplace_back(&tanks.back(), screenManager);
+                tanks.back().spawnAtRandomLocation();
             }
             event = eventManager.getEvent();
             {
