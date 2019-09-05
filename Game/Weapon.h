@@ -32,9 +32,13 @@ public:
         }
         particle.x = (loc.x1 + loc.x2) / 2;
         particle.y = (loc.y1 + loc.y2) / 2;
+        cout << "particle init with x1: " << loc.x1 << " x2: " << loc.x2 << " y1: " << loc.y1 << " y2: " << loc.y2
+             << endl;
         screenManager = screenMgr;
-        location.x1 = particle.x;
-        location.x2 = particle.x + particle.w;
+        location.x1 = loc.x1;
+        location.x2 = loc.x2 + particle.w;
+        location.y1 = loc.y1;
+        location.y2 = loc.y2 + particle.w;
         movementDirrection = movementDir;
         initialised = true;
     }

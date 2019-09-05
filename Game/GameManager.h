@@ -156,9 +156,14 @@ public:
                         particle.setIsOnScreem(false);
                         player.setHealth(-25); // THIS IS TEMPORARY
                     }
+                    cout << "==========================================================" << endl;
+                    cout << "Particle current position x1: " << particle.location.x1 << " x2: " << particle.location.x2
+                         << " y1: " << particle.location.y1 << " y2: " << particle.location.y2 << endl;
                     if (mapManager->checkForCollision(particle.location)) {
                         particle.setIsOnScreem(false);
+                        cout << "Removed particle" << endl;
                     }
+                    cout << "==========================================================" << endl;
 
                 }
             }

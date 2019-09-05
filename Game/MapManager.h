@@ -85,7 +85,6 @@ public:
                     if (coords.x2 - coords.x1 <= 20)
                         wall.setHp(-50);
                 }
-
                 return true;
             }
 
