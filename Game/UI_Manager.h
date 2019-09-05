@@ -29,6 +29,10 @@ private:
             name = name_;
             score = score_;
         }
+
+        bool operator<(const LdbrdRecord &other) {
+            return score > other.score;
+        }
     };
 
     list <LdbrdRecord> leaderBoardParsed;
@@ -166,6 +170,7 @@ public:
             leaderBoardParsed.emplace_back(name, score);
         }
         infile.close();
+        leaderBoardParsed.sort();
         if (leaderBoardParsed.empty()) {
             cout << "WARNING: LeaderBoard Empty either file is empty or error occurred" << endl;
         }
