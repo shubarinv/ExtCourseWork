@@ -12,6 +12,9 @@
 #include <list>
 #include "GameObject.h"
 #include "ScreenManager.h"
+#include "MapManager.h"
+#include "Tank.h"
+#include "BotController.h"
 
 class UI_Manager {
 private:
@@ -98,18 +101,22 @@ public:
      * @brief Draws mainMenu
      * @return (-1) if player pressed ESC, (1) if player pressed start, (2) if player pressed quit
     **/
-    int showMainMenu(EventManager *eventMgr, ScreenManager *screenMgr, UI_Manager *UI_Mgr) {
+    int showMainMenu(EventManager *eventMgr, ScreenManager *screenMgr, UI_Manager *UI_Mgr, MapManager *mapManager) {
         SDL_Event event;
-        screenMgr->clearScreen();
 
         int selectedOption{1};
         UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  start  <", 0xffffff);
         UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
                          (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
 
-
+        mapManager->getCurrentMap()->reDraw();
         screenMgr->updateScreen();
-
+        Tank tank1 = Tank(screenManager, mapManager);
+        Tank tank2 = Tank(screenManager, mapManager);
+        BotController botController1 = BotController(&tank1, screenManager);
+        BotController botController2 = BotController(&tank2, screenManager);
+        tank1.spawnAtRandomLocation();
+        tank2.spawnAtRandomLocation();
         parseLeaderboard();
 
         /* Polling events */
@@ -136,6 +143,11 @@ public:
             /* Redrawing menu/leaderboard */
             SDL_Delay(5);
             screenMgr->clearScreen();
+            mapManager->getCurrentMap()->reDraw();
+            botController1.moveTank();
+            botController2.moveTank();
+            botController1.controlledTank->reDraw();
+            botController2.controlledTank->reDraw();
             UI_Mgr->showLeaderBoard();
             switch (selectedOption) {
                 case 1:
@@ -179,62 +191,63 @@ public:
 /**
  * @brief shows gameOver and leaderboard screen
  **/
-int showGameOver(EventManager *eventMgr, ScreenManager *screenMgr, int score) {
-    SDL_Event event;
-    screenMgr->clearScreen();
-    drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  Restart  <", 0xffffff);
-    drawText((int) (0.5 * screenMgr->screenUnit),
-             (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
-    parseLeaderboard();
-    screenMgr->updateScreen();
-    int selectedOption{1};
-    while (true) {
-        /* Input handling */
-        event = eventMgr->getEvent();
-        if (event.type == SDL_QUIT) {
-            cout << "EventManager: got ESC button press. Quiting..." << endl;
-            return -1;
-        }
-        if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_RETURN) {
-            return selectedOption;
-        }
-        if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_DOWN) {
-            if (selectedOption == 2)selectedOption = 1;
-            else
-                selectedOption++;
-        } else if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_UP) {
-            if (selectedOption == 1)selectedOption = 2;
-            else
-                selectedOption--;
-        }
-        /* UI redraw */
-        SDL_Delay(5);
+    int showGameOver(EventManager *eventMgr, ScreenManager *screenMgr, int score) {
+        SDL_Event event;
         screenMgr->clearScreen();
-        showLeaderBoard();
-        drawText(screenMgr->getScreenWidth() / 2 - 50, screenMgr->getScreenHeight() - 50,
-                 "GAME OVER!\nScore:" + to_string(score),
-                 0xff0000);
-        switch (selectedOption) {
-            case 1:
-                drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  restart  <",
-                         0xffffff);
-                drawText((int) (0.5 * screenMgr->screenUnit),
-                         (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
-                break;
-            case 2:
-                drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, "restart",
-                         0xffffff);
-                drawText((int) (0.5 * screenMgr->screenUnit),
-                         (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), ">  quit  <",
-                         0xffffff);
-                break;
-            default:
-                break;
-        }
+        drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  Restart  <", 0xffffff);
+        drawText((int) (0.5 * screenMgr->screenUnit),
+                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
+        parseLeaderboard();
         screenMgr->updateScreen();
+        int selectedOption{1};
+        while (true) {
+            /* Input handling */
+            event = eventMgr->getEvent();
+            if (event.type == SDL_QUIT) {
+                cout << "EventManager: got ESC button press. Quiting..." << endl;
+                return -1;
+            }
+            if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_RETURN) {
+                return selectedOption;
+            }
+            if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_DOWN) {
+                if (selectedOption == 2)selectedOption = 1;
+                else
+                    selectedOption++;
+            } else if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_UP) {
+                if (selectedOption == 1)selectedOption = 2;
+                else
+                    selectedOption--;
+            }
+            /* UI redraw */
+            SDL_Delay(5);
+            screenMgr->clearScreen();
+            showLeaderBoard();
+            drawText(screenMgr->getScreenWidth() / 2 - 50, screenMgr->getScreenHeight() - 50,
+                     "GAME OVER!\nScore:" + to_string(score),
+                     0xff0000);
+            switch (selectedOption) {
+                case 1:
+                    drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  restart  <",
+                             0xffffff);
+                    drawText((int) (0.5 * screenMgr->screenUnit),
+                             (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
+                    break;
+                case 2:
+                    drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, "restart",
+                             0xffffff);
+                    drawText((int) (0.5 * screenMgr->screenUnit),
+                             (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), ">  quit  <",
+                             0xffffff);
+                    break;
+                default:
+                    break;
+            }
+            screenMgr->updateScreen();
 
+        }
     }
-}
+
 /**
  * @brief shows leaderBoard
  **/

@@ -17,7 +17,7 @@ using namespace std;
 class ScreenManager {
 
 private:
-    Sint16 max_x{1280}, max_y{720}; ///< @var max_x- Screen width. @var max_y screen height.
+    Sint16 max_x{1300}, max_y{700}; ///< @var max_x- Screen width. @var max_y screen height.
     SDL_Surface *mainSurface;
 public:
 
@@ -26,7 +26,7 @@ public:
         if (!mainSurface) {
             throw runtime_error("ScreenManager: Failed to init SDL\n" + (string) SDL_GetError());
         }
-        SDL_WM_SetCaption("Курсовая rev kinda 4.0 ", nullptr);
+        SDL_WM_SetCaption("Курсовая rev 4.0 kinda", nullptr);
         screenUnit = max_y / 10;
 
         //Initialize PNG loading

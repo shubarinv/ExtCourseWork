@@ -21,7 +21,9 @@ int main() {
 
     int tmp;
     // ===== Show mainMenu ===== //
-    tmp = uiManager.showMainMenu(&eventManager, &screenManager, &uiManager);
+    mapManager.setCurrentMap(1);
+
+    tmp = uiManager.showMainMenu(&eventManager, &screenManager, &uiManager, &mapManager);
     if (tmp == 2 || tmp == -1) { // player pressed quit/ESC
         return 0;
     }
@@ -29,7 +31,7 @@ int main() {
 // ==== Game start/Restart Loop ==== //
     while (true) {
         tmp = gmManager.startGame(eventManager, uiManager, player);
-        switch (tmp) { // prefoming actions depending on what player pressed after gameover screeen
+        switch (tmp) { // performing actions depending on what player pressed after gameover screen
             case 1: // player pressed restart
                 break;
             case 2: // player pressed quit

@@ -46,7 +46,7 @@ public:
     }
 
     void spawnAtRandomLocation() {
-        while (mapManager->checkForCollision(location) != 0) {
+        while (mapManager->getCurrentMap()->checkForCollision(location) != 0) {
             body.x = GameObject::randIntInRange(100, screenManager->getScreenWidth() - 100);
             body.y = GameObject::randIntInRange(100, screenManager->getScreenHeight() - 100);
             body.h = 42;
@@ -73,7 +73,7 @@ public:
             tmpCoords.y1 = location.y1 + movementDirection / -2 * movementSpeed;
             tmpCoords.y2 = tmpCoords.y1 + body.h;
         }
-        if (mapManager->checkForCollision(tmpCoords))
+        if (mapManager->getCurrentMap()->checkForCollision(tmpCoords))
             return 0;
 
         return deltaLoc;
@@ -94,7 +94,7 @@ public:
             tmpCoords.y1 = location.y1 + deltaLoc;
             tmpCoords.y2 = tmpCoords.y1 + body.h;
         }
-        return !mapManager->checkForCollision(tmpCoords, true);
+        return !mapManager->getCurrentMap()->checkForCollision(tmpCoords, true);
 
     }
 

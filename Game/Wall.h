@@ -55,7 +55,7 @@ public:
             relY = y;
             block.x = x * block.h;
             block.y = y * block.h;
-            cout << "WALL(" << this << ")->SetLocation X:" << x << " Y:" << y << " OK" << endl;
+            //    cout << "WALL(" << this << ")->SetLocation X:" << x << " Y:" << y << " OK" << endl;
         } else
             cout << "WALL(" << this << ")->SetLocation Unable to set location, coords out of bounds " << "X:" << x
                  << "Y:" << y << endl;

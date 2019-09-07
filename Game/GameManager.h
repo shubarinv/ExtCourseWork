@@ -27,6 +27,8 @@ private:
         // ===== Setting initial values
         setWave(1);
         setFramerate(100);
+        mapManager->setCurrentMap(GameObject::randIntInRange(2, 6));
+        mapManager->getCurrentMap()->reDraw();
         tanks.clear();
         bots.clear();
         tanks.emplace_back(screenManager, mapManager);
@@ -128,7 +130,7 @@ public:
 
             }
             screenManager->clearScreen();
-            mapManager->reDraw();
+            mapManager->getCurrentMap()->reDraw();
             /* ==== Redrawing game objects ====*/
             for (auto &bot : bots) {
                 bot.moveTank();
@@ -149,7 +151,7 @@ public:
                         tank.setHealth(-25); // THIS IS TEMPORARY
                     }
                 }
-                if (mapManager->checkForCollision(particle.location)) {
+                if (mapManager->getCurrentMap()->checkForCollision(particle.location)) {
                     particle.setIsOnScreem(false);
                 }
             }
@@ -163,7 +165,7 @@ public:
                     cout << "==========================================================" << endl;
                     cout << "Particle current position x1: " << particle.location.x1 << " x2: " << particle.location.x2
                          << " y1: " << particle.location.y1 << " y2: " << particle.location.y2 << endl;
-                    if (mapManager->checkForCollision(particle.location)) {
+                    if (mapManager->getCurrentMap()->checkForCollision(particle.location)) {
                         particle.setIsOnScreem(false);
                         cout << "Removed particle" << endl;
                     }

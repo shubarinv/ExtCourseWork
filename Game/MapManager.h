@@ -14,83 +14,41 @@
 #define CUTE_C2_IMPLEMENTATION
 
 #include "Lib/cute_c2.h"
+#include "Map.h"
 
 class MapManager {
 private:
     ScreenManager *screenManager;
-    list<Wall> map;
-    void readMapFromFile() {
-        std::ifstream mapsFile("../Game/maps.tnks");
-        if (mapsFile.is_open()) {
-            std::string line;
-            int rowNum{0}, column{0};
-            while (getline(mapsFile, line)) {
-                if (line[0] == '#') {
-                    cout << "SKIPPED->" << line << endl;
-                    continue;
-                } else if (line[0] == '-') {
-                    cout << "MAP" << line << endl;
-                    rowNum = 0;
-                    if (!map.empty()) {
-                        map.clear();
-                    }
-                } else if (!line.empty()) {
-                    column = 0;
-                    for (char i : line) {
-                        if (i != ' ' && i != '\n') {
-                            if (i == '1') {
-                                map.emplace_back(screenManager, false);
-                                map.back().setLocation(column, rowNum);
-                            }
-                            if (i == '2') {
-                                map.emplace_back(screenManager, true);
-                                map.back().setLocation(column, rowNum);
-                            }
-                            column++;
-                        }
-                    }
-                    rowNum++;
-                }
-            }
-        }
+    list<Map> maps;
+    Map *currentMap{};
+public:
+    Map *getCurrentMap() const {
+        return currentMap;
     }
+
 
 public:
     explicit MapManager(ScreenManager *screenMgr) {
+        int mapNumber{0};
         screenManager = screenMgr;
-        readMapFromFile();
-    }
-
-    static bool removalCheck(const Wall &wall) {
-        return wall.getHp() <= 0;
-    }
-
-    void reDraw() {
-        map.remove_if(removalCheck);
-        for (auto &wall : map) {
-            wall.reDraw();
+        while (maps.empty() || maps.back().mapNumber != -255) {
+            maps.emplace_back(screenManager, ++mapNumber);
+            maps.back().readMapFromFile();
+            if (maps.back().mapNumber != -255) {
+                cout << "Map " << mapNumber << " added" << endl;
+            } else
+                cout << "Map " << mapNumber << " NOT FOUND" << endl;
         }
     }
 
-
-    bool checkForCollision(GameObject::coords coords, bool pathChecking = false, int wallDmg = 50) {
-        c2AABB obj, wallR;
-        obj.min = c2V(coords.x1, coords.y1);
-        obj.max = c2V(coords.x2, coords.y2);
-        for (auto &wall : map) {
-            wallR.min = c2V(wall.getX(), wall.getY());
-            wallR.max = c2V(wall.getX() + wall.getSize(), wall.getY() + wall.getSize());
-            if (c2AABBtoAABB(obj, wallR) != 0) {
-                if (!pathChecking) {
-                    if (coords.x2 - coords.x1 <= 20)
-                        wall.setHp(-wallDmg);
-                }
-                return true;
-            }
-
+    void setCurrentMap(int mapNum) {
+        for (auto &map : maps) {
+            if (mapNum == map.mapNumber)
+                currentMap = &map;
         }
-        return false;
+        cout << "No such map" << endl;
     }
+
 };
 
 
