@@ -253,12 +253,12 @@ public:
  **/
     void showLeaderBoard() {
         int i = 4;
-        createButton(screenManager->getScreenWidth() / 2, screenManager->getScreenHeight() / 12,
-                     screenManager->getScreenWidth() / 4, screenManager->getScreenHeight() / 20 + 20,
+        createButton(screenManager->getScreenWidth() / 2, screenManager->getScreenHeight() / 12 - 10,
+                     screenManager->getScreenWidth() / 4, screenManager->getScreenHeight() / 20 + 31,
                      "Player Name", 0x4d4d4d, 0xFFFFff);
         createButton(screenManager->getScreenWidth() / 2 + screenManager->getScreenWidth() / 4,
-                     screenManager->getScreenHeight() / 12, screenManager->getScreenWidth() / 4,
-                     screenManager->getScreenHeight() / 20 + 20, "Score", 0x4d4d4d, 0xFFFFff);
+                     screenManager->getScreenHeight() / 12 - 10, screenManager->getScreenWidth() / 4,
+                     screenManager->getScreenHeight() / 20 + 31, "Score", 0x4d4d4d, 0xFFFFff);
         for (auto &record : leaderBoardParsed) {
             createButton(screenManager->getScreenWidth() / 2, screenManager->getScreenHeight() / 20 + 20 * i,
                          screenManager->getScreenWidth() / 4, 20,
