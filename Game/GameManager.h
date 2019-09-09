@@ -181,7 +181,7 @@ public:
             if (player.getHealth() <= 0) {
                 writeScoreToFile(uiManager.input(),
                                  player.getScore()); ///< Asks user to input PlayerName than writes it and player score to the leaderBoard file
-                return uiManager.showGameOver(&eventManager, screenManager, player.getScore());
+                return uiManager.showMainMenu(&eventManager, screenManager,&uiManager,mapManager, player.getScore());
             }
         }
         return -0xf;

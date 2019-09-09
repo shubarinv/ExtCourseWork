@@ -19,25 +19,36 @@ int main() {
 
 
 
-    int tmp;
+    int tmp = 0;
     // ===== Show mainMenu ===== //
     mapManager.setCurrentMap(1);
 
-    tmp = uiManager.showMainMenu(&eventManager, &screenManager, &uiManager, &mapManager);
-    if (tmp == 2 || tmp == -1) { // player pressed quit/ESC
-        return 0;
+    while (tmp != 1) {
+        tmp = uiManager.showMainMenu(&eventManager, &screenManager, &uiManager, &mapManager);
+        if (tmp == 2) {
+            uiManager.showRules();
+        }
+        if (tmp == 3 || tmp == -1) { // player pressed quit/ESC
+            return 0;
+        }
     }
 
 // ==== Game start/Restart Loop ==== //
     while (true) {
         tmp = gmManager.startGame(eventManager, uiManager, player);
-        switch (tmp) { // performing actions depending on what player pressed after gameover screen
-            case 1: // player pressed restart
-                break;
-            case 2: // player pressed quit
-                return 0;
-            default:
-                return -2;
+        while (tmp != 1&&tmp!=3) {
+            tmp = uiManager.showMainMenu(&eventManager, &screenManager, &uiManager, &mapManager);
+            switch (tmp) { // performing actions depending on what player pressed after gameover screen
+                case 1: // player pressed restart
+                    break;
+                case 2: // player pressed rules
+                    uiManager.showRules();
+                    break;
+                case 3: // player pressed quit
+                    return 0;
+                default:
+                    return -2;
+            }
         }
     }
 }

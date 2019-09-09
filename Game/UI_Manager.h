@@ -101,13 +101,16 @@ public:
      * @brief Draws mainMenu
      * @return (-1) if player pressed ESC, (1) if player pressed start, (2) if player pressed quit
     **/
-    int showMainMenu(EventManager *eventMgr, ScreenManager *screenMgr, UI_Manager *UI_Mgr, MapManager *mapManager) {
+    int showMainMenu(EventManager *eventMgr, ScreenManager *screenMgr, UI_Manager *UI_Mgr, MapManager *mapManager,
+                     int score = -1) {
         SDL_Event event;
 
         int selectedOption{1};
         UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  start  <", 0xffffff);
+        UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit * 3 - 5),
+                         (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "rules", 0xffffff);
         UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
-                         (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
+                         (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit), "quit", 0xffffff);
 
         mapManager->getCurrentMap()->reDraw();
         screenMgr->updateScreen();
@@ -128,11 +131,11 @@ public:
                 cout << "EventManager: got ESC button press. Quiting..." << endl;
                 return -1;
             }
-            if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_RETURN) {
+            if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_RETURN) {
                 return selectedOption;
             }
             if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_DOWN) {
-                if (selectedOption == 2)selectedOption = 1;
+                if (selectedOption == 3)selectedOption = 1;
                 else
                     selectedOption++;
             } else if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_UP) {
@@ -149,17 +152,46 @@ public:
             botController1.controlledTank->reDraw();
             botController2.controlledTank->reDraw();
             UI_Mgr->showLeaderBoard();
+            if (score != -1)
+                drawText(screenMgr->getScreenWidth() / 2 - 50, screenMgr->getScreenHeight() - 50,
+                         "GAME OVER!\nScore:" + to_string(score),
+                         0xffffff);
+
             switch (selectedOption) {
                 case 1:
-                    UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  start  <",
+                    UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit * 2 - 10), 3 * screenMgr->screenUnit,
+                                     ">  start  <",
                                      0xffffff);
-                    UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
-                                     (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.5), "quit", 0xffffff);
+
+                    UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit * 3 - 5),
+                                     (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.4), "rules",
+                                     0xffffff);
+
+                    UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit * 3 - 5),
+                                     (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
                     break;
                 case 2:
-                    UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, "start", 0xffffff);
-                    UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit),
-                                     (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.5), ">  quit  <",
+                    UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit * 3 - 9), 3 * screenMgr->screenUnit, "start",
+                                     0xffffff);
+
+                    UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit * 2 - 6),
+                                     (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.4), ">  rules  <",
+                                     0xffffff);
+
+                    UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit * 3 - 5),
+                                     (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit",
+                                     0xffffff);
+                    break;
+                case 3:
+                    UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit * 3 - 9), 3 * screenMgr->screenUnit, "start",
+                                     0xffffff);
+
+                    UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit * 3 - 5),
+                                     (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.4), "rules",
+                                     0xffffff);
+
+                    UI_Mgr->drawText((int) (0.5 * screenMgr->screenUnit * 2 - 6),
+                                     (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), ">  quit  <",
                                      0xffffff);
                     break;
                 default:
@@ -185,66 +217,6 @@ public:
         leaderBoardParsed.sort();
         if (leaderBoardParsed.empty()) {
             cout << "WARNING: LeaderBoard Empty either file is empty or error occurred" << endl;
-        }
-    }
-
-/**
- * @brief shows gameOver and leaderboard screen
- **/
-    int showGameOver(EventManager *eventMgr, ScreenManager *screenMgr, int score) {
-        SDL_Event event;
-        screenMgr->clearScreen();
-        drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  Restart  <", 0xffffff);
-        drawText((int) (0.5 * screenMgr->screenUnit),
-                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
-        parseLeaderboard();
-        screenMgr->updateScreen();
-        int selectedOption{1};
-        while (true) {
-            /* Input handling */
-            event = eventMgr->getEvent();
-            if (event.type == SDL_QUIT) {
-                cout << "EventManager: got ESC button press. Quiting..." << endl;
-                return -1;
-            }
-            if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_RETURN) {
-                return selectedOption;
-            }
-            if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_DOWN) {
-                if (selectedOption == 2)selectedOption = 1;
-                else
-                    selectedOption++;
-            } else if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_UP) {
-                if (selectedOption == 1)selectedOption = 2;
-                else
-                    selectedOption--;
-            }
-            /* UI redraw */
-            SDL_Delay(5);
-            screenMgr->clearScreen();
-            showLeaderBoard();
-            drawText(screenMgr->getScreenWidth() / 2 - 50, screenMgr->getScreenHeight() - 50,
-                     "GAME OVER!\nScore:" + to_string(score),
-                     0xff0000);
-            switch (selectedOption) {
-                case 1:
-                    drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  restart  <",
-                             0xffffff);
-                    drawText((int) (0.5 * screenMgr->screenUnit),
-                             (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
-                    break;
-                case 2:
-                    drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, "restart",
-                             0xffffff);
-                    drawText((int) (0.5 * screenMgr->screenUnit),
-                             (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), ">  quit  <",
-                             0xffffff);
-                    break;
-                default:
-                    break;
-            }
-            screenMgr->updateScreen();
-
         }
     }
 
@@ -322,6 +294,42 @@ public:
     }
 
 
+    void showRules() {
+        screenManager->clearScreen();
+        createButton(0,screenManager->getScreenHeight() / 6,screenManager->getScreenWidth(),20,
+                "Try to kill as many tanks as possible to get the highest score.",
+                0x00,0xffffff);
+        createButton(0,screenManager->getScreenHeight() / 6+22,screenManager->getScreenWidth(),20,
+                     "If you hit enemy tank, you get 15 points.",
+                     0x00,0xffcc99);
+        createButton(0,screenManager->getScreenHeight() / 6+44,screenManager->getScreenWidth(),20,
+                     "Player can take max of three hits.",
+                     0x00,0xffcc99);
+        createButton(0,screenManager->getScreenHeight() / 6+66,screenManager->getScreenWidth(),20,
+                     "Use up, down, left, right arrows to move.",
+                     0x00,0xffff6f);
+        createButton(0,screenManager->getScreenHeight() / 6+88,screenManager->getScreenWidth(),20,
+                     "Wall can be destroyed with two hits.",
+                     0x00,0xffffff);
+        createButton(0,screenManager->getScreenHeight() / 6+110,screenManager->getScreenWidth(),20,
+                     "Bounding walls are indestructible.",
+                     0x00,0xff9999);
+        createButton(0,screenManager->getScreenHeight() / 6+132,screenManager->getScreenWidth(),20,
+                     "Max of 3 tanks including player can be on screen at the same time.",
+                     0x00,0xffffff);
+        createButton(0,screenManager->getScreenHeight() -80,screenManager->getScreenWidth(),20,
+                     "Press any button to return to main menu",
+                     0x00,0xccff99);
+        createButton(0,screenManager->getScreenHeight() -40,screenManager->getScreenWidth(),20,
+                     "Made by Vladimir Shubarin in 2019.",
+                     0x00,0x808080);
+        screenManager->updateScreen();
+        SDL_Event event;
+        while(SDL_WaitEvent(&event)){
+            if (event.type == SDL_KEYDOWN &&event.key.keysym.sym == SDLK_RETURN) {break;}
+        }
+
+    }
 };
 
 
