@@ -25,7 +25,7 @@ private:
     void prestartInit() {
         // ===== Setting initial values
         setFramerate(110);
-        mapManager->setCurrentMap(GameObject::randIntInRange(2, 6));
+        mapManager->setCurrentMap(GameObject::randIntInRange(2, 7));
         mapManager->getCurrentMap()->reDraw();
         tanks.clear();
         bots.clear();
