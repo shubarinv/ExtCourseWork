@@ -22,15 +22,19 @@ private:
     SDL_Rect block{};
     ScreenManager *screenManager{};
 public:
-    explicit Wall(ScreenManager *screenMgr,bool isLimiter) {
+    explicit Wall(ScreenManager *screenMgr, bool isLimiter) {
         block.h = 50;
         block.w = block.h;
         screenManager = screenMgr;
-        if(isLimiter) hp=1000000000;
+        if (isLimiter) hp = 1000000000;
     }
 
     void reDraw() {
-        SDL_FillRect(screenManager->getMainSurface(), &block, 0x8D3516);
+        if (hp > 100) {
+            SDL_FillRect(screenManager->getMainSurface(), &block, 0x7E2F13);
+        } else {
+            SDL_FillRect(screenManager->getMainSurface(), &block, 0x8D3516);
+        }
     }
 
     void setHp(int deltaHP) {

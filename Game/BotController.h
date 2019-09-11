@@ -12,6 +12,7 @@
 
 class BotController {
 private:
+    int stuckIterations{0};
     struct whereCanGo {
         bool left{};
         bool right{};
@@ -163,7 +164,14 @@ public:
         }
         if (prevLocation.x1 == controlledTank->location.x1 && prevLocation.y1 == controlledTank->location.y1) {
             cout << "Stuck? left to go: " << leftToGo << endl;
+            stuckIterations++;
+            if (stuckIterations > 20) {
+                cout << "tank was stuck for more than 20 iterations, so it was respawned" << endl;
+                controlledTank->spawnAtRandomLocation();
+            }
             get_Direction();
+        } else {
+            stuckIterations = 0;
         }
         prevLocation = controlledTank->location;
         return canGo.chosenOption;
