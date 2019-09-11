@@ -32,6 +32,9 @@ private:
         tanks.emplace_back(screenManager, mapManager);
         bots.emplace_back(&tanks.back(), screenManager);
         tanks.back().spawnAtRandomLocation();
+        tanks.emplace_back(screenManager, mapManager);
+        bots.emplace_back(&tanks.back(), screenManager);
+        tanks.back().spawnAtRandomLocation();
 
     }
 
@@ -58,7 +61,7 @@ public:
 
     void capFPS() {
         if (swtch) {
-            elapsed = SDL_GetTicks() - current;
+            elapsed = (int) SDL_GetTicks() - current;
             current += elapsed;
             timeSinceSecond += elapsed;
             frames++;
@@ -91,6 +94,9 @@ public:
             tanks.remove_if(Tank::removalCheck);
             bots.remove_if(BotController::removalCheck);
             if (bots.empty()) {
+                tanks.emplace_back(screenManager, mapManager);
+                bots.emplace_back(&tanks.back(), screenManager);
+                tanks.back().spawnAtRandomLocation();
                 tanks.emplace_back(screenManager, mapManager);
                 bots.emplace_back(&tanks.back(), screenManager);
                 tanks.back().spawnAtRandomLocation();
@@ -155,14 +161,14 @@ public:
                         particle.setIsOnScreem(false);
                         player.setHealth(-25); // THIS IS TEMPORARY
                     }
-                    cout << "==========================================================" << endl;
-                    cout << "Particle current position x1: " << particle.location.x1 << " x2: " << particle.location.x2
-                         << " y1: " << particle.location.y1 << " y2: " << particle.location.y2 << endl;
+                    //cout << "==========================================================" << endl;
+                    // cout << "Particle current position x1: " << particle.location.x1 << " x2: " << particle.location.x2
+                    //    << " y1: " << particle.location.y1 << " y2: " << particle.location.y2 << endl;
                     if (mapManager->getCurrentMap()->checkForCollision(particle.location)) {
                         particle.setIsOnScreem(false);
                         cout << "Removed particle" << endl;
                     }
-                    cout << "==========================================================" << endl;
+                    //  cout << "==========================================================" << endl;
 
                 }
             }

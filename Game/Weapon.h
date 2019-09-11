@@ -104,12 +104,7 @@ private:
     ScreenManager *screenManager{};
     int facingDirrection{-0};
 public:
-    [[deprecated]]void init(ScreenManager *screenMgr, bool isEnemy) {
-        cout << "Weapon was spawned: " << this << endl;
-        screenManager = screenMgr;
-        initialised = true;
-    }
-
+    
     void init(ScreenManager *screenMgr) {
         cout << "Weapon was spawned: " << this << endl;
         screenManager = screenMgr;

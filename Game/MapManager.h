@@ -22,7 +22,7 @@ private:
     list<Map> maps;
     Map *currentMap{};
 public:
-    Map *getCurrentMap() const {
+    [[nodiscard]] Map *getCurrentMap() const {
         return currentMap;
     }
 

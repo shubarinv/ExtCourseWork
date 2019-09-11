@@ -167,10 +167,6 @@ public:
         return tank.health <= 0;
     }
 
-    int getMovementSpeed() const {
-        return movementSpeed;
-    }
-
     void setMovementSpeed(int mvSpeed) {
         movementSpeed = mvSpeed;
     }

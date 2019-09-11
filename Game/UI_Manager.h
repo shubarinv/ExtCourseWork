@@ -20,7 +20,7 @@ class UI_Manager {
 private:
     TTF_Font *fnt;
     ScreenManager *screenManager = nullptr;
-    SDL_Color text_color;
+    SDL_Color text_color{};
     SDL_Surface *text_surface = nullptr;
 
 
@@ -42,7 +42,7 @@ private:
 
 
 public:
-    UI_Manager(ScreenManager *screenMgr) {
+    explicit UI_Manager(ScreenManager *screenMgr) {
         screenManager = screenMgr;
         if (TTF_Init()) { // init of SDL_TFF lib
             throw runtime_error("UI_Manager: Failed to init SDL_TTF ");

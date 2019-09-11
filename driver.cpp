@@ -35,8 +35,9 @@ int main() {
 
 // ==== Game start/Restart Loop ==== //
     while (true) {
+        mapManager.setCurrentMap(GameObject::randIntInRange(1, 5));
         tmp = gmManager.startGame(eventManager, uiManager, player);
-        while (tmp != 1&&tmp!=3) {
+        while (tmp != 1 && tmp != 3 && tmp != -0xf) {
             tmp = uiManager.showMainMenu(&eventManager, &screenManager, &uiManager, &mapManager);
             switch (tmp) { // performing actions depending on what player pressed after gameover screen
                 case 1: // player pressed restart
@@ -49,6 +50,9 @@ int main() {
                 default:
                     return -2;
             }
+        }
+        if (tmp == -0xf) {
+            return 0;
         }
     }
 }
