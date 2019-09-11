@@ -14,7 +14,6 @@
 class GameManager {
 private:
     MapManager *mapManager;
-    int wave{0};
     ScreenManager *screenManager;
     int elapsed = 0, current = 0, timeSinceSecond = 0, frames = 0, next{}; //avgFPS - Avg fps per second
     int framerate = 59;
@@ -25,7 +24,6 @@ private:
 
     void prestartInit() {
         // ===== Setting initial values
-        setWave(1);
         setFramerate(100);
         mapManager->setCurrentMap(GameObject::randIntInRange(2, 6));
         mapManager->getCurrentMap()->reDraw();
@@ -54,11 +52,6 @@ public:
 
     void setFramerate(int purposedFPS) {
         GameManager::framerate = purposedFPS;
-    }
-
-    void setWave(int wv) {
-        cout << "Set wave was called...\nWave now " << wv << endl;
-        wave = wv;
     }
 
     bool swtch = true;
