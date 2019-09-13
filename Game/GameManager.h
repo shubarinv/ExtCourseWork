@@ -105,8 +105,15 @@ public:
             {
 
                 if (event.type == SDL_QUIT) {
-                    cout << "EventManager: got ESC button press. Quiting..." << endl;
+                    /*  int tmp=uiManager.showPauseMenu(screenManager,&eventManager);
+                      if(tmp==3){
+                          break;
+                      }
+                      if(tmp==2){
+                          uiManager.showRules();
+                      }*/
                     break;
+
                 }
                 if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_LEFT) {
                     player.setMovementDirection(-1);

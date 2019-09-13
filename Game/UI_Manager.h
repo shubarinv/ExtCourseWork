@@ -95,6 +95,85 @@ public:
     void drawHUD(int health, int money) {
         drawText(10, 10, "Health:" + to_string(health), 0xFFFFFF);
         drawText(screenManager->getScreenWidth() - 125, 10, "Score:" + to_string(money), 0xFFFFFF);
+
+    }
+
+    int showPauseMenu(ScreenManager *screenMgr, EventManager *eventMgr) {
+
+        createButton(0, 20, screenMgr->getScreenWidth(), 30, "PAUSE", 0xffffff, 0x00);
+        SDL_Event event;
+
+        int selectedOption{1};
+        drawText((int) (0.5 * screenMgr->screenUnit), 3 * screenMgr->screenUnit, ">  Continue  <", 0xffffff);
+        drawText((int) (0.5 * screenMgr->screenUnit * 3 - 5),
+                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "rules", 0xffffff);
+        drawText((int) (0.5 * screenMgr->screenUnit),
+                 (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit), "quit", 0xffffff);
+        screenMgr->updateScreen();
+        /* Polling events */
+        while (true) {
+            /* Handling input */
+            event = eventMgr->getEvent();
+            if (event.type == SDL_QUIT) {
+                cout << "Not yet implemented" << endl;
+            }
+            if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_RETURN) {
+                return selectedOption;
+            }
+            if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_DOWN) {
+                if (selectedOption == 3)selectedOption = 1;
+                else
+                    selectedOption++;
+            } else if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_UP) {
+                if (selectedOption == 1)selectedOption = 3;
+                else
+                    selectedOption--;
+            }
+            screenMgr->clearScreen();
+            createButton(0, 20, screenMgr->getScreenWidth(), 30, "PAUSE", 0xffffff, 0x00);
+            switch (selectedOption) {
+                case 1:
+                    drawText((int) (0.5 * screenMgr->screenUnit * 2 - 10), 3 * screenMgr->screenUnit,
+                             ">  Continue  <",
+                             0xffffff);
+
+                    drawText((int) (0.5 * screenMgr->screenUnit * 3 - 5),
+                             (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.4), "rules",
+                             0xffffff);
+
+                    drawText((int) (0.5 * screenMgr->screenUnit * 3 - 5),
+                             (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit", 0xffffff);
+                    break;
+                case 2:
+                    drawText((int) (0.5 * screenMgr->screenUnit * 3 - 9), 3 * screenMgr->screenUnit, "Continue",
+                             0xffffff);
+
+                    drawText((int) (0.5 * screenMgr->screenUnit * 2 - 6),
+                             (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.4), ">  rules  <",
+                             0xffffff);
+
+                    drawText((int) (0.5 * screenMgr->screenUnit * 3 - 5),
+                             (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), "quit",
+                             0xffffff);
+                    break;
+                case 3:
+                    drawText((int) (0.5 * screenMgr->screenUnit * 3 - 9), 3 * screenMgr->screenUnit, "Continue",
+                             0xffffff);
+
+                    drawText((int) (0.5 * screenMgr->screenUnit * 3 - 5),
+                             (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.4), "rules",
+                             0xffffff);
+
+                    drawText((int) (0.5 * screenMgr->screenUnit * 2 - 6),
+                             (int) (3 * screenMgr->screenUnit + screenMgr->screenUnit * 0.8), ">  quit  <",
+                             0xffffff);
+                    break;
+                default:
+                    break;
+            }
+            screenMgr->updateScreen();
+
+        }
     }
 
     /**
@@ -231,7 +310,10 @@ public:
         createButton(screenManager->getScreenWidth() / 2 + screenManager->getScreenWidth() / 4,
                      screenManager->getScreenHeight() / 12 - 10, screenManager->getScreenWidth() / 4,
                      screenManager->getScreenHeight() / 20 + 31, "Score", 0x4d4d4d, 0xFFFFff);
+        int j = 0;
         for (auto &record : leaderBoardParsed) {
+            j++;
+            if (j > 26) break;
             createButton(screenManager->getScreenWidth() / 2, screenManager->getScreenHeight() / 20 + 20 * i,
                          screenManager->getScreenWidth() / 4, 20,
                          record.name, 0x4d4d4d, 0xFFFF00);
@@ -258,7 +340,7 @@ public:
         string tmp;
         screenManager->clearScreen();
         createButton(0, screenManager->getScreenHeight() / 6, screenManager->getScreenWidth(), 20,
-                     "Please enter player name", 0x00, 0xffff00);
+                     "Please enter player name (20 symbols max)", 0x00, 0xffff00);
 
         createButton(0, screenManager->getScreenHeight() / 2, screenManager->getScreenWidth(), 20,
                      "Player Name: " + str, 0x3C3C3C, 0xffff00);
@@ -269,6 +351,7 @@ public:
         screenManager->updateScreen();
 
         while (SDL_WaitEvent(&event)) {
+
             if (event.type == SDL_QUIT) {
                 break;
             } else if (event.key.keysym.sym == SDLK_BACKSPACE && event.type == SDL_KEYDOWN) {
@@ -276,6 +359,7 @@ public:
             } else if (event.key.keysym.sym == SDLK_RETURN) {
                 return str;
             } else if (event.type == SDL_KEYDOWN) {
+                if (str.size() > 20) { continue; }
                 str.append(EventManager::eventToStr(event.key.keysym.sym));
             }
             screenManager->clearScreen();
@@ -296,37 +380,37 @@ public:
 
     void showRules() {
         screenManager->clearScreen();
-        createButton(0,screenManager->getScreenHeight() / 6,screenManager->getScreenWidth(),20,
-                "Try to kill as many tanks as possible to get the highest score.",
-                0x00,0xffffff);
-        createButton(0,screenManager->getScreenHeight() / 6+22,screenManager->getScreenWidth(),20,
+        createButton(0, screenManager->getScreenHeight() / 6, screenManager->getScreenWidth(), 20,
+                     "Try to kill as many tanks as possible to get the highest score.",
+                     0x00, 0xffffff);
+        createButton(0, screenManager->getScreenHeight() / 6 + 22, screenManager->getScreenWidth(), 20,
                      "If you hit enemy tank, you get 15 points.",
-                     0x00,0xffcc99);
-        createButton(0,screenManager->getScreenHeight() / 6+44,screenManager->getScreenWidth(),20,
+                     0x00, 0xffcc99);
+        createButton(0, screenManager->getScreenHeight() / 6 + 44, screenManager->getScreenWidth(), 20,
                      "Player can take max of three hits.",
-                     0x00,0xffcc99);
-        createButton(0,screenManager->getScreenHeight() / 6+66,screenManager->getScreenWidth(),20,
+                     0x00, 0xffcc99);
+        createButton(0, screenManager->getScreenHeight() / 6 + 66, screenManager->getScreenWidth(), 20,
                      "Use up, down, left, right arrows to move.",
-                     0x00,0xffff6f);
-        createButton(0,screenManager->getScreenHeight() / 6+88,screenManager->getScreenWidth(),20,
+                     0x00, 0xffff6f);
+        createButton(0, screenManager->getScreenHeight() / 6 + 88, screenManager->getScreenWidth(), 20,
                      "Wall can be destroyed with two hits.",
-                     0x00,0xffffff);
-        createButton(0,screenManager->getScreenHeight() / 6+110,screenManager->getScreenWidth(),20,
+                     0x00, 0xffffff);
+        createButton(0, screenManager->getScreenHeight() / 6 + 110, screenManager->getScreenWidth(), 20,
                      "Bounding walls are indestructible.",
-                     0x00,0xff9999);
-        createButton(0,screenManager->getScreenHeight() / 6+132,screenManager->getScreenWidth(),20,
+                     0x00, 0xff9999);
+        createButton(0, screenManager->getScreenHeight() / 6 + 132, screenManager->getScreenWidth(), 20,
                      "Max of 3 tanks including player can be on screen at the same time.",
-                     0x00,0xffffff);
-        createButton(0,screenManager->getScreenHeight() -80,screenManager->getScreenWidth(),20,
+                     0x00, 0xffffff);
+        createButton(0, screenManager->getScreenHeight() - 80, screenManager->getScreenWidth(), 20,
                      "Press any button to return to main menu",
-                     0x00,0xccff99);
-        createButton(0,screenManager->getScreenHeight() -40,screenManager->getScreenWidth(),20,
+                     0x00, 0xccff99);
+        createButton(0, screenManager->getScreenHeight() - 40, screenManager->getScreenWidth(), 20,
                      "Made by Vladimir Shubarin in 2019.",
-                     0x00,0x808080);
+                     0x00, 0x808080);
         screenManager->updateScreen();
         SDL_Event event;
-        while(SDL_WaitEvent(&event)){
-            if (event.type == SDL_KEYDOWN &&event.key.keysym.sym == SDLK_RETURN) {break;}
+        while (SDL_WaitEvent(&event)) {
+            if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_RETURN) { break; }
         }
 
     }
