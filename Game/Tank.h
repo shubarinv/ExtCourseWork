@@ -10,168 +10,170 @@
 #include "ScreenManager.h"
 #include "Weapon.h"
 #include "MapManager.h"
+#include "moving_object.hpp"
+#include "sprite.hpp"
 
-class Tank : GameObject {
+class Tank : public virtual MovingObject, public virtual Sprite {
 private:
-    int health{0}, movementDirection{0}, movementSpeed{0};
-    ScreenManager *screenManager = nullptr;
-    int score{0};
-    SDL_Rect body{};
-    MapManager *mapManager;
+	int health{0};
+	int score{0};
+	SDL_Rect body{};
+	MapManager *mapManager;
 public:
-    Weapon weapon;
+	Weapon weapon;
 
-    explicit Tank(ScreenManager *screenMgr, MapManager *mpManager) {
-        screenManager = screenMgr;
-        health = 100;
-        score = 0;
-        movementDirection = randIntInRange(-2, -1);
-        movementSpeed = 0;
-        mapManager = mpManager;
+	explicit Tank(ScreenManager *screenMgr, MapManager *mpManager) {
+		screenManager = screenMgr;
+		health = 100;
+		score = 0;
+		movementDirection = randIntInRange(-2, -1);
+		movementSpeed = 0;
+		mapManager = mpManager;
 
-        // loc on map spawn
+		// loc on map spawn
 
-        body.x = GameObject::randIntInRange(100, screenManager->getScreenWidth() - 100);
-        body.y = GameObject::randIntInRange(100, screenManager->getScreenHeight() - 100);
-        body.h = 42;
-        body.w = body.h;
+		body.x = randIntInRange(100, screenManager->getScreenWidth() - 100);
+		body.y = randIntInRange(100, screenManager->getScreenHeight() - 100);
+		body.h = 42;
+		body.w = body.h;
 
-        location.x1 = body.x;
-        location.x2 = body.x + body.w;
-        location.y1 = body.y;
-        location.y2 = body.y + body.h;
-        weapon.init(screenManager);
-        weapon.location = this->location;
-        cout << "Spawned tank(" << this << ")" << endl;
-    }
+		location.x1 = body.x;
+		location.x2 = body.x + body.w;
+		location.y1 = body.y;
+		location.y2 = body.y + body.h;
+		width=body.w;
+		height=body.h;
 
-    void spawnAtRandomLocation() {
-        while (mapManager->getCurrentMap()->checkForCollision(location) != 0) {
-            body.x = GameObject::randIntInRange(100, screenManager->getScreenWidth() - 100);
-            body.y = GameObject::randIntInRange(100, screenManager->getScreenHeight() - 100);
-            body.h = 42;
-            body.w = body.h;
+		weapon.init(screenManager);
+		weapon.location = this->location;
+		objBody.x = body.x;
+		objBody.y = body.y;
+		cout << "Spawned tank(" << this << ")" << endl;
+	}
 
-            location.x1 = body.x;
-            location.x2 = body.x + body.w;
-            location.y1 = body.y;
-            location.y2 = body.y + body.h;
-        }
-    }
-    int checkIfCanGo(int deltaLoc) {
-        GameObject::coords tmpCoords;
-        tmpCoords.y1 = location.y1;
-        tmpCoords.y2 = location.y2;
-        if (movementDirection == 1 || movementDirection == -1) {
-            tmpCoords.x1 = location.x1 + movementDirection * movementSpeed;
-            tmpCoords.x2 = tmpCoords.x1 + body.w;
-            tmpCoords.y1 = location.y1;
-            tmpCoords.y2 = location.y2;
-        } else {
-            tmpCoords.x1 = location.x1;
-            tmpCoords.x2 = location.x2;
-            tmpCoords.y1 = location.y1 + movementDirection / -2 * movementSpeed;
-            tmpCoords.y2 = tmpCoords.y1 + body.h;
-        }
-        if (mapManager->getCurrentMap()->checkForCollision(tmpCoords))
-            return 0;
+	void spawnAtRandomLocation() {
+		while (mapManager->getCurrentMap()->checkForCollision(location) != 0) {
+			body.x = randIntInRange(100, screenManager->getScreenWidth() - 100);
+			body.y = randIntInRange(100, screenManager->getScreenHeight() - 100);
+			body.h = 42;
+			body.w = body.h;
+			width=body.w;
+			height=body.h;
 
-        return deltaLoc;
-    }
 
-    bool checkIfCanGo(int deltaLoc, int movementDir) {
-        GameObject::coords tmpCoords;
-        tmpCoords.y1 = location.y1;
-        tmpCoords.y2 = location.y2;
-        if (movementDir == 1 || movementDir == -1) {
-            tmpCoords.x1 = location.x1 + deltaLoc;
-            tmpCoords.x2 = tmpCoords.x1 + body.w;
-            tmpCoords.y1 = location.y1;
-            tmpCoords.y2 = location.y2;
-        } else {
-            tmpCoords.x1 = location.x1;
-            tmpCoords.x2 = location.x2;
-            tmpCoords.y1 = location.y1 + deltaLoc;
-            tmpCoords.y2 = tmpCoords.y1 + body.h;
-        }
-        return !mapManager->getCurrentMap()->checkForCollision(tmpCoords, true);
+			location.x1 = body.x;
+			location.x2 = body.x + body.w;
+			location.y1 = body.y;
+			location.y2 = body.y + body.h;
+			objBody.x = body.x;
+			objBody.y = body.y;
+		}
+	}
 
-    }
+	int checkIfCanGo(int deltaLoc) override {
+		GameObject::coords tmpCoords;
+		tmpCoords.y1 = location.y1;
+		tmpCoords.y2 = location.y2;
+		if (movementDirection == 1 || movementDirection == -1) {
+			tmpCoords.x1 = location.x1 + movementDirection * movementSpeed;
+			tmpCoords.x2 = tmpCoords.x1 + body.w;
+			tmpCoords.y1 = location.y1;
+			tmpCoords.y2 = location.y2;
+		} else {
+			tmpCoords.x1 = location.x1;
+			tmpCoords.x2 = location.x2;
+			tmpCoords.y1 = location.y1 + movementDirection / -2 * movementSpeed;
+			tmpCoords.y2 = tmpCoords.y1 + body.h;
+		}
+		if (mapManager->getCurrentMap()->checkForCollision(tmpCoords,true))
+			return 0;
 
-    void updateLocation() {
-        if ((movementDirection == 1 || movementDirection == -1) &&
-            checkIfCanGo(movementDirection * movementSpeed) != 0) {
-            location.x1 += movementDirection * movementSpeed;
-            location.x2 = location.x1 + body.w;
-        } else if (checkIfCanGo(movementDirection / -2 * movementSpeed) != 0) {
-            location.y1 += movementDirection / -2 * movementSpeed;
-            location.y2 = location.y1 + body.h;
-        }
-    }
+		return deltaLoc;
+	}
 
-    void reDraw() {
-        if (health > 0) {
-            updateLocation();
-            body.x = location.x1;
-            body.y = location.y1;
-            switch (movementDirection) {
-                case -1:
-                    screenManager->drawImage("../Game/Sprites/Tank_L.png", &body);
-                    break;
-                case 1:
-                    screenManager->drawImage("../Game/Sprites/Tank_R.png", &body);
-                    break;
-                case -2:
-                    screenManager->drawImage("../Game/Sprites/Tank_D.png", &body);
-                    break;
-                case 2:
-                    screenManager->drawImage("../Game/Sprites/Tank_U.png", &body);
-                    break;
-                default:
-                    break;
+	bool checkIfCanGo(int deltaLoc, int movementDir) {
+		GameObject::coords tmpCoords;
+		tmpCoords.y1 = location.y1;
+		tmpCoords.y2 = location.y2;
+		if (movementDir == 1 || movementDir == -1) {
+			tmpCoords.x1 = location.x1 + deltaLoc;
+			tmpCoords.x2 = tmpCoords.x1 + body.w;
+			tmpCoords.y1 = location.y1;
+			tmpCoords.y2 = location.y2;
+		} else {
+			tmpCoords.x1 = location.x1;
+			tmpCoords.x2 = location.x2;
+			tmpCoords.y1 = location.y1 + deltaLoc;
+			tmpCoords.y2 = tmpCoords.y1 + body.h;
+		}
+		return !mapManager->getCurrentMap()->checkForCollision(tmpCoords, true);
 
-            }
-            weapon.update(location, movementDirection);
-        }
-    }
+	}
 
-    /**
-     * @param direction -1=left ; 1=right ; 2=up ; -2=down
-     **/
-    void setMovementDirection(int direction) {
-        movementDirection = direction;
-    }
+	void reDraw() {
+		if (health > 0) {
+			updateLocation();
+			body.x = location.x1;
+			body.y = location.y1;
+			objBody.x = body.x;
+			objBody.y = body.y;
+			switch (movementDirection) {
+				case -1:
+					fileName = "../Game/Sprites/Tank_L.png";
+					break;
+				case 1:
+					fileName = "../Game/Sprites/Tank_R.png";
+					break;
+				case -2:
+					fileName = "../Game/Sprites/Tank_D.png";
+					break;
+				case 2:
+					fileName = "../Game/Sprites/Tank_U.png";
+					break;
+				default:
+					break;
 
-    int getScore() {
-        return score;
-    }
+			}
+			Sprite::reDraw();
+			weapon.update(location, movementDirection);
+		}
+	}
 
-    void setScore(int Deltascore) {
-        score += Deltascore;
-    }
+	/**
+	 * @param direction -1=left ; 1=right ; 2=up ; -2=down
+	 **/
+	void setMovementDirection(int direction) {
+		movementDirection = direction;
+	}
 
-    void shoot() {
-        weapon.shoot();
-    }
+	int getScore() {
+		return score;
+	}
 
-    void setHealth(int deltaHealth) {
-        health += deltaHealth;
-        cout << "Tank(" << this << ") HP changed to:" << getHealth() << endl;
-    }
+	void setScore(int Deltascore) {
+		score += Deltascore;
+	}
 
-    int getHealth() {
-        return health;
-    }
+	void shoot() {
+		weapon.shoot();
+	}
 
-    static bool removalCheck(const Tank &tank) {
-        return tank.health <= 0;
-    }
+	void setHealth(int deltaHealth) {
+		health += deltaHealth;
+		cout << "Tank(" << this << ") HP changed to:" << getHealth() << endl;
+	}
 
-    void setMovementSpeed(int mvSpeed) {
-        movementSpeed = mvSpeed;
-    }
+	int getHealth() {
+		return health;
+	}
 
-    coords location{1, 1, 1, 1};
+	static bool removalCheck(const Tank &tank) {
+		return tank.health <= 0;
+	}
+
+	void setMovementSpeed(int mvSpeed) {
+		movementSpeed = mvSpeed;
+	}
 
 };
 

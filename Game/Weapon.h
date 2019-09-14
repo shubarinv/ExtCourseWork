@@ -14,7 +14,7 @@ private:
     bool bIsOnScreen{true};
     ScreenManager *screenManager{};
     SDL_Rect particle{};
-    int movementDirrection{-0};
+    int movementDirection{-0};
 public:
     Particle() {
         bIsOnScreen = true;
@@ -39,7 +39,7 @@ public:
         location.x2 = loc.x2 + particle.w;
         location.y1 = loc.y1;
         location.y2 = loc.y2 + particle.w;
-        movementDirrection = movementDir;
+	    movementDirection = movementDir;
         initialised = true;
     }
 
@@ -64,7 +64,7 @@ public:
 private:
     void updateLocation() {
         if (bIsOnScreen) {
-            switch (movementDirrection) {
+            switch (movementDirection) {
                 case -1:
                     particle.x -= 2;
                     break;
@@ -102,7 +102,7 @@ public:
 class Weapon : public GameObject {
 private:
     ScreenManager *screenManager{};
-    int facingDirrection{-0};
+    int facingDirection{-0};
 public:
     
     void init(ScreenManager *screenMgr) {
@@ -118,12 +118,12 @@ public:
     void shoot() {
         if (!initialised) throw runtime_error("ERROR: attempt to call shoot on uninitialised Weapon instance\n");
         particles.push_back(*new Particle());
-        particles.back().init(screenManager, location, facingDirrection);
+        particles.back().init(screenManager, location, facingDirection);
     }
 
-    void update(coords newloc, int movementDirrection) {
+    void update(coords newloc, int movementDirection) {
         location = newloc;
-        facingDirrection = movementDirrection;
+	    facingDirection = movementDirection;
         particles.remove_if(Particle::removalCheck);
         if (!particles.empty()) {
             for (auto &particle : particles) {

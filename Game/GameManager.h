@@ -29,13 +29,13 @@ private:
         mapManager->getCurrentMap()->reDraw();
         tanks.clear();
         bots.clear();
-        tanks.emplace_back(screenManager, mapManager);
+     /*   tanks.emplace_back(screenManager, mapManager);
         bots.emplace_back(&tanks.back(), screenManager);
         tanks.back().spawnAtRandomLocation();
         tanks.emplace_back(screenManager, mapManager);
         bots.emplace_back(&tanks.back(), screenManager);
         tanks.back().spawnAtRandomLocation();
-
+*/
     }
 
     static void writeScoreToFile(const string &playerName, int Score) {
@@ -91,7 +91,7 @@ public:
         while (true) {
             capFPS();
 
-            tanks.remove_if(Tank::removalCheck);
+          /*  tanks.remove_if(Tank::removalCheck);
             bots.remove_if(BotController::removalCheck);
             if (bots.empty()) {
                 tanks.emplace_back(screenManager, mapManager);
@@ -100,7 +100,7 @@ public:
                 tanks.emplace_back(screenManager, mapManager);
                 bots.emplace_back(&tanks.back(), screenManager);
                 tanks.back().spawnAtRandomLocation();
-            }
+            }*/
             event = eventManager.getEvent();
             {
 

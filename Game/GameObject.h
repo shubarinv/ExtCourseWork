@@ -10,22 +10,23 @@
 
 class GameObject {
 public:
-    bool initialised{false};
-    struct coords {
-        int x1{1}, x2{1};
-        int y1{1}, y2{1};
-    };
-    coords location{};
+	bool initialised{false};
+	struct coords {
+		int x1{1}, x2{1};
+		int y1{1}, y2{1};
+	};
+	int width{0}, height{0};
 
-    static int randIntInRange(int min, int max) {
-        std::random_device rd;     // only used once to initialise (seed) engine
-        std::mt19937 rng(rd());    // random-number engine used (Mersenne-Twister in this case)
-        std::uniform_int_distribution<int> uni(min, max); // guaranteed unbiased
+	static int randIntInRange(int min, int max) {
+		std::random_device rd;     // only used once to initialise (seed) engine
+		std::mt19937 rng(rd());    // random-number engine used (Mersenne-Twister in this case)
+		std::uniform_int_distribution<int> uni(min, max); // guaranteed unbiased
 
-        auto random_integer = uni(rng);
-        return random_integer;
-    }
+		auto random_integer = uni(rng);
+		return random_integer;
+	}
 
+	coords location{};
 };
 
 

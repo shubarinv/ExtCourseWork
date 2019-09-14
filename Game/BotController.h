@@ -148,7 +148,7 @@ private:
     ScreenManager *screenManager;
 
 public:
-    BotController(Tank *ctrledTank, ScreenManager *screenMgr) {
+    BotController(Tank  *ctrledTank, ScreenManager *screenMgr) {
         controlledTank = ctrledTank;
         controlledTank->setMovementSpeed(1);
         screenManager = screenMgr;

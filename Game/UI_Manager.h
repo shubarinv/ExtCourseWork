@@ -193,12 +193,12 @@ public:
 
         mapManager->getCurrentMap()->reDraw();
         screenMgr->updateScreen();
-        Tank tank1 = Tank(screenManager, mapManager);
+       /* Tank tank1 = Tank(screenManager, mapManager);
         Tank tank2 = Tank(screenManager, mapManager);
         BotController botController1 = BotController(&tank1, screenManager);
         BotController botController2 = BotController(&tank2, screenManager);
         tank1.spawnAtRandomLocation();
-        tank2.spawnAtRandomLocation();
+        tank2.spawnAtRandomLocation();*/
         parseLeaderboard();
 
         /* Polling events */
@@ -226,10 +226,10 @@ public:
             SDL_Delay(5);
             screenMgr->clearScreen();
             mapManager->getCurrentMap()->reDraw();
-            botController1.moveTank();
+        /*    botController1.moveTank();
             botController2.moveTank();
             botController1.controlledTank->reDraw();
-            botController2.controlledTank->reDraw();
+            botController2.controlledTank->reDraw();*/
             UI_Mgr->showLeaderBoard();
             if (score != -1)
                 drawText(screenMgr->getScreenWidth() / 2 - 50, screenMgr->getScreenHeight() - 50,
