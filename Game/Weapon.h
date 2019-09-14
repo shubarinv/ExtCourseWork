@@ -8,16 +8,14 @@
 
 #include <list>
 #include "ScreenManager.h"
+#include "moving_object.hpp"
 
-class Particle : public GameObject {
+class Particle : virtual public DrawableObject,virtual public MovingObject {
 private:
-    bool bIsOnScreen{true};
-    ScreenManager *screenManager{};
     SDL_Rect particle{};
-    int movementDirection{-0};
 public:
     Particle() {
-        bIsOnScreen = true;
+        isOnScreen = true;
         initialised = false;
     }
 
@@ -43,17 +41,9 @@ public:
         initialised = true;
     }
 
-    [[nodiscard]] bool isOnScreen() const {
-        return bIsOnScreen;
-    }
-
-    void setIsOnScreem(bool OnScreen) {
-        Particle::bIsOnScreen = OnScreen;
-    }
-
     void reDraw() {
         if (!initialised) cout << "WARNING: Particle is UNINITIALISED, but got reDraw command" << endl;
-        if (initialised && bIsOnScreen) {
+        if (initialised && isOnScreen) {
             updateLocation();
             SDL_FillRect(screenManager->getMainSurface(), &particle, 0xff0000);
         } else {
@@ -62,8 +52,8 @@ public:
     }
 
 private:
-    void updateLocation() {
-        if (bIsOnScreen) {
+    void updateLocation() override {
+        if (isOnScreen) {
             switch (movementDirection) {
                 case -1:
                     particle.x -= 2;
@@ -83,7 +73,7 @@ private:
 
             if (particle.y >= screenManager->getScreenHeight() || particle.y <= 0 || particle.x <= 0 ||
                 particle.x >= screenManager->getScreenWidth())
-                bIsOnScreen = false;
+	            isOnScreen = false;
 
             location.y1 = particle.y;
             location.y2 = particle.y + particle.h;
@@ -94,7 +84,7 @@ private:
 
 public:
     static bool removalCheck(Particle prtcl) {
-        return !prtcl.isOnScreen();
+        return !prtcl.isOnScreen;
     }
 };
 

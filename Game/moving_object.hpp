@@ -12,7 +12,7 @@ class MovingObject : public GameObject {
 protected:
 	int movementSpeed{0}, movementDirection{0};
 protected:
-	void updateLocation() {
+	virtual void updateLocation() {
 		if ((movementDirection == 1 || movementDirection == -1) &&
 		    checkIfCanGo(movementDirection * movementSpeed) != 0) {
 			location.x1 += movementDirection * movementSpeed;
