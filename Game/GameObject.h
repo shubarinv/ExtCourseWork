@@ -16,6 +16,8 @@ public:
 		int y1{1}, y2{1};
 	};
 	int width{0}, height{0};
+	bool isOnScreen{true};
+	int hp{100};
 
 	static int randIntInRange(int min, int max) {
 		std::random_device rd;     // only used once to initialise (seed) engine
