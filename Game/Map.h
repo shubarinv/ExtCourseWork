@@ -31,7 +31,6 @@ public:
             int rowNum{0}, column{0};
             while (getline(mapsFile, line)) {
                 if (line[0] == '#') {
-                    //  cout << "SKIPPED->" << line << endl;
                     continue;
                 } else if (line[0] == '-') {
                     if (mapNum == mapNumber) break;
@@ -47,11 +46,11 @@ public:
                         for (char i : line) {
                             if (i != ' ' && i != '\n') {
                                 if (i == '1') {
-                                    walls.emplace_back(screenManager, false);
+	                                walls.emplace_back(screenManager, true);
                                     walls.back().setLocation(column, rowNum);
                                 }
                                 if (i == '2') {
-                                    walls.emplace_back(screenManager, true);
+	                                walls.emplace_back(screenManager, false);
                                     walls.back().setLocation(column, rowNum);
                                 }
                                 column++;
@@ -68,10 +67,10 @@ public:
         }
     }
 
-    void reDraw() {
+	void redraw() {
         walls.remove_if(removalCheck);
         for (auto &wall : walls) {
-            wall.reDraw();
+	        wall.redraw();
         }
     }
 

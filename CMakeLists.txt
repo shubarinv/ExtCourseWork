@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
-project(NewCourseWork)
+project(TanksCourseWorkRD)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/ ${CMAKE_MODULE_PATH})
 find_package(SDL REQUIRED)
 find_package(SDL_ttf REQUIRED)
@@ -19,4 +19,4 @@ link_libraries(
 )
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(NewCourseWork driver.cpp Game/ScreenManager.h Game/UI_Manager.h Game/Tank.h Game/GameObject.h Game/GameManager.h Game/Weapon.h Game/EventManager.h Game/Lib/cute_c2.h Game/Wall.h Game/MapManager.h Game/BotController.h Game/Map.h)
+add_executable(TanksCourseWorkRD Driver.cpp Game/Lib/cute_c2.h Game/Map.h Game/MapManager.h Game/Wall.h Game/EventManager.h Game/game_manager.hpp Game/ScreenManager.h Game/game_object.hpp Game/moveable_object.hpp Game/stationary_object.hpp Game/sprite.hpp Game/drawable_object.hpp Game/tank.hpp Game/bot_controller.hpp Game/weapon.hpp Game/UI/ui_base.hpp Game/UI/ui_manager.hpp Game/UI/ui_main_menu.hpp Game/UI/ui_rules.hpp)
