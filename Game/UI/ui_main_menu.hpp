@@ -100,7 +100,7 @@ private:
 			case 1:
 
 				drawText((int) (0.5 * screenManager->screenUnit * 2 - 10),
-				         3 * screenManager->screenUnit, ">  start  <", 0xffffff);
+				         3 * screenManager->screenUnit, ">  Start  <", 0xffffff);
 
 				drawText((int) (0.5 * screenManager->screenUnit * 3 - 5),
 				         (int) (3 * screenManager->screenUnit +
@@ -120,7 +120,7 @@ private:
 				drawText((int) (0.5 * screenManager->screenUnit * 2 - 6),
 				         (int) (3 * screenManager->screenUnit +
 				                screenManager->screenUnit * 0.4),
-				         ">  rules  <", 0xffffff);
+				         ">  Rules  <", 0xffffff);
 
 				drawText((int) (0.5 * screenManager->screenUnit * 3 - 5),
 				         (int) (3 * screenManager->screenUnit +
@@ -140,7 +140,7 @@ private:
 				drawText((int) (0.5 * screenManager->screenUnit * 2 - 6),
 				         (int) (3 * screenManager->screenUnit +
 				                screenManager->screenUnit * 0.8),
-				         ">  quit  <", 0xffffff);
+				         ">  Quit  <", 0xffffff);
 				break;
 			default:
 				break;
