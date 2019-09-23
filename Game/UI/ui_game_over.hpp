@@ -127,7 +127,7 @@ private:
 		return str;
 	}
 
-	/**
+/**
  * @brief reads file that's called leaderBoard, then adds data from this file to the list
  **/
 	void parseLeaderboard() {

@@ -10,6 +10,7 @@
 #include "ui_pause_menu.hpp"
 #include "ui_hud.hpp"
 #include "ui_game_over.hpp"
+#include "ui_leader_board.hpp"
 
 class UIManager {
 private:
@@ -35,11 +36,15 @@ public:
 				UIMainMenu mainMenu(screenManager, mapManager);
 				mainMenu.show();
 				if (mainMenu.selectedOption == 2) {
+					whatToShow = 'l';
+					prevWhatToShow = 'm';
+				}
+				if (mainMenu.selectedOption == 3) {
 					whatToShow = 'r';
 					prevWhatToShow = 'm';
 				} else if (mainMenu.selectedOption == 1) {
 					break;
-				} else if (mainMenu.selectedOption == 3) {
+				} else if (mainMenu.selectedOption == 4) {
 					whatToShow = 'q';
 					break;
 				}
@@ -68,6 +73,10 @@ public:
 				gameOver.show();
 				whatToShow = '-';
 				break;
+			} else if (whatToShow == 'l') {
+				UILeaderBoard leaderBoard(screenManager);
+				leaderBoard.show();
+				whatToShow = prevWhatToShow;
 			} else {
 				cout << "WAIT A MINUTE!!!  ADon't know that widget (" << whatToShow << ")" << endl;
 				break;

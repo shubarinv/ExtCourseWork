@@ -19,4 +19,4 @@ link_libraries(
 )
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(TanksCourseWorkRD Driver.cpp Game/Lib/cute_c2.h Game/Map.h Game/MapManager.h Game/Wall.h Game/EventManager.h Game/game_manager.hpp Game/ScreenManager.h Game/game_object.hpp Game/moveable_object.hpp Game/stationary_object.hpp Game/sprite.hpp Game/drawable_object.hpp Game/tank.hpp Game/bot_controller.hpp Game/weapon.hpp Game/UI/ui_base.hpp Game/UI/ui_manager.hpp Game/UI/ui_main_menu.hpp Game/UI/ui_rules.hpp)
+add_executable(TanksCourseWorkRD Driver.cpp Game/Lib/cute_c2.h Game/Map.h Game/MapManager.h Game/Wall.h Game/EventManager.h Game/game_manager.hpp Game/ScreenManager.h Game/game_object.hpp Game/moveable_object.hpp Game/stationary_object.hpp Game/sprite.hpp Game/drawable_object.hpp Game/tank.hpp Game/bot_controller.hpp Game/weapon.hpp Game/UI/ui_base.hpp Game/UI/ui_manager.hpp Game/UI/ui_main_menu.hpp Game/UI/ui_rules.hpp Game/UI/ui_leader_board.hpp)
