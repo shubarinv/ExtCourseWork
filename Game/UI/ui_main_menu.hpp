@@ -38,13 +38,17 @@ public:
 		drawText((int) (0.5 * screenManager->screenUnit),
 		         3 * screenManager->screenUnit, ">  start  <", 0xffffff);
 
+		drawText((int) (0.5 * screenManager->screenUnit * 3 - 5),
+		         (int) (3 * screenManager->screenUnit +
+		                screenManager->screenUnit * 0.4),
+		         "leaderboard", 0xffffff);
 		drawText(
 				(int) (0.5 * screenManager->screenUnit * 3 - 5),
 				(int) (3 * screenManager->screenUnit + screenManager->screenUnit * 0.8),
 				"rules", 0xffffff);
 
 		drawText((int) (0.5 * screenManager->screenUnit),
-		         (int) (3 * screenManager->screenUnit + screenManager->screenUnit),
+		         (int) (3 * screenManager->screenUnit + screenManager->screenUnit * 1.2),
 		         "quit", 0xffffff);
 
 		screenManager->updateScreen();
@@ -82,13 +86,13 @@ private:
 			return true;
 		}
 		if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_DOWN) {
-			if (selectedOption == 3)
+			if (selectedOption == 4)
 				selectedOption = 1;
 			else
 				selectedOption++;
 		} else if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_UP) {
 			if (selectedOption == 1)
-				selectedOption = 3;
+				selectedOption = 4;
 			else
 				selectedOption--;
 		}
@@ -102,14 +106,20 @@ private:
 				drawText((int) (0.5 * screenManager->screenUnit * 2 - 10),
 				         3 * screenManager->screenUnit, ">  Start  <", 0xffffff);
 
+
 				drawText((int) (0.5 * screenManager->screenUnit * 3 - 5),
 				         (int) (3 * screenManager->screenUnit +
 				                screenManager->screenUnit * 0.4),
-				         "rules", 0xffffff);
+				         "leaderboard", 0xffffff);
 
 				drawText((int) (0.5 * screenManager->screenUnit * 3 - 5),
 				         (int) (3 * screenManager->screenUnit +
 				                screenManager->screenUnit * 0.8),
+				         "rules", 0xffffff);
+
+				drawText((int) (0.5 * screenManager->screenUnit * 3 - 5),
+				         (int) (3 * screenManager->screenUnit +
+				                screenManager->screenUnit * 1.2),
 				         "quit", 0xffffff);
 				break;
 			case 2:
@@ -120,11 +130,16 @@ private:
 				drawText((int) (0.5 * screenManager->screenUnit * 2 - 6),
 				         (int) (3 * screenManager->screenUnit +
 				                screenManager->screenUnit * 0.4),
-				         ">  Rules  <", 0xffffff);
+				         ">  Leaderboard  <", 0xffffff);
 
 				drawText((int) (0.5 * screenManager->screenUnit * 3 - 5),
 				         (int) (3 * screenManager->screenUnit +
 				                screenManager->screenUnit * 0.8),
+				         "rules", 0xffffff);
+
+				drawText((int) (0.5 * screenManager->screenUnit * 3 - 5),
+				         (int) (3 * screenManager->screenUnit +
+				                screenManager->screenUnit * 1.2),
 				         "quit", 0xffffff);
 				break;
 			case 3:
@@ -135,11 +150,36 @@ private:
 				drawText((int) (0.5 * screenManager->screenUnit * 3 - 5),
 				         (int) (3 * screenManager->screenUnit +
 				                screenManager->screenUnit * 0.4),
-				         "rules", 0xffffff);
+				         "leaderboard", 0xffffff);
 
 				drawText((int) (0.5 * screenManager->screenUnit * 2 - 6),
 				         (int) (3 * screenManager->screenUnit +
 				                screenManager->screenUnit * 0.8),
+				         ">  Rules  <", 0xffffff);
+
+				drawText((int) (0.5 * screenManager->screenUnit * 3 - 5),
+				         (int) (3 * screenManager->screenUnit +
+				                screenManager->screenUnit * 1.2),
+				         "quit", 0xffffff);
+				break;
+
+			case 4:
+				drawText((int) (0.5 * screenManager->screenUnit * 3 - 9),
+				         3 * screenManager->screenUnit, "start", 0xffffff);
+
+				drawText((int) (0.5 * screenManager->screenUnit * 3 - 5),
+				         (int) (3 * screenManager->screenUnit +
+				                screenManager->screenUnit * 0.4),
+				         "leaderboard", 0xffffff);
+
+				drawText((int) (0.5 * screenManager->screenUnit * 3 - 5),
+				         (int) (3 * screenManager->screenUnit +
+				                screenManager->screenUnit * 0.8),
+				         "rules", 0xffffff);
+
+				drawText((int) (0.5 * screenManager->screenUnit * 2 - 6),
+				         (int) (3 * screenManager->screenUnit +
+				                screenManager->screenUnit * 1.2),
 				         ">  Quit  <", 0xffffff);
 				break;
 			default:

@@ -9,7 +9,7 @@
 #include "ScreenManager.h"
 #include "game_object.hpp"
 
-class DrawableObject : public virtual GameObject {
+class DrawableObject : protected virtual GameObject {
 protected:
 	ScreenManager *screenManager{};
 
